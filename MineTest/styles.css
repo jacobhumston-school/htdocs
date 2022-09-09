@@ -1,3 +1,5 @@
+/* Font Familys */
+
 @font-face {
 	font-family: OpenSans-Regular;
 	src: url("Assets/static/OpenSans/OpenSans-Regular.ttf");
@@ -8,11 +10,18 @@
 	src: url("Assets/static/OpenSans/OpenSans-Bold.ttf");
 }
 
+
+/* Body */
+
 body {
 	padding: 0;
 	margin: 0;
 	font-family: OpenSans-Regular;
+	background-color: rgb(32, 30, 30);
 }
+
+
+/* Topbar */
 
 #TopBar {
 	background-color: rgb(54, 48, 48);
@@ -35,4 +44,38 @@ body {
 	margin-top: 10px;
 	margin-left: 10px;
 	float: left;
+}
+
+
+/* Footer */
+
+footer {
+	background-color: rgb(54, 48, 48);
+	height: 80px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+.FooterText {
+	color: rgb(225, 255, 255);
+	font-family: OpenSans-Bold;
+	font-size: medium;
+	margin-top: 10px;
+	margin-left: 5px;
+	height: 25px;
+	float: left;
+}
+
+.FooterIcon {
+	height: 25px;
+	width: 25px;
+	margin-top: 10px;
+	margin-left: 10px;
+	float: left;
+}
+
+.BottomFooter {
+	margin-top: 0;
 }
