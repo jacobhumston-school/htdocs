@@ -1,0 +1,56 @@
+@font-face {
+  font-family: PTSansRegular;
+  src:         url(Fonts/PT_Sans/PTSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: PTSansBold;
+  src:         url(Fonts/PT_Sans/PTSans-Bold.ttf);
+}
+
+body
+{
+    color:            white;
+    background-color: #36393f;
+    font-family:      PTSansRegular;
+    background-image: url(pattern.png);
+    
+    /* Not currently needed
+    background-repeat: no-repeat;
+    background-size:   cover;
+    */
+}
+
+h1
+{
+    font-family: PTSansBold;
+}
+
+h2
+{
+    font-family: PTSansBold;
+}
+
+b
+{
+    font-family: PTSansBold;
+}
+
+p
+{
+    color: white;
+}
+
+button
+{
+    background-color: #ff6e6e;
+    border:           none;
+    color:            white;
+    padding:          10px 20px;
+    border-radius:    10px;
+}
+
+button:disabled
+{
+    background-color: #d95d5d;
+}

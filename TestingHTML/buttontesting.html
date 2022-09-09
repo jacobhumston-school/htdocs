@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Random Number</title>
+    <link rel="stylesheet" href="buttontestingstyles.css">
+  </head>
+  <body>
+    <h1 align="center">Welcome!</h1>
+    <p align="center">You can click the <b>button bellow</b> to get a random number.</p>
+    <br>
+    <div align="center">
+        <button id="button" onclick="ButtonFunction()" title="Generate a number!"><b>Random Number</b></button>
+        <p id="total"><b>Total Amount Generated:</b> 0</p>
+        <p id="last"><b>Last Amount Generated:</b> 0</p>
+    </div>
+    <br>
+    <div align="center">
+        <h2>Settings</h2>
+        <p>Hover over a button for more info.</p>
+       
+        <!-- Tween Button -->
+        <button 
+            id="tweenbutton" 
+            onclick="ButtonTweenFunction()" 
+            title="Enable/disable the counting down animation that is played after a number is generated.">
+            <b>Tween Number: true</b>
+        </button>
+        
+        <!-- Cooldown Button -->
+        <button 
+            id="cooldownbutton" 
+            onclick="ButtonCooldownFunction()" 
+            title="Enable/disable the cooldown when generating a number.">
+            <b>Cooldown: true</b>
+        </button>
+        
+        <h2>Miscellaneous</h2>
+        <p>Hover over a button for more info.</p>
+        
+        <!-- Refresh Button -->
+        <button 
+            onclick="ButtonRefreshFunction()" 
+            title="Refreshes the page. WARNING: Will reset ALL stats.">
+            <b>Refresh Page</b>
+        </button>
+        
+        <!-- Copy Button -->
+        <button 
+            id="copybutton" 
+            onclick="ButtonCopyFunction()" 
+            title="Copy the current total generated to your clipboard.">
+            <b>Copy Number Total</b>
+        </button>
+    </div>
+    <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        function FormatNumber(ProvidedNumber) {
+            let FormatedNumber = ""
+            let NumberToFormat = ProvidedNumber.toString()
+            let NumbersPassed = 0
+            for (let Index = NumberToFormat.length; Index != 0; Index--) {
+                NumbersPassed++
+                let Character = NumberToFormat.charAt(Index - 1)
+                FormatedNumber = Character + FormatedNumber
+                if (NumbersPassed == 3) {
+                    if (Index != 1) {
+                        FormatedNumber = "," + FormatedNumber
+                        NumbersPassed = 0
+                    }
+                }
+            }
+            return FormatedNumber
+        }
+        
+        let TotalNumber = 0
+        const Button = document.getElementById("button")
+        const TotalNumberParagraph = document.getElementById("total")
+        const LastNumberParagraph = document.getElementById("last")
+        const TweenButton = document.getElementById("tweenbutton")
+        const CooldownButton = document.getElementById("cooldownbutton")
+        const CopyButton = document.getElementById("copybutton")
+        
+        let TweenNumber = true
+        let Cooldown = true
+        
+        async function ButtonTweenFunction() {
+            TweenButton.disabled = true
+            TweenNumber = !TweenNumber
+            TweenButton.innerHTML = `<b>Tween Number: ${TweenNumber.toString()}</b>`
+            await sleep(500)
+            TweenButton.disabled = false
+        }
+         
+        async function ButtonCooldownFunction() {
+            CooldownButton.disabled = true
+            Cooldown = !Cooldown
+            CooldownButton.innerHTML = `<b>Cooldown: ${Cooldown.toString()}</b>`
+            await sleep(500)
+            CooldownButton.disabled = false
+        }
+        
+        async function ButtonRefreshFunction() {
+            document.location.reload()
+        }
+        
+        async function ButtonCopyFunction() {
+            CopyButton.disabled = true
+            try {
+                navigator.clipboard.writeText(TotalNumber);
+                CopyButton.innerHTML = "<b>Succes!</b>"
+            } catch {
+                CopyButton.innerHTML = "<b>Error</b>"
+            }
+            await sleep(1000)
+            CopyButton.innerHTML = "<b>Copy Number Total</b>"
+            CopyButton.disabled = false
+        }
+        
+        async function ButtonFunction() {
+            Button.disabled = true
+            
+            const RandomNumber = Math.floor(Math.random() * 9999999999)
+            
+            TotalNumber = TotalNumber + RandomNumber
+            TotalNumberParagraph.innerHTML = "<b>Total Amount Generated:</b> " + FormatNumber(TotalNumber)
+            LastNumberParagraph.innerHTML = "<b>Last Amount Generated:</b> " + FormatNumber(RandomNumber)
+            
+            Button.innerHTML = "<b>Random Number: " + FormatNumber(RandomNumber) + "</b>"
+            
+            if (Cooldown == true) {
+                await sleep(3000) 
+            }
+            
+            let SubtractingNumber = 1
+            function UpdateSubtractingNumber(LengthNumber) {
+               // SubtractingNumber = LengthNumber.toString().length * 1000
+               if (LengthNumber > 100000000) {
+                   SubtractingNumber = 100000000
+               } else if (LengthNumber > 10000000) {
+                   SubtractingNumber = 1000000
+               } else if (LengthNumber > 1000000) {
+                   SubtractingNumber = 100000
+               } else if (LengthNumber > 100000) {
+                   SubtractingNumber = 10000
+               } else if (LengthNumber > 10000) {
+                   SubtractingNumber = 1000
+               } else if (LengthNumber > 1000) {
+                   SubtractingNumber = 100
+               } else if (LengthNumber > 100) {
+                   SubtractingNumber = 10
+               } else {
+                   SubtractingNumber = 1
+               }
+            }
+            
+            if (TweenNumber == true) {
+                for (let NewNumber = RandomNumber; NewNumber > 0; NewNumber = NewNumber - SubtractingNumber) {
+                    Button.innerHTML = "<b>Random Number: " + FormatNumber(NewNumber) + "</b>"
+                    await sleep(0)
+                    UpdateSubtractingNumber(NewNumber)
+                }
+            }
+            
+            Button.innerHTML = "<b>Random Number</b>"
+            Button.disabled = false
+        }
+        
+    </script>
+  </body>
+</html>

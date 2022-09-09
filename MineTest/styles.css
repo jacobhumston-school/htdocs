@@ -1,0 +1,38 @@
+@font-face {
+	font-family: OpenSans-Regular;
+	src: url("Assets/static/OpenSans/OpenSans-Regular.ttf");
+}
+
+@font-face {
+	font-family: OpenSans-Bold;
+	src: url("Assets/static/OpenSans/OpenSans-Bold.ttf");
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: OpenSans-Regular;
+}
+
+#TopBar {
+	background-color: rgb(54, 48, 48);
+	height: 50px;
+}
+
+#Title {
+	color: rgb(225, 255, 255);
+	font-family: OpenSans-Bold;
+	font-size: large;
+	margin-top: 12.5px;
+	margin-left: 5px;
+	height: 25px;
+	float: left;
+}
+
+#TitleIcon {
+	height: 30px;
+	width: 30px;
+	margin-top: 10px;
+	margin-left: 10px;
+	float: left;
+}

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<!-- Created by Jacob Humston | Anything used that is not made by me is credited above it in a comment. -->
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Learn About Minecraft</title>
+    <link rel="icon" href="Assets/minecraftfavicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Center Tag -->
+    <center>
+
+        <!-- Header -->
+        <h1>Learn About Minecraft</h1>
+
+        <!-- Content Divider; Holds the main content of each chapter. -->
+        <div id="Content">
+            <h1>Loading...</h1>
+        </div>
+
+        <!-- Previous Chapter Button -->
+        <button id="BackPageButton" onclick="BackButtonFunction()">Previous Chapter</button>
+
+        <!-- Chapter Key Button -->
+        <button id="KeyButton" onclick="KeyButtonFunction()">Chapter Key</button>
+
+        <!-- Next Chapter Button -->
+        <button id="NextPageButton" onclick="NextButtonFunction()">Next Chapter</button>
+
+        <!-- Footer Content -->
+        <footer>Created by Jacob Humston<br>Last edited: 9/1/22</footer>
+
+        <!-- Getting all the stuff I need from Highlight.js (it highlights code) -->
+        <!-- https://highlightjs.org/usage/ -->
+        <script src="/highlight/highlight.min.js"></script>
+        <link rel="stylesheet" href="/highlight/styles/default.min.css">
+
+        <!-- I needed a code formatter and I found this one on stackoverflow! -->
+        <!-- https://stackoverflow.com/questions/3913355/how-to-format-tidy-beautify-in-javascript -->
+        <script src='http://lovasoa.github.io/tidy-html5/tidy.js'></script>
+
+        <!-- Code -->
+        <script>
+            /* All JavaScript was written by Jacob Humston, 
+            any code that I did not write myself has the source commented above it! :) */
+
+            /* UNDERSTANDING THE CODE:
+            
+                The code itself is not very complicated by any means, however it may come off as confusing to anyone looking at this so I thought I'd explain it a bit. 
+                Basically, the code is just handling buttons, that's all its doing for the most part. 
+                I split each action into functions to allow it to be more readable and changeable. 
+                Chapters are kept in array, since index of arrays starts at 0, the chapter number is actually index + 1. 
+                You may find that in the code in places where current chapter is subtracted by 1. 
+                This is to get the index as the current chapter varible is not the index.
+                
+                Here's some helpful terms:
+                key = Chapter Key
+                Page = Chapter
+                
+                The rest should be self explanatory by the function names. If you have any questions about my page let me know!
+            
+            */
+
+            // VARIABLES --------------------------
+
+            // Chapter Table
+            const Chapters = [
+                // Chapter One
+                {
+                    Title: "What is Minecraft?",
+                    Content: "<p>Minecraft is a lot of things! A sandbox game, pvp game, survival game, and more. The game is mostly up to you on what you want to do with it! But there is something important; the whole world is made of blocks! But that won't stop you from making something amazing!"
+
+                        + "<br><br>Example of something you can build!<br><img src=\"Assets/buildexample.jpg\" alt=\"Minecraft Build Example\" height=\"210\" width=\"438\">"
+
+                        + "<br><br>You'll learn a lot about Minecraft in the following chapters! But first, let's learn how to install the game!<br><br><b>Click the \"Next Chapter\" button to go to the next chapter!</b></p>"
+                },
+
+                // Chapter Two
+                {
+                    Title: "Installation",
+                    Content: "<p>Installing Minecraft is simple!"
+
+                        + `<br>Please go to <a href="https://www.minecraft.net/en-us/get-minecraft" target="blank">this page<a> to install Minecraft on your device!<br><br>Minecraft is currently $29.99 to purchase for computer users. The device requirements for your chosen platform can also be found on the Minecraft website.`
+
+                        + "<br><br>The next few chapters will go more in depth about the game, if you would like to consider the purchase I advise reading the next few chapters first!</p>"
+                },
+
+                // Chapter Three
+                {
+                    Title: "Gamemodes",
+                    Content: "<p>This chapter will be going over the two main gamemodes in Minecraft; Creative & Survival. Gamemodes are modes that change how you play the game. There are other modes which will be mentioned at the end of this chapter.</p>"
+
+                        + "<h3>Creative</h3><p>Creative mode allows you to be creative as you want! You have infinite amount of blocks. Which is perfect for anyone who wants to just relax and build something. And best of all, mobs and other players can't do damage to you in creative! (More on mobs and pvp later.)</p>"
+
+                        + "<h3>Survival</h3><p>Survival on the other hand is for people who want a challenge. In survival you can die by mobs and get attacked by other players! Instead of having infinite amount of resources, you have to hunt for food and gather materials from the world that is generated for you! This doesn't mean you can't be creative as you want though. You can still build of course! And of course I can't forget to mention that you must craft tools and gear to protect yourself.</p>"
+
+                        + "<h3>Other Modes</h3><p>There is two other modes, however these modes are pretty much just modifcations of the other modes for the most part.<br><br><b>Hardcore Mode:</b> Hardcore is a mode where you are in survival. However, you cannot respawn if you die. (This mode is only in the java edition of Minecraft.)<br><br><b>Adventure Mode:</b> In adventure mode you cannot destroy blocks with tools or your hands. Imagine this mode as a spectate mode for the most part, it's used in maps that other people build to prevent someone from destroying stuff.</p>"
+                },
+
+                // Chapter Four
+                {
+                    Title: "Mobs & PVP",
+                    Content: "<p>You may be asking... \"What is a mob?\" or \"What is PVP?\" Well these things will be explained in this chapter!</p>"
+
+                        + `<h3>Mobs</h3><p>Mobs or "inteties" are non-player characters that can be nice (passive) or attack you (aggressive). They can also do random little things. A list of all mobs currently in the game can be found <a href="https://minecraft.fandom.com/wiki/Mob" target="blank">here</a>. For example, you have to kill sheep to get wool. Or kill pigs, cows, etc for food. You have to defend yourself from mobs that want to attack you! Thankfully, aggressive mobs only spawn at night for the most part.<br><br><img src="Assets/mobs.webp" alt="Minecraft Mobs" width="559" height="391.5"></p>`
+
+                        + `<h3>PVP</h3><p>PVP is an abbreviation for player vs player. In Minecraft players that play togethor can also hurt each other using weapons or just their hands! This can be fun to do in competitions, etc.<br><br><img src="Assets/fightingexample.png" alt="pvp" width="480" height="320"></p>`
+                },
+
+                // Chapter Five
+                {
+                    Title: "How do I win Minecraft?",
+                    Content: "<p>Winning Minecraft is a fun task, and I won't spoil too much here. However, to give you an idea of how to win, you must find a portel, this portal will allow you to defeat a boss and win the game! Once you win the game, you don't have stop! You can keep building, crafting, and more!"
+
+                        + `<br><br>Click <a href="https://minecraft-archive.fandom.com/wiki/Category:Bosses" target="blank">here</a> to learn more about Minecraft bosses.<br><br><img src="Assets/boss.jpg" alt="Minecraft Boss Battle" wdith="427" height="252.5"></p>`
+                },
+
+                // Chapter Six
+                {
+                    Title: "Health, Crafting, and Hunger",
+                    Content: "<p>In the last few chapters we mentioned health, crafting, etc but we never explained it. So this chapter will be going over those things.</p>"
+
+                        + "<h3>Health</h3><p>Your health or HP is what defines the amount of damage you can take before you die. By defult you have 20 HP. (Or 10 hearts, as 1 heart is 2 HP.)</p>"
+
+                        + `<h3>Crafting</h3><p>Crafting is how you create tools and anything else you will need that can't be found by killing mobs or breaking blocks.<br><br>Here's a picture of what you use to craft things. (It's called a crafting table!)<br><br><img src="Assets/craftingtable.webp" alt="Crafting Table"></p>`
+
+                        + "<h3>Hunger</h3><p>Your hunger is how much food you need to stay healed! It's very important that you eat food as much as needed or you'll end up starving. Actions such as sprinting can make you get hungry faster.</p>"
+
+                        + `<h3>Toolbar</h3><p>The toolbar is very imporant, it's what you use to hold out swords, food, and etc to hold them & use them. This is also where your health bar and hunger bar can be found. You can click or use the number keys to pick an item at any time.</p><br><img src="Assets/toolbar.webp" alt="Minecraft Toolbar">`
+                },
+
+                // Chapter Seven
+                {
+                    Title: "End",
+                    Content: `<p>Thanks for reading. :D<br><br>"Right Click -> View Page Source" if you would like to see how this page was made!<br><br>Style Sheet: <a href="/styles.css" target="blank">view</a></p>`
+                }
+            ]
+
+            // CLARIFICATION: Page is the same as a chapter, page is just shorter.
+            // Content & Buttons
+            const ContentDivider = document.getElementById("Content")
+            const BackPageButton = document.getElementById("BackPageButton")
+            const NextPageButton = document.getElementById("NextPageButton")
+            const KeyButton = document.getElementById("KeyButton")
+
+            // CurrentChapter & If the chapter key is being displayed & is code being displayed.
+            let CurrentChapter = 1
+            let KeyBeingDisplayed = false
+            let CodeBeingDisplayed = false
+
+
+            // FUNCTIONS --------------------------
+
+            // Format Numbers (adds commas) 
+            // This function was made by me but for something else so I thought I might as well use it here too!
+            function FormatNumber(ProvidedNumber) {
+                let FormatedNumber = ""
+                let NumberToFormat = ProvidedNumber.toString()
+                let NumbersPassed = 0
+                for (let Index = NumberToFormat.length; Index != 0; Index--) {
+                    NumbersPassed++
+                    let Character = NumberToFormat.charAt(Index - 1)
+                    FormatedNumber = Character + FormatedNumber
+                    if (NumbersPassed == 3) {
+                        if (Index != 1) {
+                            FormatedNumber = "," + FormatedNumber
+                            NumbersPassed = 0
+                        }
+                    }
+                }
+                return FormatedNumber
+            }
+
+            // Update Buttons 
+            function UpdateButtons(Index) {
+                const NextChapter = Chapters[Index + 1]
+                const PreviousChapter = Chapters[Index - 1]
+
+                if (NextChapter !== undefined && KeyBeingDisplayed !== true && CodeBeingDisplayed !== true) {
+                    NextPageButton.disabled = false
+                    NextPageButton.innerHTML = "Next Chapter"
+                } else {
+                    NextPageButton.disabled = true
+                    NextPageButton.innerHTML = "<strike>Next Chapter</strike>"
+                }
+
+                if (PreviousChapter !== undefined && KeyBeingDisplayed !== true && CodeBeingDisplayed !== true) {
+                    BackPageButton.disabled = false
+                    BackPageButton.innerHTML = "Previous Chapter"
+                } else {
+                    BackPageButton.disabled = true
+                    BackPageButton.innerHTML = "<strike>Previous Chapter</strike>"
+                }
+
+                if (KeyBeingDisplayed !== true && CodeBeingDisplayed !== true) {
+                    KeyButton.innerHTML = "Chapter Key"
+                    KeyButton.disabled = false
+                } else if (CodeBeingDisplayed === true) {
+                    KeyButton.disabled = true
+                    KeyButton.innerHTML = "<strike>Chapter Key</strike>"
+                } else {
+                    KeyButton.disabled = false
+                    KeyButton.innerHTML = "Close Chapter Key"
+                }
+            }
+
+            // Display the chapter on the page using index
+            function DisplayChapter(Index) {
+                UpdateButtons(Index)
+                const ChapterTitle = Chapters[Index].Title
+                const ChapterContent = Chapters[Index].Content
+                ContentDivider.innerHTML = `<h2>Chapter ${Index + 1}: ${ChapterTitle}</h2>\n${ChapterContent}<hr><p id="CurrentPage"><b>Viewing Chapter ${Index + 1}/${Chapters.length}</b>`
+                    + ` - ${FormatNumber(ChapterContent.length)} Characters - <a href="/?sourceindex=${Index}">View Source</a></p>`
+                console.log(`[Success] Displaying chapter ${CurrentChapter}`)
+            }
+
+            // Display Chapter Key
+            function DisplayKey(Enable) {
+                KeyBeingDisplayed = Enable
+                UpdateButtons(0)
+                if (KeyBeingDisplayed === true) {
+                    let KeyString = ""
+                    for (let CurrentIndex = 0; CurrentIndex !== Chapters.length; CurrentIndex++) {
+                        const Chapter = Chapters[CurrentIndex]
+                        if (KeyString.length === 0) {
+                            KeyString = KeyString + `${Chapter.Title} <a href="/?chapterindex=${CurrentIndex}">Open</a>`
+                        } else {
+                            KeyString = KeyString + `<br>${Chapter.Title} <a href="/?chapterindex=${CurrentIndex}">Open</a>`
+                        }
+                    }
+                    ContentDivider.innerHTML = `<h1>Chapter Key</h1><h2>${KeyString}</h2>`
+                    console.log("[Success] Displaying chapter key")
+                } else {
+                    DisplayChapter(CurrentChapter - 1)
+                }
+            }
+
+            // Button Functions
+            // Next Button
+            function NextButtonFunction() {
+                CurrentChapter++
+                DisplayChapter(CurrentChapter - 1)
+            }
+
+            // Back Button
+            function BackButtonFunction() {
+                CurrentChapter--
+                DisplayChapter(CurrentChapter - 1)
+            }
+
+            // Key Button
+            function KeyButtonFunction() {
+                DisplayKey(!KeyBeingDisplayed)
+            }
+
+            // Close Code Button
+            function CloseCodeButtonFunction() {
+                CodeBeingDisplayed = false
+                DisplayChapter(CurrentChapter - 1)
+            }
+
+
+            // STARTUP ----------------------------
+
+            // This site SAVED me from using string functions!!
+            // -> https://www.sitepoint.com/get-url-parameters-with-javascript/
+
+            // Getting URL Parameters
+            const URLParameters = new URLSearchParams(document.location.search)
+
+            // If there is a a chapterindex then we use it (must validate first)
+            const ChapterParamIndex = URLParameters.get("chapterindex")
+            if (ChapterParamIndex !== null) {
+                const FoundChapterIndex = Number(ChapterParamIndex)
+                if (FoundChapterIndex !== NaN) {
+                    if (Chapters[FoundChapterIndex] !== undefined) {
+                        CurrentChapter = FoundChapterIndex + 1
+                    }
+                }
+            }
+
+            // Clearing console
+            console.clear()
+
+            // Display the current chapter
+            DisplayChapter(CurrentChapter - 1)
+
+            // Displays source code if a source param is provided. Then validates and displays it.
+            // Uses highlight.js -> https://highlightjs.org/usage/ (highlighting)
+            // Uses tidy -> http://www.html-tidy.org/ (formatting)
+            const SourceIndexParam = URLParameters.get("sourceindex")
+            if (SourceIndexParam !== null) {
+                const SourceIndex = Number(SourceIndexParam)
+                if (SourceIndex !== NaN) {
+                    if (Chapters[SourceIndex] !== undefined) {
+                        CurrentChapter = SourceIndex + 1
+                        CodeBeingDisplayed = true
+
+                        UpdateButtons()
+
+                        const ChapterTitle = Chapters[SourceIndex].Title
+                        const ChapterContent = Chapters[SourceIndex].Content
+
+                        // Modification of defult options
+                        const CodeOptions = {
+                            "indent": "auto",
+                            "indent-spaces": 4,
+                            "wrap": 80,
+                            "markup": true,
+                            "output-xml": false,
+                            "numeric-entities": true,
+                            "quote-marks": true,
+                            "quote-nbsp": false,
+                            "show-body-only": true,
+                            "quote-ampersand": false,
+                            "break-before-br": true,
+                            "uppercase-tags": false,
+                            "uppercase-attributes": false,
+                            "drop-font-tags": true,
+                            "tidy-mark": false,
+                            "show-warnings": false,
+                        }
+
+                        ContentDivider.innerHTML = `<h2>[Source] Chapter ${CurrentChapter}: ${ChapterTitle}</h2>`
+                            + `<pre><code class="language-html">${tidy_html5(ChapterContent.replaceAll("<", "&#60;"), CodeOptions)}</code></pre><button onclick="CloseCodeButtonFunction()">Go Back to Chapter ${CurrentChapter}</button>`
+
+                        // Highlighting text
+                        hljs.highlightAll()
+
+                        // Clearing console because tidy logs random stuff that you cant disable for some reason
+                        console.clear()
+
+                        // Logging
+                        console.log(`[Success] Displaying code for chapter ${CurrentChapter}`)
+                    }
+                }
+            }
+
+        </script>
+        <!-- End of Code -->
+
+    </center>
+    <!-- End of Center Tag -->
+</body>
+
+</html>
