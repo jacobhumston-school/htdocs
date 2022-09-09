@@ -10,14 +10,33 @@
 	src: url("Assets/static/OpenSans/OpenSans-Bold.ttf");
 }
 
+@font-face {
+	font-family: OpenSans-Italic;
+	src: url("Assets/static/OpenSans/OpenSans-Italic.ttf");
+}
 
-/* Body */
+
+/* Body + Base Elements*/
 
 body {
 	padding: 0;
 	margin: 0;
 	font-family: OpenSans-Regular;
 	background-color: rgb(32, 30, 30);
+	text-align: center;
+}
+
+h1 {
+	color: rgb(225, 255, 255);
+	font-family: OpenSans-Bold;
+}
+
+p {
+	color: rgb(255, 255, 255);
+}
+
+b {
+	font-family: OpenSans-Bold;
 }
 
 
