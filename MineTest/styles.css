@@ -22,7 +22,7 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: OpenSans-Regular;
-	background-color: rgb(32, 30, 30);
+	background-color: #2C2F33;
 	text-align: center;
 }
 
@@ -43,7 +43,7 @@ b {
 /* Topbar */
 
 #TopBar {
-	background-color: rgb(54, 48, 48);
+	background-color: #23272A;
 	height: 50px;
 }
 
@@ -69,7 +69,7 @@ b {
 /* Footer */
 
 footer {
-	background-color: rgb(54, 48, 48);
+	background-color: #23272A;
 	height: 80px;
 	position: absolute;
 	bottom: 0;
