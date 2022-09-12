@@ -19,7 +19,9 @@
 		<h id="Title">Home | MineTest</h>
 
 		<!-- Page Buttons -->
-		<button class="TopBarButtons" id="HomeButton" onclick="HomeButton()"></button>
+		<button class="TopBarButtons" id="HomeButton" onclick="Update('Home', this)">Home</button>
+		<button class="TopBarButtons" id="AboutButton" onclick="Update('About', this)">About</button>
+		<button class="TopBarButtons" id="InstallButton" onclick="Update('Install', this)">Install</button>
 	</div>
 
 	<!-- Content Divider -->
@@ -47,7 +49,53 @@
 	// Element variables
 	const TitelIcon = document.getElementById("TitleIcon")
 	const Title = document.getElementById("Title")
+	const ContentDivider = document.getElementById("Content")
+	const MenuButtons = document.getElementsByClassName("TopBarButtons")
 
+	// Pages
+	const Pages = {
+		Home: {
+			Name: "Home",
+			Icon: "home_white_48dp.svg",
+			HTML: `
+			<h1>Home</h1>
+			<p>Idk...</p>
+			`
+		},
+		About: {
+			Name: "About",
+			Icon: "description_white_48dp.svg",
+			HTML: `
+			<h1>About</h1>
+			<p>Idk...</p>
+			`
+		},
+		Install: {
+			Name: "Install",
+			Icon: "file_download_white_48dp.svg",
+			HTML: `
+			<h1>Install</h1>
+			<p>Idk...</p>
+			`
+		}
+	}
+
+	// Update Function
+	function Update(Name, Element) {
+		const Page = Pages[Name]
+		document.title = `MineTest | ${Page.Name}`
+		Title.innerHTML = `${Page.Name} | MineTest`
+		TitelIcon.src = `Assets/${Page.Icon}`
+		ContentDivider.innerHTML = Page.HTML
+		for (let Index = 0; Index < MenuButtons.length; Index++) {
+			const CurrentItem = MenuButtons.item(Index)
+			CurrentItem.style.color = "rgb(255, 255, 255)"
+		}
+		Element.style.color = "rgb(193, 193, 193)"
+	}
+
+	// Opening the first page
+	Update("Home", MenuButtons.namedItem("HomeButton"))
 </script>
 
 </html>
