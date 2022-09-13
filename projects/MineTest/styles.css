@@ -24,11 +24,21 @@ body {
 	font-family: OpenSans-Regular;
 	background-color: #2C2F33;
 	text-align: center;
+	background-image: url("Assets/Screenshot_20220913_091536.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 h1 {
 	color: rgb(225, 255, 255);
 	font-family: OpenSans-Bold;
+	margin-top: 10px;
+}
+
+h2 {
+	color: rgb(225, 255, 255);
+	font-family: OpenSans-Bold;
+	margin-top: 10px;
 }
 
 p {
@@ -45,6 +55,10 @@ b {
 #TopBar {
 	background-color: #23272A;
 	height: 50px;
+	margin-bottom: 0;
+	position: sticky;
+	top: 0px;
+	z-index: 1;
 }
 
 #Title {
@@ -82,8 +96,17 @@ b {
 	border-radius: 10px;
 }
 
-#HomeButton {
-	margin-right: 10px;
+#AboutButton {
+	margin-right: 25px;
+}
+
+
+/* Content */
+#Content {
+	margin-left: 25px;
+	margin-right: 25px;
+	margin-top: 0px;
+	margin-bottom: calc(100% / 2);
 }
 
 
@@ -92,10 +115,12 @@ b {
 footer {
 	background-color: #23272A;
 	height: 80px;
-	position: absolute;
+	position: sticky;
+	margin-top: 100% - 80px;
 	bottom: 0;
 	left: 0;
 	width: 100%;
+	z-index: 1;
 }
 
 .FooterText {
@@ -118,4 +143,52 @@ footer {
 
 .BottomFooter {
 	margin-top: 0;
+}
+
+
+/* About Section Sub Dividers + Buttons */
+
+#PageContent {
+	width: 70%;
+	margin: 0px;
+	color:rgb(225, 255, 255);
+	float: left;
+	position: absolute;
+}
+
+#PageList {
+	width: 25%;
+	margin-left: 70%;
+	margin-right: 0px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	color:rgb(225, 255, 255);
+	float: right;
+	position: absolute;
+	background-color: #23272A;
+	border-radius: 15px;
+	padding: 10px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#PageListTitle {
+	margin-bottom: 0px;
+}
+
+.PageListButton {
+	height: 30px;
+	width: 90%;
+	font-family: OpenSans-Bold;
+	font-size: large;
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border: none;
+	background-color: #2C2F33;
+	color: rgb(225, 255, 255);
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
 }
