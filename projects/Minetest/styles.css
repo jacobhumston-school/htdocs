@@ -55,9 +55,12 @@ ul {
 	text-align: left;
 	margin-left: 30%;
 	margin-right: 30%;
+	margin-top: 2px;
 	padding-top: 15px;
 	padding-bottom: 2px;
+	padding-right: 4px;
 	border-radius: 15px;
+	border: 2px solid rgb(193, 193, 193);
 }
 
 li {
@@ -180,7 +183,7 @@ footer {
 	width: 25%;
 	margin-left: 70%;
 	margin-right: 0px;
-	margin-top: 10px;
+	margin-top: 12px;
 	margin-bottom: 0px;
 	color: rgb(225, 255, 255);
 	float: right;
@@ -191,6 +194,7 @@ footer {
 	padding-top: 0px;
 	padding-left: 0px;
 	padding-right: 0px;
+	border: 2px solid rgb(193, 193, 193);
 }
 
 #PageListTitle {
