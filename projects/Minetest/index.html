@@ -41,7 +41,7 @@
 
 		<!-- Icon/Text (last edited) -->
 		<img class="FooterIcon BottomFooter" src="Assets/edit_white_48dp.svg" alt="Footer Icon">
-		<h class="FooterText BottomFooter">September 13th, 2022</h>
+		<h class="FooterText BottomFooter">September 14th, 2022</h>
 	</footer>
 </body>
 
@@ -58,8 +58,24 @@
 			Name: "Home",
 			Icon: "home_white_48dp.svg",
 			HTML: `
-			<h1>Home</h1>
-			<p>Idk...</p>
+			<h1>Minetest</h1>
+			<p>
+				Welcome, this is an unofficial site about Minetest!
+				<br>
+				<br>
+				You'll find at the top of this page three buttons you can use...
+			</p>
+			<ul>
+				<li>
+					<b>Home</b> - Leads to this page!
+				</li>
+				<li>
+					<b>Install</b> - The installation page, which will explain how to install Minetest. 
+				</li>
+				<li>	
+					<b>About</b> - You'll find all the information about Minetest there. This includes gameplay & more!
+				</li>
+			<ul>
 			`
 		},
 		About: {
@@ -110,14 +126,14 @@
 		const PageContent = document.getElementById("PageContent")
 		const ButtonArray = []
 		for (const [PageKey, Page] of Object.entries(AboutPages)) {
-			ButtonArray.push(`<button class="PageListButton" id="${PageKey}" onclick="UpdateAbout('${PageKey}')">${Page.Title}</button>`)
+			ButtonArray.push(`<button class="PageListButton" id="AboutPage_${PageKey}" onclick="UpdateAbout('${PageKey}')">${Page.Title}</button>`)
 		}
 		PageList.innerHTML = `
 		<h2 id="PageListTitle">Pages</h2>
 		${ButtonArray.join("<br>")}
 		`
 		PageContent.innerHTML = AboutPages[PageKey].HTML
-		document.getElementById(PageKey).style.color = "rgb(193, 193, 193)"
+		document.getElementById("AboutPage_" + PageKey).style.color = "rgb(193, 193, 193)"
 	}
 
 	// Update Function

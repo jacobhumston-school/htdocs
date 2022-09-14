@@ -22,7 +22,6 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: OpenSans-Regular;
-	/*background-color: #2C2F33;*/
 	background-color: #23272A;
 	text-align: center;
 	background-image: url("Assets/Screenshot_20220913_091536.png");
@@ -50,6 +49,20 @@ b {
 	font-family: OpenSans-Bold;
 }
 
+ul {
+	color:rgb(225, 255, 255);
+	background-color: #2C2F33;
+	text-align: left;
+	margin-left: 30%;
+	margin-right: 30%;
+	padding-top: 15px;
+	padding-bottom: 2px;
+	border-radius: 15px;
+}
+
+li {
+	margin-bottom: 10px;
+}
 
 /* Topbar */
 
@@ -95,6 +108,12 @@ b {
 	padding-left: 10px;
 	padding-right: 10px;
 	border-radius: 10px;
+}
+
+.TopBarButtons:hover {
+	height: 35px;
+	margin-top: 5px;
+	border: 2px solid rgb(193, 193, 193);
 }
 
 #AboutButton {
@@ -152,7 +171,7 @@ footer {
 #PageContent {
 	width: 70%;
 	margin: 0px;
-	color:rgb(225, 255, 255);
+	color: rgb(225, 255, 255);
 	float: left;
 	position: absolute;
 }
@@ -163,7 +182,7 @@ footer {
 	margin-right: 0px;
 	margin-top: 10px;
 	margin-bottom: 0px;
-	color:rgb(225, 255, 255);
+	color: rgb(225, 255, 255);
 	float: right;
 	position: absolute;
 	background-color: #23272A;
@@ -192,4 +211,10 @@ footer {
 	padding-left: 10px;
 	padding-right: 10px;
 	border-radius: 10px;
+}
+
+.PageListButton:hover {
+	height: 32px;
+	margin-top: 8px;
+	border: 2px solid rgb(193, 193, 193);
 }
