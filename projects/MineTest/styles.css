@@ -22,7 +22,8 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: OpenSans-Regular;
-	background-color: #2C2F33;
+	/*background-color: #2C2F33;*/
+	background-color: #23272A;
 	text-align: center;
 	background-image: url("Assets/Screenshot_20220913_091536.png");
 	background-repeat: no-repeat;

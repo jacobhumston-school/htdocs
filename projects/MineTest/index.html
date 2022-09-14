@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>MineTest | Home</title>
+	<title>Minetest | Home</title>
 	<link rel="stylesheet" href="styles.css">
 	<link rel="icon" href="Assets/minetest.svg">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
 		<img id="TitleIcon" src="Assets/home_white_48dp.svg" alt="Title Icon">
 
 		<!-- Title -->
-		<h id="Title">Home | MineTest</h>
+		<h id="Title">Home | Minetest</h>
 
 		<!-- Page Buttons -->
 		<button class="TopBarButtons" id="AboutButton" onclick="Update('About', this)">About</button>
@@ -26,7 +26,7 @@
 
 	<!-- Content Divider -->
 	<div id="Content">
-		<h1>MineTest</h1>
+		<h1>Minetest</h1>
 		<p>Here is some place holder text. What awesome text this is... Why are you reading this?</p>
 		<p>This text is <b>bold</b> and this text is <i>italic</i>.</p>
 	</div>
@@ -68,7 +68,7 @@
 			HTML: `
 			<div id="PageContent">
 				<h1>About</h1>
-				<p>Cool page</p>
+				<p>Cool page...</p>
 			</div>
 			<div id="PageList">
 				<h2 id="PageListTitle">Pages</h2>
@@ -109,8 +109,8 @@
 		const PageList = document.getElementById("PageList")
 		const PageContent = document.getElementById("PageContent")
 		const ButtonArray = []
-		for (const [PageKey, Page] of Object.entries(AboutPages))  {
-			ButtonArray.push(`<button class="PageListButton" id="${PageKey}" onclick="UpdateAbout(${PageKey})">${Page.Title}</button>`)	
+		for (const [PageKey, Page] of Object.entries(AboutPages)) {
+			ButtonArray.push(`<button class="PageListButton" id="${PageKey}" onclick="UpdateAbout('${PageKey}')">${Page.Title}</button>`)
 		}
 		PageList.innerHTML = `
 		<h2 id="PageListTitle">Pages</h2>
@@ -123,8 +123,8 @@
 	// Update Function
 	function Update(Name, Element) {
 		const Page = Pages[Name]
-		document.title = `MineTest | ${Page.Name}`
-		Title.innerHTML = `${Page.Name} | MineTest`
+		document.title = `Minetest | ${Page.Name}`
+		Title.innerHTML = `${Page.Name} | Minetest`
 		TitelIcon.src = `Assets/${Page.Icon}`
 		ContentDivider.innerHTML = Page.HTML
 		for (let Index = 0; Index < MenuButtons.length; Index++) {
@@ -139,6 +139,11 @@
 
 	// Opening the first page
 	Update("Home", MenuButtons.namedItem("HomeButton"))
+
+	// Popup errors for easy debug *hopefully*
+	addEventListener("error", Error => {
+		alert("Something went wrong:\n\n" + Error.message)
+	})
 </script>
 
 </html>
