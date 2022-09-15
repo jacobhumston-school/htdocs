@@ -43,21 +43,21 @@
 		<img class="FooterIcon BottomFooter" src="Assets/edit_white_48dp.svg" alt="Footer Icon">
 		<h class="FooterText BottomFooter">September 14th, 2022</h>
 	</footer>
-</body>
 
-<script>
-	// Element variables
-	const TitelIcon = document.getElementById("TitleIcon")
-	const Title = document.getElementById("Title")
-	const ContentDivider = document.getElementById("Content")
-	const MenuButtons = document.getElementsByClassName("TopBarButtons")
+	<!-- Script -->
+	<script>
+		// Element variables
+		const TitelIcon = document.getElementById("TitleIcon")
+		const Title = document.getElementById("Title")
+		const ContentDivider = document.getElementById("Content")
+		const MenuButtons = document.getElementsByClassName("TopBarButtons")
 
-	// Pages
-	const Pages = {
-		Home: {
-			Name: "Home",
-			Icon: "home_white_48dp.svg",
-			HTML: `
+		// Pages
+		const Pages = {
+			Home: {
+				Name: "Home",
+				Icon: "home_white_48dp.svg",
+				HTML: `
 			<h1>Minetest</h1>
 			<p>
 				Welcome, this is an unofficial site about Minetest!
@@ -77,11 +77,11 @@
 				</li>
 			</ul>
 			`
-		},
-		About: {
-			Name: "About",
-			Icon: "description_white_48dp.svg",
-			HTML: `
+			},
+			About: {
+				Name: "About",
+				Icon: "description_white_48dp.svg",
+				HTML: `
 			<div id="PageContent">
 				<h1>About</h1>
 				<p>Cool page...</p>
@@ -93,73 +93,74 @@
 				<button class="PageListButton">Test2</button>
 			</div>
 			`
-		},
-		Install: {
-			Name: "Install",
-			Icon: "file_download_white_48dp.svg",
-			HTML: `
+			},
+			Install: {
+				Name: "Install",
+				Icon: "file_download_white_48dp.svg",
+				HTML: `
 			<h1>Install</h1>
 			<p>Idk...</p>
 			`
+			}
 		}
-	}
 
-	// About Pages
-	const AboutPages = {
-		Test1: {
-			Title: "Test1",
-			HTML: `
+		// About Pages
+		const AboutPages = {
+			Test1: {
+				Title: "Test1",
+				HTML: `
 			<h1>This is test page 1.<h1>
 			`
-		},
-		Test2: {
-			Title: "Test2",
-			HTML: `
+			},
+			Test2: {
+				Title: "Test2",
+				HTML: `
 			<h1>This is test page 2.</h1>
 			`
+			}
 		}
-	}
 
-	// Update About Function
-	function UpdateAbout(PageKey) {
-		const PageList = document.getElementById("PageList")
-		const PageContent = document.getElementById("PageContent")
-		const ButtonArray = []
-		for (const [PageKey, Page] of Object.entries(AboutPages)) {
-			ButtonArray.push(`<button class="PageListButton" id="AboutPage_${PageKey}" onclick="UpdateAbout('${PageKey}')">${Page.Title}</button>`)
-		}
-		PageList.innerHTML = `
+		// Update About Function
+		function UpdateAbout(PageKey) {
+			const PageList = document.getElementById("PageList")
+			const PageContent = document.getElementById("PageContent")
+			const ButtonArray = []
+			for (const [PageKey, Page] of Object.entries(AboutPages)) {
+				ButtonArray.push(`<button class="PageListButton" id="AboutPage_${PageKey}" onclick="UpdateAbout('${PageKey}')">${Page.Title}</button>`)
+			}
+			PageList.innerHTML = `
 		<h2 id="PageListTitle">Pages</h2>
 		${ButtonArray.join("<br>")}
 		`
-		PageContent.innerHTML = AboutPages[PageKey].HTML
-		document.getElementById("AboutPage_" + PageKey).style.color = "rgb(193, 193, 193)"
-	}
-
-	// Update Function
-	function Update(Name, Element) {
-		const Page = Pages[Name]
-		document.title = `Minetest | ${Page.Name}`
-		Title.innerHTML = `${Page.Name} | Minetest`
-		TitelIcon.src = `Assets/${Page.Icon}`
-		ContentDivider.innerHTML = Page.HTML
-		for (let Index = 0; Index < MenuButtons.length; Index++) {
-			const CurrentItem = MenuButtons.item(Index)
-			CurrentItem.style.color = "rgb(255, 255, 255)"
+			PageContent.innerHTML = AboutPages[PageKey].HTML
+			document.getElementById("AboutPage_" + PageKey).style.color = "rgb(193, 193, 193)"
 		}
-		Element.style.color = "rgb(193, 193, 193)"
-		if (Page.Name === "About") {
-			UpdateAbout("Test1")
+
+		// Update Function
+		function Update(Name, Element) {
+			const Page = Pages[Name]
+			document.title = `Minetest | ${Page.Name}`
+			Title.innerHTML = `${Page.Name} | Minetest`
+			TitelIcon.src = `Assets/${Page.Icon}`
+			ContentDivider.innerHTML = Page.HTML
+			for (let Index = 0; Index < MenuButtons.length; Index++) {
+				const CurrentItem = MenuButtons.item(Index)
+				CurrentItem.style.color = "rgb(255, 255, 255)"
+			}
+			Element.style.color = "rgb(193, 193, 193)"
+			if (Page.Name === "About") {
+				UpdateAbout("Test1")
+			}
 		}
-	}
 
-	// Opening the first page
-	Update("Home", MenuButtons.namedItem("HomeButton"))
+		// Opening the first page
+		Update("Home", MenuButtons.namedItem("HomeButton"))
 
-	// Popup errors for easy debug *hopefully*
-	addEventListener("error", Error => {
-		alert("Something went wrong:\n\n" + Error.message)
-	})
-</script>
+		// Popup errors for easy debug *hopefully*
+		addEventListener("error", Error => {
+			alert("Something went wrong:\n\n" + Error.message)
+		})
+	</script>
+</body>
 
 </html>
