@@ -49,6 +49,10 @@ b {
 	font-family: OpenSans-Bold;
 }
 
+a {
+	color:rgb(152, 190, 255)
+}
+
 ul {
 	color:rgb(225, 255, 255);
 	background-color: #2C2F33;
@@ -65,6 +69,10 @@ ul {
 
 li {
 	margin-bottom: 10px;
+}
+
+iframe {
+	border:2px solid rgb(255, 255, 255);
 }
 
 /* Topbar */
