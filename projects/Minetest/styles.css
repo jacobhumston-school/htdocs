@@ -131,6 +131,26 @@ iframe
 	border-radius: 15px;
 }
 
+
+/* Random */
+
+#CantSeeEmojisButton
+{
+	width: 40%;
+	font-family: OpenSans-Bold;
+	font-size: large;
+	border: none;
+	background-color: #2C2F33;
+	color: rgb(225, 255, 255);
+	padding: 5px;
+	border-radius: 10px;
+}
+
+#CantSeeEmojisButton:hover
+{
+	border: 2px solid rgb(193, 193, 193);
+}
+
 /* Topbar */
 
 #TopBar
