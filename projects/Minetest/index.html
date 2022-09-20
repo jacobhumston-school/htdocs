@@ -13,7 +13,7 @@
 	<!-- Menu/Top Bar Divider -->
 	<div id="TopBar">
 		<!-- Icon -->
-		<img id="TitleIcon" src="Assets/home_white_48dp.svg" alt="Title Icon">
+		<img id="TitleIcon" class="ImgIcon" src="Assets/home_white_48dp.svg" alt="Title Icon">
 
 		<!-- Title -->
 		<h id="Title">Home | Minetest</h>
@@ -34,14 +34,14 @@
 	<!-- Footer -->
 	<footer>
 		<!-- Icon/Text (author) -->
-		<img class="FooterIcon" src="Assets/person_white_48dp.svg" alt="Footer Icon">
+		<img class="FooterIcon ImgIcon" src="Assets/person_white_48dp.svg" alt="Footer Icon">
 		<h class="FooterText">Jacob Humston</h>
 
 		<!-- Break (separating author and last edited) -->
 		<br><br>
 
 		<!-- Icon/Text (last edited) -->
-		<img class="FooterIcon BottomFooter" src="Assets/edit_white_48dp.svg" alt="Footer Icon">
+		<img class="FooterIcon BottomFooter ImgIcon" src="Assets/edit_white_48dp.svg" alt="Footer Icon">
 		<h class="FooterText BottomFooter">September 14th, 2022</h>
 	</footer>
 
@@ -77,8 +77,6 @@
 					<b>About</b> - You'll find all the information about Minetest there. This includes gameplay & more!
 				</li>
 			</ul>
-			<br>
-			<br>
 			<p>If you have any questions, you can contact the web developer of this page <a href="mailto:jhumston24@sciototech.org?subject=Minetest Site">here</a>.</p>
 			`
 			},
@@ -86,8 +84,8 @@
 				Name: "About",
 				Icon: "description_white_48dp.svg",
 				HTML: `
-			<div id="PageContent"></div>
-			<div id="PageList"></div>
+			<div id="PageContent"><p>You shouldn't see this...</p></div>
+			<div id="PageList"><p>You shouldn't see this...</p></div>
 			`
 			},
 			Install: {
@@ -102,8 +100,10 @@
 				<br>
 				<br>
 				And best of all... it's <b>100% free</b>!
+				<br>
+				<br>
+				If your still confused, you may watch the video bellow as a guide.
 			</p>
-			<p>If your still confused, you may watch the video bellow as a guide.</p>
 			<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ceseKLPNfTE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			`
 			}
@@ -116,7 +116,8 @@
 				HTML: `
 			<h1>What is Minetest?</h1>
 			<p>
-				I think the best way to describe Minetest would be a open-sourced application that is heavily insipired by Minecraft.
+				I think the best way to describe Minetest would be a open-sourced application that is heavily insipired by Minecraft. But you could also call it an open-sourced sandbox game. Created by the <a href="https://www.minetest.net/credits/" target="blank">Minetest Team</a>, using the <a href="https://irrlicht.sourceforge.io/" target="blank">Irrlicht Engine</a>.
+				<br>
 				<br>
 				Unlike Minecraft, Minetest can be changed in a lot more ways. You're able to change pretty much anything if you learn how.
 				<br>
@@ -124,23 +125,57 @@
 				However, something that is really cool about Minetest is that it is updated & maintained by the community!
 				<br>
 				You can find on <a href="https://github.com/minetest/minetest" target="blank">GitHub</a> the repository where everyone is allowed to recommend changes, and more!
+				<br>
+				<br>
+				Bellow is a cool build made in Minetest!
+				<br>
+				<img src="Assets/coolminetestbuild.jpg" alt="Minetest Build" width="520px" height="220px">
 			</p>
 			`
 			},
-			Page2: {
-				Title: "How to play?",
+			Page2a: {
+				Title: "Minetest vs. Minecraft",
 				HTML: `
-			<h1>How to play?</h1>
-			<p>This page hasn't been created yet.</p>
+			<h1>Minetest vs. Minecraft</h1>
+			<table>
+				<tr class="TopRow">
+					<th><b>Difference</b></th>
+					<th><b>Minecraft</b></th>
+					<th><b>Minetest</b></th>
+				</tr>
+				<tr>
+					<th>Mobs?</th>
+					<th>✅</th>
+					<th>✅</th>
+				</tr>
+				<tr>
+					<th>Open Source?</th>
+					<th>❌</th>
+					<th>✅</th>
+				</tr>
+				<tr>
+					<th>Crafting & building?</th>
+					<th>✅</th>
+					<th>✅</th>
+				</tr>
+				<tr>
+					<th>Mods?</th>
+					<th>✅</th>
+					<th>✅</th>
+				</tr>
+				<tr>
+					<th>Free?</th>
+					<th>❌</th>
+					<th>✅</th>
+				</tr>
+				<tr>
+					<th>Polished?</th>
+					<th>✅</th>
+					<th>❌</th>
+				</tr>
+			</table>
 			`
 			},
-			Page3: {
-				Title: "Some Extra Information",
-				HTML: `
-			<h1>Some Extra Information</h1>
-			<p>This page hasn't been created yet.</p>
-			`
-			}
 		}
 
 		// Update About Function
@@ -183,6 +218,7 @@
 		addEventListener("error", Error => {
 			alert("Something went wrong:\n\n" + Error.message)
 		})
+		
 	</script>
 </body>
 

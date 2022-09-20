@@ -1,16 +1,19 @@
 /* Font Familys */
 
-@font-face {
+@font-face
+{
 	font-family: OpenSans-Regular;
 	src: url("Assets/static/OpenSans/OpenSans-Regular.ttf");
 }
 
-@font-face {
+@font-face
+{
 	font-family: OpenSans-Bold;
 	src: url("Assets/static/OpenSans/OpenSans-Bold.ttf");
 }
 
-@font-face {
+@font-face
+{
 	font-family: OpenSans-Italic;
 	src: url("Assets/static/OpenSans/OpenSans-Italic.ttf");
 }
@@ -18,7 +21,8 @@
 
 /* Body + Base Elements*/
 
-body {
+body
+{
 	padding: 0;
 	margin: 0;
 	font-family: OpenSans-Regular;
@@ -29,32 +33,38 @@ body {
 	background-size: cover;
 }
 
-h1 {
+h1
+{
 	color: rgb(225, 255, 255);
 	font-family: OpenSans-Bold;
 	margin-top: 10px;
 }
 
-h2 {
+h2
+{
 	color: rgb(225, 255, 255);
 	font-family: OpenSans-Bold;
 	margin-top: 10px;
 }
 
-p {
+p
+{
 	color: rgb(255, 255, 255);
-	padding: 20px;
+	padding: 25px;
 }
 
-b {
+b
+{
 	font-family: OpenSans-Bold;
 }
 
-a {
+a
+{
 	color: rgb(152, 190, 255)
 }
 
-ul {
+ul
+{
 	color: rgb(225, 255, 255);
 	background-color: #2C2F33;
 	text-align: left;
@@ -68,17 +78,63 @@ ul {
 	border: 2px solid rgb(193, 193, 193);
 }
 
-li {
+table
+{
+	color: rgb(225, 255, 255);
+	background-color: #2C2F33;
+	text-align: left;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 2px;
+	width: 80%;
+	padding: 25px;
+	border-radius: 15px;
+	border: 2px solid rgb(193, 193, 193);
+}
+
+.TopRow
+{
+	background-color: #23272A;
+	font-size: large;
+}
+
+tr:nth-child(even)
+{
+	background-color: #272b2e
+}
+
+th
+{
+	padding: 10px;
+	text-align: center;
+}
+
+li
+{
 	margin-bottom: 10px;
 }
 
-iframe {
-	border: 2px solid rgb(255, 255, 255);
+img
+{
+	border: 2px solid rgb(193, 193, 193);
+	border-radius: 15px;
+}
+
+.ImgIcon
+{
+	border: none;
+}
+
+iframe
+{
+	border: 2px solid rgb(193, 193, 193);
+	border-radius: 15px;
 }
 
 /* Topbar */
 
-#TopBar {
+#TopBar
+{
 	background-color: #23272A;
 	height: 50px;
 	margin-bottom: 0;
@@ -87,7 +143,8 @@ iframe {
 	z-index: 1;
 }
 
-#Title {
+#Title
+{
 	color: rgb(225, 255, 255);
 	font-family: OpenSans-Bold;
 	font-size: large;
@@ -97,7 +154,8 @@ iframe {
 	float: left;
 }
 
-#TitleIcon {
+#TitleIcon
+{
 	height: 30px;
 	width: 30px;
 	margin-top: 10px;
@@ -105,7 +163,8 @@ iframe {
 	float: left;
 }
 
-.TopBarButtons {
+.TopBarButtons
+{
 	height: 30px;
 	font-family: OpenSans-Bold;
 	font-size: large;
@@ -122,19 +181,22 @@ iframe {
 	border-radius: 10px;
 }
 
-.TopBarButtons:hover {
+.TopBarButtons:hover
+{
 	height: 35px;
 	margin-top: 5px;
 	border: 2px solid rgb(193, 193, 193);
 }
 
-#AboutButton {
+#AboutButton
+{
 	margin-right: 25px;
 }
 
 
 /* Content */
-#Content {
+#Content
+{
 	margin-left: 25px;
 	margin-right: 25px;
 	margin-top: 0px;
@@ -144,7 +206,8 @@ iframe {
 
 /* Footer */
 
-footer {
+footer
+{
 	background-color: #23272A;
 	height: 80px;
 	position: sticky;
@@ -155,7 +218,8 @@ footer {
 	z-index: 1;
 }
 
-.FooterText {
+.FooterText
+{
 	color: rgb(225, 255, 255);
 	font-family: OpenSans-Bold;
 	font-size: medium;
@@ -165,7 +229,8 @@ footer {
 	float: left;
 }
 
-.FooterIcon {
+.FooterIcon
+{
 	height: 25px;
 	width: 25px;
 	margin-top: 10px;
@@ -173,14 +238,16 @@ footer {
 	float: left;
 }
 
-.BottomFooter {
+.BottomFooter
+{
 	margin-top: 0;
 }
 
 
 /* About Section Sub Dividers + Buttons */
 
-#PageContent {
+#PageContent
+{
 	width: 70%;
 	margin: 0px;
 	color: rgb(225, 255, 255);
@@ -188,11 +255,12 @@ footer {
 	position: absolute;
 }
 
-#PageList {
+#PageList
+{
 	width: 25%;
 	margin-left: 70%;
 	margin-right: 0px;
-	margin-top: 12px;
+	margin-top: 25px;
 	margin-bottom: 0px;
 	color: rgb(225, 255, 255);
 	float: right;
@@ -206,15 +274,18 @@ footer {
 	border: 2px solid rgb(193, 193, 193);
 }
 
-#PageListTitle {
+#PageListTitle
+{
 	margin-bottom: 0px;
 }
 
-.PageListButton {
-	height: 30px;
+.PageListButton
+{
+	height: auto;
+	padding: 5px;
 	width: 90%;
 	font-family: OpenSans-Bold;
-	font-size: large;
+	font-size: medium;
 	margin-top: 10px;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -226,8 +297,7 @@ footer {
 	border-radius: 10px;
 }
 
-.PageListButton:hover {
-	height: 32px;
-	margin-top: 8px;
+.PageListButton:hover
+{
 	border: 2px solid rgb(193, 193, 193);
 }
