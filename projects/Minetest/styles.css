@@ -136,13 +136,13 @@ iframe
 
 #CantSeeEmojisButton
 {
-	width: 40%;
+	width: auto;
 	font-family: OpenSans-Bold;
 	font-size: large;
 	border: none;
 	background-color: #2C2F33;
 	color: rgb(225, 255, 255);
-	padding: 5px;
+	padding: 10px;
 	border-radius: 10px;
 }
 
