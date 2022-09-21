@@ -63,6 +63,12 @@ a
 	color: rgb(152, 190, 255)
 }
 
+hr
+{
+	color: rgb(255, 255, 255);
+	width: 60%;
+}
+
 ul
 {
 	color: rgb(225, 255, 255);
@@ -150,6 +156,14 @@ iframe
 {
 	border: 2px solid rgb(193, 193, 193);
 }
+
+#MobsAndModsDesc
+{
+	width: 70%;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
 
 /* Topbar */
 
