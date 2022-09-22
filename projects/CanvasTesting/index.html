@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html style="height: 100%; margin: 0px;">
+
+<!-- This uses in-line style because it is faster to do and I don't need to spend as much time styling D: -->
+
+<head>
+    <title>Canvas Testing/TestGame</title>
+</head>
+
+<body id="body" onload="StartUp()" style="height: 100%; margin: 0px;">
+
+    <div id="div" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%"></div>
+
+    <script>
+        // Code written by Jacob Humston
+
+        function StartUp() {
+            const Canvas = document.createElement("canvas")
+            Canvas.id = "canvas"
+            Canvas.style.width = "700px"
+            Canvas.style.height = "700px"
+            Canvas.style.display = "inline-block"
+            Canvas.style.backgroundColor = "rgb(1, 1, 1)"
+            document.getElementById("div").appendChild(Canvas)
+
+            /////////////////////////////////////////////////
+
+            window.devicePixelRatio = 2
+            const Scale = window.devicePixelRatio
+            Canvas.width = Math.floor(700 * Scale)
+            Canvas.height = Math.floor(700 * Scale)
+
+            /////////////////////////////////////////////////
+
+            const Context = Canvas.getContext("2d")
+            Context.scale(Scale, Scale)
+            Context.font = '35px serif';
+            Context.fillStyle = "rgb(255, 255, 255)"
+            Context.textAlign = "center"
+            Context.textBaseline = "middle"
+            Context.fillText("When you see a dot press space!", 700 / 2, 40)
+
+            /////////////////////////////////////////////////
+
+            const TheWorker = new Worker("worker.js")
+
+            let CurrentCount = 0;
+            let SpacePressed = false
+
+            TheWorker.addEventListener("message", async function (Message) {
+                if (Message.data == "SecondHasPassed") {
+                    CurrentCount++
+                    SpacePressed = false
+                    Context.clearRect(0, 100, Canvas.width, Canvas.height)
+                    Context.fillText(`*dot* (${CurrentCount})`, 700 / 2, 700 / 2)
+                    while (SpacePressed == false) {
+                        await new Promise(Resolve => setTimeout(Resolve, 1))
+                    }
+                }
+            })
+
+            addEventListener("keydown", function(Key) {
+                if (Key.code == "Space") {
+                    SpacePressed = true
+                }
+            })
+        }
+
+    </script>
+
+</body>
+
+</html>
