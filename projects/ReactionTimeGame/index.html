@@ -8,7 +8,7 @@
     <link rel="icon" href="trophyicon.svg">
 </head>
 
-<body id="body" onload="StartUp()" style="height: 100%; margin: 0px;">
+<body id="body" onload="StartUp()" style="height: 100%; margin: 0px; background-color: rgb(1, 1, 1);">
 
     <div id="div" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%"></div>
 
@@ -70,7 +70,7 @@
                         Context.fillText(`Round: ${CurrentCount} | Best Time: ${BestTime}ms`, 700 / 2, 650)
                         const CurrentRound = CurrentCount
                         await new Promise(Resolve => setTimeout(Resolve, 3000))
-                        
+
                         /////////////////////////////////////////////////
 
                         if (CurrentCount === CurrentCount && Waiting === true) {
@@ -93,12 +93,12 @@
             addEventListener("keydown", async function (Key) {
                 if (Key.repeat) return
                 if (Key.code === "Space") {
-                    
+
                     if (GameOver == true) {
                         document.location.reload()
 
-                    /////////////////////////////////////////////////
-                        
+                        /////////////////////////////////////////////////
+
                     } else if (Waiting == false) {
                         GameOver = true
                         TheWorker.terminate()
@@ -109,9 +109,9 @@
                         Context.fillText(`You can also press space to refresh.`, 700 / 2, (700 / 2) + 150)
                         await new Promise(Resolve => setTimeout(Resolve, 10000))
                         document.location.reload()
-                    
-                    /////////////////////////////////////////////////
-                    
+
+                        /////////////////////////////////////////////////
+
                     } else if (Cooldown === false && Waiting == true) {
                         Cooldown = true
                         Waiting = false
