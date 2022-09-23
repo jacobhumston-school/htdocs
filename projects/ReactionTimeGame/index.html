@@ -40,7 +40,7 @@
             Context.textAlign = "center"
             Context.textBaseline = "middle"
             Context.fillText("When you see a dot press space!", 700 / 2, 40)
-            Context.font = '30px serif';
+            Context.font = '25px serif';
             Context.fillText(`Round: 0 | Best Time: ??? | Average: ???`, 700 / 2, 650)
             Context.font = '20px serif';
             Context.fillText("Reaction Time Game - By Jacob Humston", 700 / 2, 100)
@@ -62,11 +62,11 @@
             // very basic lol
             function GetSum() {
                 let Sum = 0
-                NumbersForSum.forEach(function(Value) {
+                NumbersForSum.forEach(function (Value) {
                     Sum = Sum + Value
                 })
                 Sum = Sum / NumbersForSum.length
-                if (Sum === NaN) {
+                if (isNaN(Sum)) {
                     return "???"
                 } else {
                     return Sum
@@ -87,7 +87,7 @@
                         Context.arc(700 / 2, 700 / 2, 50, 2 * Math.PI, false)
                         Context.fill()
                         Context.closePath()
-                        Context.font = '30px serif';
+                        Context.font = '25px serif';
                         Context.fillText(`Round: ${CurrentCount} | Best Time: ${BestTime}ms | Average: ${GetSum()}ms`, 700 / 2, 650)
                         const CurrentRound = CurrentCount
                         await new Promise(Resolve => setTimeout(Resolve, 3000))
@@ -144,12 +144,12 @@
                         if ((CurrentTime - SentTime) < BestTime || BestTime == 0) {
                             BestTime = CurrentTime - SentTime
                         }
-                        Context.font = '30px serif';
+                        Context.font = '25px serif';
                         Context.fillText(`Round: ${CurrentCount} | Best Time: ${BestTime}ms | Average: ${GetSum()}ms`, 700 / 2, 650)
                         await new Promise(Resolve => setTimeout(Resolve, 2000))
                         if (GameOver == true) return
                         Context.clearRect(0, 110, Canvas.width, Canvas.height)
-                        Context.font = '30px serif';
+                        Context.font = '25px serif';
                         Context.fillText(`Round: ${CurrentCount} | Best Time: ${BestTime}ms | Average: ${GetSum()}ms`, 700 / 2, 650)
                         await new Promise(Resolve => setTimeout(Resolve, ((Math.floor(Math.random() * 6)) * 1000 + (1000))))
                         if (GameOver == true) return
