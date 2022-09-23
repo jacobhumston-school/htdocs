@@ -104,7 +104,7 @@
                         TheWorker.terminate()
                         Context.clearRect(0, 0, Canvas.width, Canvas.height)
                         Context.font = '25px serif';
-                        Context.fillText(`Don't press when the dot isn't on your screen!`, 700 / 2, 700 / 2)
+                        Context.fillText(`Don't press space when the dot isn't on your screen!`, 700 / 2, 700 / 2)
                         Context.fillText(`Refresh page to restart. (Auto refresh in 10 seconds.)`, 700 / 2, (700 / 2) + 50)
                         Context.fillText(`You can also press space to refresh.`, 700 / 2, (700 / 2) + 150)
                         await new Promise(Resolve => setTimeout(Resolve, 10000))
