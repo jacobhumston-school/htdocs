@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html style="height: 100%; margin: 0px;">
+
+<!-- This uses in-line style because it is faster to do and I don't need to spend as much time styling D: -->
+
+<head>
+    <title>Reaction Time Game</title>
+    <link rel="icon" href="trophyicon.svg">
+</head>
+
+<body id="body" onload="StartUp()" style="height: 100%; margin: 0px;">
+
+    <div id="div" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%"></div>
+
+    <script>
+        // Code written by Jacob Humston
+
+        function StartUp() {
+            const Canvas = document.createElement("canvas")
+            Canvas.id = "canvas"
+            Canvas.style.width = "700px"
+            Canvas.style.height = "700px"
+            Canvas.style.display = "inline-block"
+            Canvas.style.backgroundColor = "rgb(1, 1, 1)"
+            document.getElementById("div").appendChild(Canvas)
+
+            /////////////////////////////////////////////////
+
+            window.devicePixelRatio = 2
+            const Scale = window.devicePixelRatio
+            Canvas.width = Math.floor(700 * Scale)
+            Canvas.height = Math.floor(700 * Scale)
+
+            /////////////////////////////////////////////////
+
+            const Context = Canvas.getContext("2d")
+            Context.scale(Scale, Scale)
+            Context.font = '35px serif';
+            Context.fillStyle = "rgb(255, 255, 255)"
+            Context.textAlign = "center"
+            Context.textBaseline = "middle"
+            Context.fillText("When you see a dot press space!", 700 / 2, 40)
+            Context.fillText(`Round: 0 | Best Time: ???`, 700 / 2, 650)
+            Context.font = '20px serif';
+            Context.fillText("Reaction Time Game - By Jacob Humston", 700 / 2, 100)
+
+            /////////////////////////////////////////////////
+
+            const TheWorker = new Worker("worker.js")
+
+            let CurrentCount = 0;
+            let Waiting = false
+            let Cooldown = true
+            let BestTime = 0
+            let SentTime = 0
+            let GameOver = false
+
+            TheWorker.addEventListener("message", async function (Message) {
+                if (Message.data == "SecondHasPassed") {
+                    if (Waiting === false && Cooldown === false) {
+                        Context.font = '35px serif';
+                        Waiting = true
+                        SentTime = Date.now()
+                        CurrentCount++
+                        Context.clearRect(0, 110, Canvas.width, Canvas.height)
+                        Context.beginPath()
+                        Context.arc(700 / 2, 700 / 2, 50, 2 * Math.PI, false)
+                        Context.fill()
+                        Context.closePath()
+                        Context.fillText(`Round: ${CurrentCount} | Best Time: ${BestTime}ms`, 700 / 2, 650)
+                        const CurrentRound = CurrentCount
+                        await new Promise(Resolve => setTimeout(Resolve, 3000))
+                        
+                        /////////////////////////////////////////////////
+
+                        if (CurrentCount === CurrentCount && Waiting === true) {
+                            GameOver = true
+                            TheWorker.terminate()
+                            Context.clearRect(0, 0, Canvas.width, Canvas.height)
+                            Context.font = '25px serif';
+                            Context.fillText(`You took too long!`, 700 / 2, 700 / 2)
+                            Context.fillText(`Refresh page to restart. (Auto refresh in 10 seconds.)`, 700 / 2, (700 / 2) + 50)
+                            Context.fillText(`You can also press space to refresh.`, 700 / 2, (700 / 2) + 150)
+                            await new Promise(Resolve => setTimeout(Resolve, 10000))
+                            document.location.reload()
+                        }
+                    }
+                }
+            })
+
+            /////////////////////////////////////////////////
+
+            addEventListener("keydown", async function (Key) {
+                if (Key.repeat) return
+                if (Key.code === "Space") {
+                    
+                    if (GameOver == true) {
+                        document.location.reload()
+
+                    /////////////////////////////////////////////////
+                        
+                    } else if (Waiting == false) {
+                        GameOver = true
+                        TheWorker.terminate()
+                        Context.clearRect(0, 0, Canvas.width, Canvas.height)
+                        Context.font = '25px serif';
+                        Context.fillText(`Don't press when the dot isn't on your screen!`, 700 / 2, 700 / 2)
+                        Context.fillText(`Refresh page to restart. (Auto refresh in 10 seconds.)`, 700 / 2, (700 / 2) + 50)
+                        Context.fillText(`You can also press space to refresh.`, 700 / 2, (700 / 2) + 150)
+                        await new Promise(Resolve => setTimeout(Resolve, 10000))
+                        document.location.reload()
+                    
+                    /////////////////////////////////////////////////
+                    
+                    } else if (Cooldown === false && Waiting == true) {
+                        Cooldown = true
+                        Waiting = false
+                        Context.clearRect(0, 110, Canvas.width, Canvas.height)
+                        const CurrentTime = Date.now()
+                        Context.fillText(`${CurrentTime - SentTime}ms (${(CurrentTime - SentTime) / 1000}s)`, 700 / 2, 700 / 2)
+                        if ((CurrentTime - SentTime) < BestTime || BestTime == 0) {
+                            BestTime = CurrentTime - SentTime
+                        }
+                        Context.fillText(`Round: ${CurrentCount} | Best Time: ${BestTime}ms`, 700 / 2, 650)
+                        await new Promise(Resolve => setTimeout(Resolve, 2000))
+                        if (GameOver == true) return
+                        Context.clearRect(0, 110, Canvas.width, Canvas.height)
+                        Context.fillText(`Round: ${CurrentCount} | Best Time: ${BestTime}ms`, 700 / 2, 650)
+                        await new Promise(Resolve => setTimeout(Resolve, ((Math.floor(Math.random() * 6)) * 1000 + (1000))))
+                        if (GameOver == true) return
+                        Cooldown = false
+                    }
+
+                }
+            });
+
+            /////////////////////////////////////////////////
+
+            (async () => {
+                await new Promise(Resolve => setTimeout(Resolve, 3000))
+                Cooldown = false
+            })()
+        }
+
+    </script>
+
+</body>
+
+</html>
