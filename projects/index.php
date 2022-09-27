@@ -1,148 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta charset="UTF8">
-    <title>Area Contents</title>
-  
-  <style>
-/*           Hoping for mainly self contained for ease of use */
-    body
-      {
-        background-color:#202020;
-      }
-      
-    table
-      {
-        width:75%; 
-        margin-left:auto;  
-        margin-right:auto; 
-        margin-top:40px;
-      }
-      
-    td
-      {
-        vertical-align:text-top; 
-        border-radius: 5px; 
-        background-color: #404040; 
-        border: 5px solid #606060;
-        padding-left: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-      }
-    a
-      {
-        color: white;
-        text-decoration: none;
-      }
-      
-  </style>
-  </head>
-  
-  <body style="color: white"> 
-  <table>
-    <tbody>
-      <tr>
-        <td>
-       
-  <?php
-    $LineCount = 0;
-    $files = scandir('.');
-    $FileCount = sizeof($files);
-    usort($files, 'strnatcasecmp');
-    
-    
-    for ( $i = 0 ; $i < $FileCount ; $i++ ) 
-      {
-        if ( $files[$i] != "." && $files[$i] != ".." && $files[$i] != "Maint" &&$files[$i] != "index.php" && $files[$i] != "index.php~"  && is_dir($files[$i]) == true )
-          {
-            echo "  <a href=\"" . $files[$i]."\"><img src='Maint/folder.png'  width='24px'> " . $files[$i] . " </a><br>";
-            
-              $LineCount++;
-              if ( $LineCount >= 24 )
-            {
-              $LineCount = 0;
-              echo  "<td>  ";
-            }
-          }
-      }
-     
-      $LineCount = 0;
 
-      echo '<td>';
-      
-      for ( $i = 0 ; $i < $FileCount ; $i++ ) 
-      {
-        if ( $files[$i] != ".directory" && $files[$i] != "." && $files[$i] != ".." &&$files[$i] != "index.php" && $files[$i] != "index.php~"  && is_dir($files[$i]) == false )
-          {
-            $path_parts = pathinfo($files[$i]);
-          
-            if ( $path_parts['extension'] =="png" || $path_parts['extension'] =="bmp" || $path_parts['extension'] =="jpg" || $path_parts['extension'] =="gif")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/image.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-              
-            else if ( $path_parts['extension'] =="cpp")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/cpp.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-                      
-            else if ( $path_parts['extension'] =="gz" || $path_parts['extension'] =="zip")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/compress.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-              
-            else if ( $path_parts['extension'] =="html")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/html.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
+<head>
+    <meta charset="UTF8">
+    <title>Project Files</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <?php
+
+        ini_set('display_errors', 1);
+
+        function Main() {
+
+        $ANumber = 10;  
+        $NeedBreak = false;  
+
+        function MainLoop($Directory, $IsStart) {
+
+            global $ANumber;
+            global $NeedBreak;
+        
+            $Files = scandir($Directory);
+            $FileCount = sizeof($Files);
+
+            for ($Index = 0; $Index < $FileCount; $Index++) 
+            {
+
+                ++$ANumber;
+
+                $CurrentFile = $Files[$Index];
+                $PathInfo = pathinfo($Directory . "/" . $CurrentFile);
+                $IsDirectory = is_dir($Directory . "/" . $CurrentFile);
+
+                if ($CurrentFile == "." || $CurrentFile == "..") continue;
+                       
+                if ($IsDirectory == true) {
+                    if ($NeedBreak == true) echo "<br>";
+                    echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#P' . $ANumber . '"><img src="./Assets/folder_black_24dp.svg"> <b>' . $CurrentFile . '</b></button><a type="button" class="btn btn-link" href="' . $Directory . "/" . $CurrentFile . '">Open</a>';
+                    echo '<div id="P' . $ANumber . '" class="collapse">';
+                    echo ' <div class="well well-sm">';
+                    //echo "<b>" . $CurrentFile . "</b>";
+                    MainLoop($Directory . "/" . $CurrentFile, false);
+                    echo "</div></div><br>";
+                    $NeedBreak = false;
+                }
                 
-            else if ( $path_parts['extension'] =="php")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/php.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-                 
-            else if ( $path_parts['extension'] =="txt")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/txt.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-            
-            else if ( $path_parts['extension'] =="blend")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/blender.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-              
-            else if ( $path_parts['extension'] =="doc" || $path_parts['extension'] =="odt" || $path_parts['extension'] =="docx")
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/doc.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-              
-            else
-              {
-                echo "  <a href=\"" . $files[$i]."\"><img src='Maint/file.png' width='24px'> " . $files[$i] . " </a><br>";
-              }
-            
-            $LineCount++;
-              if ( $LineCount >= 24 )
-            {
-              $LineCount = 0;
-              echo  "<td> ";
-            }
-          }
-      }
+                else 
+                {
+                    echo '<img src="./Assets/description_black_24dp.svg"> <b>' . $CurrentFile . '</b> <a type="button" class="btn btn-link" href="' . $Directory . "/" . $CurrentFile . '">Open</a>';
+                    $NeedBreak = true;
+                };
 
-  ?>
-            </ul>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                echo "<br>";
+            };
 
-    <table>
-      <tr>
-        <td>
-                    <a href="../" alt="back"> Back </a>
-        </td>
-      </tr>
-    </table>   
-  </body>
+        };
+
+        echo "<div class=\"well\">";
+
+        echo '<h1>Projects File Directory<br></h1><h3>Made by Jacob Humston<br></h3><h5>Some links will lead to a download instead of viewing in the browser depending on the file type. You can go to <b>Example > ProjectDirectoryViewer.zip</b> if you would like to use this yourself.</h5><br>';
+
+        MainLoop(".", true);
+
+        echo "</div>";
+
+    };
+
+    Main();
+
+    ?>
+</body>
+
 </html>
