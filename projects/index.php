@@ -42,7 +42,7 @@
                        
                 if ($IsDirectory == true) {
                     if ($NeedBreak == true) echo "<br>";
-                    echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#P' . $ANumber . '"><img src="./Assets/folder_black_24dp.svg"> <b>' . $CurrentFile . '</b></button><a type="button" class="btn btn-link" href="' . $Directory . "/" . $CurrentFile . '">Open</a>';
+                    echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#P' . $ANumber . '"><img src="./ViewerAssets/folder_black_24dp.svg"> <b>' . $CurrentFile . '</b></button><a target="blank" type="button" class="btn btn-defualt" href="' . $Directory . "/" . $CurrentFile . '"><img src="./ViewerAssets/launch_black_24dp.svg""> Open</a>';
                     echo '<div id="P' . $ANumber . '" class="collapse">';
                     echo ' <div class="well well-sm">';
                     //echo "<b>" . $CurrentFile . "</b>";
@@ -53,7 +53,7 @@
                 
                 else 
                 {
-                    echo '<img src="./Assets/description_black_24dp.svg"> <b>' . $CurrentFile . '</b> <a type="button" class="btn btn-link" href="' . $Directory . "/" . $CurrentFile . '">Open</a>';
+                    echo '<img src="./ViewerAssets/description_black_24dp.svg"> <b>' . $CurrentFile . '</b> <a target="blank" type="button" class="btn btn-defualt" href="' . $Directory . "/" . $CurrentFile . '"><img src="./ViewerAssets/launch_black_24dp.svg"> Open</a>';
                     $NeedBreak = true;
                 };
 
