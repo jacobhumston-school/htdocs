@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF8">
     <title>Project Files</title>
-    <link rel="icon" href="./Assets/folder_black_24dp.svg">
+    <link rel="icon" href="./ViewerAssets/folder_black_24dp.svg">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -18,8 +18,17 @@
 
         function Main() {
 
-        $ANumber = 10;  
+        $ANumber = 0;  
         $NeedBreak = false;  
+
+        function GetImageOfFileType($Ext) {
+            $Image = null;
+            if ($Ext == "svg" || $Ext == "png" || $Ext == "jpg" || $Ext == "jpeg" || $Ext == "webp") $Image = '<img src="./ViewerAssets/FileTypes/image_black_24dp.svg">';
+            if ($Ext == "php" || $Ext == "js" || $Ext == "html" || $Ext == "css") $Image = '<img src="./ViewerAssets/FileTypes/code_black_24dp.svg">';
+            if ($Ext == "txt" || $Ext == "md") $Image = '<img src="./ViewerAssets/FileTypes/text_fields_black_24dp.svg">';
+            if ($Ext == "ttf" || $Ext == "otf") $Image = '<img src="./ViewerAssets/FileTypes/title_black_24dp.svg">';
+            return $Image;
+        };
 
         function MainLoop($Directory, $IsStart) {
 
@@ -42,18 +51,28 @@
                        
                 if ($IsDirectory == true) {
                     if ($NeedBreak == true) echo "<br>";
-                    echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#P' . $ANumber . '"><img src="./ViewerAssets/folder_black_24dp.svg"> <b>' . $CurrentFile . '</b></button><a target="blank" type="button" class="btn btn-defualt" href="' . $Directory . "/" . $CurrentFile . '"><img src="./ViewerAssets/launch_black_24dp.svg""> Open</a>';
+                    echo '<a target="blank" type="button" class="btn btn-success btn-xs" href="' . $Directory . "/" . $CurrentFile . '">Open</a> <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#P' . $ANumber . '"><img src="./ViewerAssets/folder_black_24dp.svg"> <b>' . $CurrentFile . '</b></button>';
                     echo '<div id="P' . $ANumber . '" class="collapse">';
                     echo ' <div class="well well-sm">';
                     //echo "<b>" . $CurrentFile . "</b>";
                     MainLoop($Directory . "/" . $CurrentFile, false);
-                    echo "</div></div><br>";
+                    echo "</div></div>";
+                    if ($Index + 1 != $FileCount) echo "<br>";
                     $NeedBreak = false;
                 }
                 
                 else 
                 {
-                    echo '<img src="./ViewerAssets/description_black_24dp.svg"> <b>' . $CurrentFile . '</b> <a target="blank" type="button" class="btn btn-defualt" href="' . $Directory . "/" . $CurrentFile . '"><img src="./ViewerAssets/launch_black_24dp.svg"> Open</a>';
+                    $Image = '<img src="./ViewerAssets/description_black_24dp.svg">';
+                    $PathExtension = null;
+                    if (isset($PathInfo["extension"]) == true) {
+                       $PathExtension = $PathInfo["extension"];
+                    } else {
+                        $PathExtension = "Unkown";
+                    };
+                    $ImageFound = GetImageOfFileType($PathExtension);
+                    if ($ImageFound != null) $Image = $ImageFound;
+                    echo '<a target="blank" type="button" class="btn btn-success btn-xs" href="' . $Directory . "/" . $CurrentFile . '">Open</a> ' . $Image . ' <b>' . $CurrentFile . '</b>';
                     $NeedBreak = true;
                 };
 
