@@ -14,9 +14,9 @@
 
     <?php
 
-        ini_set('display_errors', 1);
+    ini_set('display_errors', 1);
 
-        function Main() {
+    function Main() {
 
         $ANumber = 0;  
         $NeedBreak = false;  
@@ -27,6 +27,7 @@
             if ($Ext == "php" || $Ext == "js" || $Ext == "html" || $Ext == "css") $Image = '<img src="./ViewerAssets/FileTypes/code_black_24dp.svg">';
             if ($Ext == "txt" || $Ext == "md") $Image = '<img src="./ViewerAssets/FileTypes/text_fields_black_24dp.svg">';
             if ($Ext == "ttf" || $Ext == "otf") $Image = '<img src="./ViewerAssets/FileTypes/title_black_24dp.svg">';
+            if ($Ext == "Unkown") $Image = '<img src="./ViewerAssets/FileTypes/question_mark_black_24dp.svg">';
             return $Image;
         };
 
