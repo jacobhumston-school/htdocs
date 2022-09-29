@@ -84,8 +84,10 @@
 
         echo "<div class=\"well\">";
 
-        echo '<h1>Projects File Directory<br></h1><h3>Made by Jacob Humston<br></h3><h5>Some links will lead to a download instead of viewing in the browser depending on the file type. You can go to <b>Example > ProjectDirectoryViewer.zip</b> if you would like to use this yourself.</h5><br>';
+        echo '<h1>Projects File Directory<br></h1><h3>Made by Jacob Humston<br></h3><h5>Some links will lead to a download instead of viewing in the browser depending on the file type. You can go to <b>Example > ProjectDirectoryViewer.zip</b> if you would like to use this yourself.</h5>';
 
+        echo '<p><img src="./ViewerAssets/iconmonstr-github-1.svg" height="30px"> <b>GitHub Repository:</b> <a href="https://github.com/jacobhumston-school/htdocs" target="blank">https://github.com/jacobhumston-school/htdocs</a></p>';
+        
         MainLoop(".", true);
 
         echo "</div>";
