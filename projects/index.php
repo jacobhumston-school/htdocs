@@ -55,7 +55,6 @@
                     echo '<a target="blank" type="button" class="btn btn-success btn-xs" href="' . $Directory . "/" . $CurrentFile . '">Open</a> <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#P' . $ANumber . '"><img src="./ViewerAssets/folder_black_24dp.svg"> <b>' . $CurrentFile . '</b></button>';
                     echo '<div id="P' . $ANumber . '" class="collapse">';
                     echo '<div class="well well-sm">';
-                    //echo "<b>" . $CurrentFile . "</b>";
                     MainLoop($Directory . "/" . $CurrentFile, false);
                     echo "</div></div>";
                     if ($Index + 1 != $FileCount) echo "<br>";
