@@ -89,6 +89,12 @@
         
         MainLoop(".", true);
 
+        echo "<br>";
+
+        global $ANumber;
+
+        echo '<img src="./ViewerAssets/info_black_48dp.svg" width="25px" height="25px"> Total Files: <b>' . $ANumber . '</b>';
+
         echo "</div>";
 
     };
