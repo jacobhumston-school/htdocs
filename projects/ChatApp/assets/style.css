@@ -1,0 +1,89 @@
+/*
+    Fonts
+*/
+
+@font-face
+{
+    font-family: Poppins-Regular;
+    src: url("./Poppins-Regular.ttf");
+}
+
+/*
+    Basic Elements
+*/
+
+body
+{
+    margin: 0px;
+    padding: 0px;
+    font-family: Poppins-Regular;
+    background-color: rgb(42, 42, 42)
+}
+
+p
+{
+    margin: 0px;
+    color: rgb(255, 255, 255);
+}
+
+h1
+{
+    color: rgb(255, 255, 255);
+}
+
+/*
+    Classes
+*/
+
+.TopBarDivider
+{
+    width: 100%;
+    height: .5in;
+    background-color: rgb(67, 67, 67);
+}
+
+.TopBarParagraph
+{
+    height: 50%;
+    padding: 0px;
+    padding-top: calc((.25in / 2) - 2.5px);
+    font-size: larger;
+    text-align: center;
+    float: left;
+    margin-left: 5px;
+}
+
+.TopBarIcon
+{
+    height: 50%;
+    padding: 0px;
+    padding-top: calc(.25in / 2);
+    float: left;
+    margin-left: 10px;
+}
+
+.LoginTitle
+{
+    text-align: center;
+    margin-top: .5in;
+}
+
+.LoginDivider
+{
+    height: 3in;
+    width: 50%;
+    background-color: rgb(67, 67, 67);
+    margin-left: 25%;
+    margin-top: .3in;
+    border-radius: .3in;
+}
+
+@media (max-width: 8in)
+{
+    .LoginDivider
+    {
+       width: 100%;
+       border-radius: 0px;
+       margin-left: 0px;
+    }
+}
