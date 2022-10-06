@@ -1,0 +1,27 @@
+body
+{
+    background-color: rgb(50, 50, 50);
+    margin: 0px;
+    padding: 0px;
+}
+
+#slideshowImage
+{
+    border-radius: 50px;
+    border: solid 5px rgb(0, 0, 0);
+}
+
+#slideshowDivider
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 25px;
+}
+
+h1
+{
+    color: white;
+    margin-right: 15px;
+}

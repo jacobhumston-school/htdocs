@@ -71,19 +71,83 @@ h1
 .LoginDivider
 {
     height: 3in;
-    width: 50%;
+    width: 7in;
     background-color: rgb(67, 67, 67);
-    margin-left: 25%;
+    margin-left: calc((100% - 7in) / 2);
     margin-top: .3in;
     border-radius: .3in;
 }
 
-@media (max-width: 8in)
+@media (max-width: 7.5in)
 {
     .LoginDivider
     {
-       width: 100%;
-       border-radius: 0px;
-       margin-left: 0px;
+        width: 100%;
+        border-radius: 0px;
+        margin-left: 0px;
     }
+}
+
+.LoginInput
+{
+    background-color: rgb(42, 42, 42);
+    color: rgb(255, 255, 255);
+    font-family: Poppins-Regular;
+    border: none;
+    width: 90%;
+    margin-left: 5%;
+    height: .5in;
+    margin-top: .2in;
+    font-size: larger;
+    text-align: center;
+    border-radius: .1in;
+}
+
+.LoginInput:focus
+{
+    outline: solid .05in rgb(37, 179, 158);
+    /* background-color: rgb(37, 179, 158); */
+}
+
+.LoginButton
+{
+    width: 2in;
+    height: .5in;
+    color: rgb(255, 255, 255);
+    border-radius: .1in;
+    border: none;
+    margin-top: .4in;
+    font-family: Poppins-Regular;
+    font-size: larger;
+    background-color: rgb(42, 42, 42);
+}
+
+.LoginButtonLeft
+{
+    margin-left: 1in;
+    float: left;
+}
+
+.LoginButtonRight
+{
+    margin-right: 1in;
+    float: right;
+}
+
+@media (max-width: 6.5in)
+{
+    .LoginButtonLeft
+    {
+        margin-left: .2in;
+    }
+
+    .LoginButtonRight
+    {
+        margin-right: .2in;
+    }
+}
+
+.LoginButton:hover
+{
+    background-color: rgb(37, 179, 158);
 }
