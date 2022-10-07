@@ -2,11 +2,13 @@
     "data": [
         {
             "pass": "supercooladminpass",
-            "user": "Jacob"
+            "user": "Jacob",
+            "ip": "::ffff:192.168.0.23"
         },
         {
             "pass": "I_Love_TO_Chat",
-            "user": "SuperGeneral"
+            "user": "SuperGeneral",
+            "ip": "::ffff:192.168.0.24"
         }
     ]
 }

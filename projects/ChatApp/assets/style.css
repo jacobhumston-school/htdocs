@@ -35,6 +35,8 @@ h1
     Classes
 */
 
+/* TopBar */
+
 .TopBarDivider
 {
     width: 100%;
@@ -62,15 +64,30 @@ h1
     margin-left: 10px;
 }
 
+/* Login Page */
+
 .LoginTitle
 {
     text-align: center;
     margin-top: .5in;
 }
 
+.AlertBox
+{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(255, 84, 84);
+    font-size: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .LoginDivider
 {
-    height: 3in;
+    height: 2.7in;
     width: 7in;
     background-color: rgb(67, 67, 67);
     margin-left: calc((100% - 7in) / 2);
@@ -138,12 +155,17 @@ h1
 {
     .LoginButtonLeft
     {
-        margin-left: .2in;
+        margin-left: .5in;
     }
 
     .LoginButtonRight
     {
-        margin-right: .2in;
+        margin-right: .5in;
+    }
+
+    .LoginButton
+    {
+        width: 1in;
     }
 }
 

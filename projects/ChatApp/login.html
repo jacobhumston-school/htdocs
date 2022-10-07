@@ -19,16 +19,59 @@
     <!-- Login Title -->
     <h1 class="LoginTitle">Login or Sign up</h1>
 
-    <p id="ErrorBox"></p>
+    <!-- Error Box -->
+    <p id="ErrorBox" class="AlertBox" hidden="true">Placeholder</p>
 
+    <!-- Login Divider -->
     <div class="LoginDivider">
-        <input type="text" placeholder="Username" class="LoginInput">
-        <br>
-        <input type="password" placeholder="Password" class="LoginInput">
-        <br>
-        <button class="LoginButton LoginButtonLeft">Login</button>
-        <button class="LoginButton LoginButtonRight">Sign up</button>
+        <!-- Username Input -->
+        <input type="text" placeholder="Username" class="LoginInput" id="UsernameField">
+
+        <!-- Password Input -->
+        <input type="password" placeholder="Password" class="LoginInput" id="PasswordField">
+
+        <!-- Login Button -->
+        <button class="LoginButton LoginButtonLeft" id="LoginButton">Login</button>
+
+        <!-- Sign up Button -->
+        <button class="LoginButton LoginButtonRight" id="SignupButton">Sign up</button>
     </div>
+
+    <!-- Client Login Page Code -->
+    <script>
+        const apiURL = "http://192.168.0.23:4000/chat/login/api/"
+
+        const errorBox = document.getElementById("ErrorBox")
+        const usernameField = document.getElementById("UsernameField")
+        const passwordField = document.getElementById("PasswordField")
+        const loginButton = document.getElementById("LoginButton")
+        const signupButton = document.getElementById("SignupButton")
+
+        loginButton.addEventListener("click", function () {
+            errorBox.hidden = true
+            const request = new XMLHttpRequest()
+            request.addEventListener("load", function () {
+                const response = JSON.parse(this.responseText)
+                const success = response.success
+                if (success === true) {
+
+                } else {
+                    errorBox.innerHTML = `<b>${response.errorType}:</b> ${response.errorMessage}`
+                    errorBox.hidden = false
+                }
+            })
+            request.addEventListener("error", function () {
+                errorBox.innerHTML = "<b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
+                errorBox.hidden = false
+            })
+            request.open("GET", apiURL + "login", true)
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            request.send(JSON.stringify({
+                username: usernameField.value,
+                password: passwordField.value
+            }))
+        })
+    </script>
 </body>
 
 </html>
