@@ -49,28 +49,68 @@
 
         loginButton.addEventListener("click", function () {
             errorBox.hidden = true
+            const closeButton = `<img class="AlertBoxButton" onclick="closeErrorBoxFunction()" src="./assets/close_white_48dp.svg" alt="Close">`
             const request = new XMLHttpRequest()
             request.addEventListener("load", function () {
                 const response = JSON.parse(this.responseText)
                 const success = response.success
                 if (success === true) {
-
+                    document.location.reload()
                 } else {
-                    errorBox.innerHTML = `<b>${response.errorType}:</b> ${response.errorMessage}`
+                    errorBox.innerHTML = `${closeButton} <b>${response.errorType}:</b> ${response.errorMessage}`
                     errorBox.hidden = false
                 }
             })
             request.addEventListener("error", function () {
-                errorBox.innerHTML = "<b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
+                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
                 errorBox.hidden = false
             })
-            request.open("GET", apiURL + "login", true)
+            request.addEventListener("abort", function () {
+                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
+                errorBox.hidden = false
+            })
+            request.open("POST", apiURL + "signin", true)
             request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
             request.send(JSON.stringify({
                 username: usernameField.value,
                 password: passwordField.value
             }))
         })
+
+        signupButton.addEventListener("click", function () {
+            errorBox.hidden = true
+            const closeButton = `<img class="AlertBoxButton" onclick="closeErrorBoxFunction()" src="./assets/close_white_48dp.svg" alt="Close">`
+            const request = new XMLHttpRequest()
+            request.addEventListener("load", function () {
+                const response = JSON.parse(this.responseText)
+                const success = response.success
+                if (success === true) {
+                    document.location.reload()
+                } else {
+                    errorBox.innerHTML = `${closeButton} <b>${response.errorType}:</b> ${response.errorMessage}`
+                    errorBox.hidden = false
+                }
+            })
+            request.addEventListener("error", function () {
+                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
+                errorBox.hidden = false
+            })
+            request.addEventListener("abort", function () {
+                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
+                errorBox.hidden = false
+            })
+            request.open("POST", apiURL + "signup", true)
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            request.send(JSON.stringify({
+                username: usernameField.value,
+                password: passwordField.value
+            }))
+        })
+
+
+        function closeErrorBoxFunction() {
+            errorBox.hidden = true
+        }
     </script>
 </body>
 
