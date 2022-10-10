@@ -39,7 +39,7 @@
 
     <!-- Client Login Page Code -->
     <script>
-        const apiURL = "http://192.168.0.23:4000/chat/login/api/"
+        const apiURL = window.location.origin + "/chat/login/api/"
 
         const errorBox = document.getElementById("ErrorBox")
         const usernameField = document.getElementById("UsernameField")

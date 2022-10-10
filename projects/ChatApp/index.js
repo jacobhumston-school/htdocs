@@ -203,7 +203,7 @@ app.post("/chat/login/api/signup", function (request, response) {
                 response.send({
                     success: false,
                     errorType: "Invalid Sign up",
-                    errorMessage: `The username must be between 3-15 characters & the password must be between 8-25 characters. Username and password cannot contain the following characters:&nbsp;<code>${blacklistedStrings.join("</code>, <code>")}</code>`,
+                    errorMessage: `The username must be between 3-15 characters & the password must be between 8-25 characters.<br>Username and password cannot contain the following characters:&nbsp;<code>${blacklistedStrings.join("</code>, <code>")}</code>`,
                     returned: loginValidation
                 })
             }
