@@ -11,7 +11,6 @@ const fs = require("fs")
 const { v4: uuidv4 } = require('uuid')
 
 const adminData = require("./adminpass.json")
-const e = require("express")
 
 const data = {
     accounts: [],
