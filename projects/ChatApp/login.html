@@ -1,117 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ChatApp | Login</title>
+        <link rel="stylesheet" type="text/css" href="./assets/style.css" />
+        <link rel="icon" type="image/x-icon" href="./assets/icon.svg" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatApp | Login</title>
-    <link rel="stylesheet" type="text/css" href="./assets/style.css">
-    <link rel="icon" type="image/x-icon" href="./assets/icon.svg">
-</head>
+    <body>
+        <!-- TopBar -->
+        <div class="TopBarDivider">
+            <img src="./assets/icon.svg" alt="Chat Icon" class="TopBarIcon" />
+            <p class="TopBarParagraph">ChatApp</p>
+        </div>
 
-<body>
-    <!-- TopBar -->
-    <div class="TopBarDivider">
-        <img src="./assets/icon.svg" alt="Chat Icon" class="TopBarIcon">
-        <p class="TopBarParagraph">ChatApp</p>
-    </div>
+        <!-- Login Title -->
+        <h1 class="LoginTitle">Login or Sign up</h1>
 
-    <!-- Login Title -->
-    <h1 class="LoginTitle">Login or Sign up</h1>
+        <!-- Error Box -->
+        <p id="ErrorBox" class="AlertBox" hidden="true">Placeholder</p>
 
-    <!-- Error Box -->
-    <p id="ErrorBox" class="AlertBox" hidden="true">Placeholder</p>
+        <!-- Login Divider -->
+        <div class="LoginDivider">
+            <!-- Username Input -->
+            <input type="text" placeholder="Username" class="LoginInput" id="UsernameField" />
 
-    <!-- Login Divider -->
-    <div class="LoginDivider">
-        <!-- Username Input -->
-        <input type="text" placeholder="Username" class="LoginInput" id="UsernameField">
+            <!-- Password Input -->
+            <input type="password" placeholder="Password" class="LoginInput" id="PasswordField" />
 
-        <!-- Password Input -->
-        <input type="password" placeholder="Password" class="LoginInput" id="PasswordField">
+            <!-- Login Button -->
+            <button class="LoginButton LoginButtonLeft" id="LoginButton">Login</button>
 
-        <!-- Login Button -->
-        <button class="LoginButton LoginButtonLeft" id="LoginButton">Login</button>
+            <!-- Sign up Button -->
+            <button class="LoginButton LoginButtonRight" id="SignupButton">Sign up</button>
+        </div>
 
-        <!-- Sign up Button -->
-        <button class="LoginButton LoginButtonRight" id="SignupButton">Sign up</button>
-    </div>
+        <!-- Client Login Page Code -->
+        <script>
+            const apiURL = window.location.origin + "/chat/login/api/";
 
-    <!-- Client Login Page Code -->
-    <script>
-        const apiURL = window.location.origin + "/chat/login/api/"
+            const errorBox = document.getElementById("ErrorBox");
+            const usernameField = document.getElementById("UsernameField");
+            const passwordField = document.getElementById("PasswordField");
+            const loginButton = document.getElementById("LoginButton");
+            const signupButton = document.getElementById("SignupButton");
 
-        const errorBox = document.getElementById("ErrorBox")
-        const usernameField = document.getElementById("UsernameField")
-        const passwordField = document.getElementById("PasswordField")
-        const loginButton = document.getElementById("LoginButton")
-        const signupButton = document.getElementById("SignupButton")
+            loginButton.addEventListener("click", function () {
+                errorBox.hidden = true;
+                const closeButton = `<img class="AlertBoxButton" onclick="closeErrorBoxFunction()" src="./assets/close_white_48dp.svg" alt="Close">`;
+                const request = new XMLHttpRequest();
+                request.addEventListener("load", function () {
+                    const response = JSON.parse(this.responseText);
+                    const success = response.success;
+                    if (success === true) {
+                        document.location.reload();
+                    } else {
+                        errorBox.innerHTML = `${closeButton} <b>${response.errorType}:</b> ${response.errorMessage}`;
+                        errorBox.hidden = false;
+                    }
+                });
+                request.addEventListener("error", function () {
+                    errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?";
+                    errorBox.hidden = false;
+                });
+                request.addEventListener("abort", function () {
+                    errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?";
+                    errorBox.hidden = false;
+                });
+                request.open("POST", apiURL + "signin", true);
+                request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                request.send(
+                    JSON.stringify({
+                        username: usernameField.value,
+                        password: passwordField.value,
+                    })
+                );
+            });
 
-        loginButton.addEventListener("click", function () {
-            errorBox.hidden = true
-            const closeButton = `<img class="AlertBoxButton" onclick="closeErrorBoxFunction()" src="./assets/close_white_48dp.svg" alt="Close">`
-            const request = new XMLHttpRequest()
-            request.addEventListener("load", function () {
-                const response = JSON.parse(this.responseText)
-                const success = response.success
-                if (success === true) {
-                    document.location.reload()
-                } else {
-                    errorBox.innerHTML = `${closeButton} <b>${response.errorType}:</b> ${response.errorMessage}`
-                    errorBox.hidden = false
-                }
-            })
-            request.addEventListener("error", function () {
-                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
-                errorBox.hidden = false
-            })
-            request.addEventListener("abort", function () {
-                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
-                errorBox.hidden = false
-            })
-            request.open("POST", apiURL + "signin", true)
-            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-            request.send(JSON.stringify({
-                username: usernameField.value,
-                password: passwordField.value
-            }))
-        })
+            signupButton.addEventListener("click", function () {
+                errorBox.hidden = true;
+                const closeButton = `<img class="AlertBoxButton" onclick="closeErrorBoxFunction()" src="./assets/close_white_48dp.svg" alt="Close">`;
+                const request = new XMLHttpRequest();
+                request.addEventListener("load", function () {
+                    const response = JSON.parse(this.responseText);
+                    const success = response.success;
+                    if (success === true) {
+                        document.location.reload();
+                    } else {
+                        errorBox.innerHTML = `${closeButton} <b>${response.errorType}:</b> ${response.errorMessage}`;
+                        errorBox.hidden = false;
+                    }
+                });
+                request.addEventListener("error", function () {
+                    errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?";
+                    errorBox.hidden = false;
+                });
+                request.addEventListener("abort", function () {
+                    errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?";
+                    errorBox.hidden = false;
+                });
+                request.open("POST", apiURL + "signup", true);
+                request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                request.send(
+                    JSON.stringify({
+                        username: usernameField.value,
+                        password: passwordField.value,
+                    })
+                );
+            });
 
-        signupButton.addEventListener("click", function () {
-            errorBox.hidden = true
-            const closeButton = `<img class="AlertBoxButton" onclick="closeErrorBoxFunction()" src="./assets/close_white_48dp.svg" alt="Close">`
-            const request = new XMLHttpRequest()
-            request.addEventListener("load", function () {
-                const response = JSON.parse(this.responseText)
-                const success = response.success
-                if (success === true) {
-                    document.location.reload()
-                } else {
-                    errorBox.innerHTML = `${closeButton} <b>${response.errorType}:</b> ${response.errorMessage}`
-                    errorBox.hidden = false
-                }
-            })
-            request.addEventListener("error", function () {
-                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
-                errorBox.hidden = false
-            })
-            request.addEventListener("abort", function () {
-                errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?"
-                errorBox.hidden = false
-            })
-            request.open("POST", apiURL + "signup", true)
-            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-            request.send(JSON.stringify({
-                username: usernameField.value,
-                password: passwordField.value
-            }))
-        })
-
-
-        function closeErrorBoxFunction() {
-            errorBox.hidden = true
-        }
-    </script>
-</body>
-
+            function closeErrorBoxFunction() {
+                errorBox.hidden = true;
+            }
+        </script>
+    </body>
 </html>
