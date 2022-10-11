@@ -187,3 +187,30 @@ code
 {
     background-color: rgb(37, 179, 158);
 }
+
+/* Main Chat Page */
+
+#ErrorDivider
+{
+    text-align: center;
+}
+
+#SignOutButton
+{
+    height: 50%;
+    padding: 5px;
+    padding-top: calc((.25in / 2) - 2.5px);
+    font-size: large;
+    text-align: center;
+    float: right;
+    margin-right: 5px;
+    color: rgb(255, 122, 122);
+    background: none;
+    border: none;
+    font-family: Poppins-Regular;
+}
+
+#MessageDivider
+{
+    overflow-y: scroll;
+}

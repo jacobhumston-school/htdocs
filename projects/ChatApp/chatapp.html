@@ -1,26 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ChatApp</title>
-        <link rel="stylesheet" type="text/css" href="./chat/assets/style.css" />
-        <link rel="icon" type="image/x-icon" href="./chat/assets/icon.svg" />
-    </head>
 
-    <body>
-        <!-- TopBar -->
-        <div class="TopBarDivider">
-            <img src="./chat/assets/icon.svg" alt="Chat Icon" class="TopBarIcon" />
-            <p class="TopBarParagraph">ChatApp</p>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatApp</title>
+    <link rel="stylesheet" type="text/css" href="./chat/assets/style.css" />
+    <link rel="icon" type="image/x-icon" href="./chat/assets/icon.svg" />
+</head>
+
+<body>
+    <!-- TopBar -->
+    <div class="TopBarDivider">
+        <img src="./chat/assets/icon.svg" alt="Chat Icon" class="TopBarIcon" />
+        <p class="TopBarParagraph">ChatApp</p>
+        <button id="SignOutButton" onclick="logout()">Sign Out</button>
+    </div>
+
+    <div id="MainDivider">
+        <div id="MessageDivider">
+
         </div>
+    </div>
 
-        <!-- Main Script -->
-        <script>
-            const webSocket = new WebSocket("ws://" + window.location.hostname + ":" + "4001");
-            webSocket.onmessage = function (Message) {
-                console.log(Message);
-            };
-        </script>
-    </body>
+    <!-- Main Script -->
+    <script>
+        const mainDivider = document.getElementById("MainDivider")
+        const messageDivider = document.getElementById("MessageDivider")
+
+        function appendMessage(message) {
+            const element = document.createElement("p")
+            element.innerText = message.message
+            messageDivider.appendChild(element)
+        }
+
+        function displayErrorPage(message) {
+            mainDivider.innerHTML = `<div id="ErrorDivider"><h1>Oops!</h1><p>Looks like something went wrong...</p><br><p><b>${message}<b></p></div>`
+        }
+
+        function logout() {
+            const request = new XMLHttpRequest();
+            request.addEventListener("load", function () {
+                document.location.reload();
+            });
+            request.open("GET", window.location.origin + "/logout", true);
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            request.send()
+        }
+
+        let firstMessageRequest = true
+
+        const webSocket = new WebSocket("ws://" + window.location.hostname + ":" + "4001");
+        webSocket.onmessage = function (message) {
+            try {
+                const data = JSON.parse(message.data)
+                if (data.Type == "Messages") {
+                    if (firstMessageRequest === true) {
+                        firstMessageRequest = false
+                        data.Data.forEach(message => {
+                            appendMessage(message)
+                        });
+                    } else {
+                        appendMessage(data.Data[data.Data.length - 1])
+                    }
+                } else {
+                    console.log("Invalid Type: ", data.Type)
+                }
+            } catch (error) {
+                console.log("Looks like something went wrong: " + error)
+            }
+        };
+
+        webSocket.onclose = function () {
+            displayErrorPage(`WebSocket Closed: Looks like the server is no longer communicating with you, waiting for server... <p id="PingCount">Attempt... 0</p>`)
+            const pingCount = document.getElementById("PingCount")
+            let count = 0
+            const intervel = setInterval(() => {
+                count++
+                pingCount.innerHTML = "Attempt... " + count
+                const request = new XMLHttpRequest();
+                request.addEventListener("load", function () {
+                    window.location.reload()
+                });
+                request.open("GET", window.location.origin + "/ping", true);
+                request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                request.send("ping");
+                if (count === 60) {
+                    pingCount.innerHTML = "Max attempts reached, please refresh manually."
+                    clearInterval(intervel)
+                }
+            }, 1000);
+        }
+
+        webSocket.onerror = function (error) {
+            displayErrorPage("WebSocket Error: " + error)
+        }
+    </script>
+</body>
+
 </html>
