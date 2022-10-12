@@ -213,4 +213,89 @@ code
 #MessageDivider
 {
     overflow-y: scroll;
+    background-color: rgb(67, 67, 67);
+    border: none;
+    margin-left: 5%;
+    width: 90%;
+    height: 6in;
+    margin-top: 15px;
+    border-radius: .3in;
+    padding-bottom: 5px;
+}
+
+.ChatMessageDivider
+{
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.ChatMessageProfilePicture
+{
+    height: 35px;
+    width: 35px;
+    display: inline;
+    float: left;
+    margin-right: 5px;
+}
+
+.ChatMessageName
+{
+    height: 35px;
+    font-size: x-large;
+    display: inline;
+    float: left;
+}
+
+.ChatMessageMessage
+{
+    font-size: large;
+    display: inline;
+    word-wrap: break-word;
+}
+
+.LoadingText
+{
+    width: 100%;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.GoldText
+{
+    color: rgb(245, 255, 133);
+    font-size: large;
+}
+
+.ChatInput
+{
+    background-color: rgb(67, 67, 67);
+    color: rgb(255, 255, 255);
+    font-family: Poppins-Regular;
+    border: none;
+    width: 70%;
+    margin-left: 5%;
+    height: .5in;
+    margin-top: .2in;
+    font-size: larger;
+    text-align: center;
+    border-radius: .1in;
+    display: inline;
+}
+
+.SendMessageButton
+{
+    background-color: rgb(37, 179, 158);
+    color: rgb(255, 255, 255);
+    font-family: Poppins-Regular;
+    border: none;
+    width: 15%;
+    margin-left: 1%;
+    height: .5in;
+    margin-top: .2in;
+    font-size: larger;
+    text-align: center;
+    border-radius: .1in;
+    display: inline;
 }

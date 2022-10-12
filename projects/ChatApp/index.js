@@ -101,6 +101,43 @@ function isValidSession(sessionId) {
     }
 }
 
+function getAccountFromSession(sessionId) {
+    const index = data.sessions.findIndex((value) => value.sessionId === sessionId)
+    const userId = data.sessions[index].accountId
+    const userIndex = data.accounts.findIndex((value) => value.userId === userId)
+    return data.accounts[userIndex]
+}
+
+// these are very important functions that are used to do very important things
+
+function sendMessage(message, account) {
+    data.messages.push({
+        message: message.replaceAll("<", "&#60;").replaceAll(">", "&#62;"),
+        author: {
+            name: account.username,
+            userId: account.userId,
+            profilePicture: account.profilePicture,
+            isAdmin: account.admin,
+            isRobot: account.robot ?? false,
+        },
+        created: new Date(),
+        id: uuidv4()
+    })
+    wsServer.clients.forEach(function (webSocket) {
+        webSocket.send(JSON.stringify({ Type: "Messages", Data: data.messages }))
+    })
+}
+
+function sendRobotMessage(message) {
+    sendMessage(message, {
+        username: "Robot 🤖",
+        userId: "cool-robot",
+        profilePicture: "https://ui-avatars.com/api/?name=Robot&format=svg&rounded=true",
+        admin: true,
+        robot: true,
+    })
+}
+
 // websocket for all the chat messenging needs
 
 const wsServer = new webSocket.Server({ port: webSocketPort });
@@ -120,9 +157,13 @@ wsServer.on("connection", function (webSocket, request) {
     } else {
         const cookies = request.headers.cookie
         const sessionId = cookies.split("sessionId=")[1]
+        let account = null
 
         if (!isValidSession(sessionId) === true) {
             webSocket.close();
+        } else {
+            account = getAccountFromSession(sessionId)
+            sendRobotMessage("👋 " + account.username + " has connected to the chat, welcome!")
         }
 
         const intervel = setInterval(function () {
@@ -132,6 +173,9 @@ wsServer.on("connection", function (webSocket, request) {
         }, 1000)
 
         webSocket.onclose = function () {
+            if (account !== null) {
+                sendRobotMessage("👋 " + account.username + " has disconnected, goodbye!")
+            }
             clearInterval(intervel)
         }
 
@@ -150,23 +194,9 @@ wsServer.on("connection", function (webSocket, request) {
     }
 });
 
-// these are very important functions that are used to do very important things
+// starting message
 
-function sendMessage(message, account) {
-    data.messages.push({
-        message: message,
-        author: {
-            name: account.username,
-            userId: account.userId,
-            profilePicture: account.profilePicture,
-        },
-        created: new Date(),
-        id: uuidv4()
-    })
-    wsServer.clients.forEach(function (webSocket) {
-        webSocket.send(JSON.stringify({ Type: "Messages", Data: data.messages }))
-    })
-}
+sendRobotMessage("A new chatting session has started! Make sure to be nice to each other.")
 
 // this is the main api, used for login and such
 
@@ -178,7 +208,7 @@ app.get("/ping", function (request, response) {
     response.send("ok")
 })
 
-app.get("/logout", function (request, response) {
+app.get("/api/logout", function (request, response) {
     const sessionId = request.cookies.sessionId
     if (isValidSession(request.cookies.sessionId) === true) {
         const index = data.sessions.findIndex(value => value.sessionId === sessionId)
@@ -187,6 +217,24 @@ app.get("/logout", function (request, response) {
         }
     }
     response.redirect("/")
+})
+
+app.post("/api/sendmessage", function (request, response) {
+    const sessionId = request.cookies.sessionId
+    if (isValidSession(request.cookies.sessionId) === true) {
+        const body = request.body
+        if (body !== undefined && body !== null) {
+            let message = body.message
+            if (typeof (message) === "string") {
+                message = message.trim()
+                if (message.length < 1000 || message.length > 1) {
+                    const account = getAccountFromSession(sessionId)
+                    sendMessage(message, account)
+                }
+            }
+        }
+    }
+    response.send("ok")
 })
 
 app.get("/chat", function (request, response) {
@@ -341,9 +389,3 @@ app.use(function (request, response) {
 app.listen(port, function () {
     console.log(`App is listening to port ${port}...`);
 });
-
-let count = 0
-setInterval(function () {
-    count++
-    sendMessage("wassup guys " + count, data.accounts[0])
-}, 1000)
