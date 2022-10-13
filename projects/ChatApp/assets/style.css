@@ -201,6 +201,7 @@ hr
 #ErrorDivider
 {
     text-align: center;
+    padding-right: 5px;
 }
 
 #SignOutButton
@@ -307,6 +308,7 @@ hr
     border-radius: .1in;
     display: inline;
     outline: none;
+    word-wrap: break-word;
 }
 
 .ChatInput:hover

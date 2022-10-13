@@ -89,7 +89,7 @@
                 }
                 const elementDivider = document.createElement("div");
                 elementDivider.classList.add("ChatMessageDivider");
-                elementDivider.innerHTML = `<p class="ChatMessageName"><img src="${message.author.profilePicture}" class="ChatMessageProfilePicture">&nbsp;${message.author.name}${tagText}</p><br><br><p class="ChatMessageTime"><i>${new Date(message.created).toLocaleString()}</i></p><br><br><p class="ChatMessageMessage">${message.message}</p>`;
+                elementDivider.innerHTML = `<p class="ChatMessageName"><img src="${message.author.profilePicture}" class="ChatMessageProfilePicture"> ${message.author.name}${tagText}</p><br><br><p class="ChatMessageTime"><i>${new Date(message.created).toLocaleString()}</i></p><br><br><p class="ChatMessageMessage">${message.message}</p>`;
                 messageDivider.appendChild(elementDivider);
                 elementDivider.scrollIntoView();
             }
@@ -128,12 +128,15 @@
                     } else {
                         appendMessage(data.Data[data.Data.length - 1]);
                     }
+                } else if(data.Type == "Connected") {
+                    document.title = "ChatApp (" + data.Data.Count + " Connected)"
                 } else {
                     console.log("Invalid Type: ", data.Type);
                 }
             };
 
             webSocket.onclose = function () {
+                document.title = "ChatApp"
                 displayErrorPage(`WebSocket Closed: Looks like the server is no longer communicating with you, waiting for server... <p id="PingCount">Attempt... 0</p>`);
                 const pingCount = document.getElementById("PingCount");
                 let count = 0;

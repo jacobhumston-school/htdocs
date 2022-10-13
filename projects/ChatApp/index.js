@@ -128,6 +128,12 @@ function sendMessage(message, account) {
     });
 }
 
+function updateConnected(count) {
+    wsServer.clients.forEach(function (webSocket) {
+        webSocket.send(JSON.stringify({ Type: "Connected", Data: { Count: count } }));
+    });
+}
+
 function sendRobotMessage(message) {
     sendMessage(message, {
         username: "Robot 🤖",
@@ -150,11 +156,17 @@ wsServer.on("error", function (error) {
     console.log("WebSocket Error: " + error.message);
 });
 
+let connected = 0
+
 wsServer.on("connection", function (webSocket, request) {
     if (isIpBanned(request.socket.remoteAddress) === true) {
         webSocket.send("You're IP is blacklisted, lol.");
         webSocket.close();
     } else {
+
+        connected++
+        updateConnected(connected)
+
         const cookies = request.headers.cookie ?? "";
         const sessionId = cookies.split("sessionId=")[1];
         let account = null;
@@ -177,6 +189,8 @@ wsServer.on("connection", function (webSocket, request) {
                 sendRobotMessage("👋 " + account.username + " has disconnected, goodbye!");
             }
             clearInterval(intervel);
+            connected--
+            updateConnected(connected)
         };
 
         /** dont need this but keeping it for later incase
