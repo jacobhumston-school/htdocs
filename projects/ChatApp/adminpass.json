@@ -6,6 +6,11 @@
             "ip": "::ffff:192.168.0.23"
         },
         {
+            "pass": "supercooladminpass",
+            "user": "Jacob.Humston",
+            "ip": "::ffff:192.168.0.22"
+        },
+        {
             "pass": "I_Love_TO_Chat",
             "user": "SuperGeneral",
             "ip": "::ffff:192.168.0.24"

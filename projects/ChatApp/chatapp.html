@@ -1,119 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ChatApp</title>
+        <link rel="stylesheet" type="text/css" href="./chat/assets/style.css" />
+        <link rel="icon" type="image/x-icon" href="./chat/assets/icon.svg" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChatApp</title>
-    <link rel="stylesheet" type="text/css" href="./chat/assets/style.css" />
-    <link rel="icon" type="image/x-icon" href="./chat/assets/icon.svg" />
-</head>
-
-<body>
-    <!-- TopBar -->
-    <div class="TopBarDivider">
-        <img src="./chat/assets/icon.svg" alt="Chat Icon" class="TopBarIcon" />
-        <p class="TopBarParagraph">ChatApp</p>
-        <button id="SignOutButton" onclick="logout()">Sign Out</button>
-    </div>
-
-    <div id="MainDivider">
-        <div id="MessageDivider">
-
+    <body>
+        <!-- TopBar -->
+        <div class="TopBarDivider">
+            <img src="./chat/assets/icon.svg" alt="Chat Icon" class="TopBarIcon" />
+            <p class="TopBarParagraph">ChatApp</p>
+            <button id="SignOutButton" onclick="logout()">Sign Out</button>
         </div>
-    </div>
 
-    <input type="text" placeholder="Send a message..." class="ChatInput" id="ChatField" />
-    <button class="SendMessageButton" id="SendMessageButton">Send</button>
+        <div id="MainDivider">
+            <div id="MessageDivider"></div>
+            <p id="ErrorBox" class="AlertBox" hidden="true">Placeholder</p>
+            <input type="text" placeholder="Send a message..." class="ChatInput" id="ChatField" />
+            <button class="SendMessageButton" id="SendMessageButton">Send</button>
+        </div>
 
-    <!-- Main Script -->
-    <script>
-        const mainDivider = document.getElementById("MainDivider")
-        const messageDivider = document.getElementById("MessageDivider")
+        <!-- Main Script -->
+        <script>
+            const mainDivider = document.getElementById("MainDivider");
+            const messageDivider = document.getElementById("MessageDivider");
+            const errorBox = document.getElementById("ErrorBox");
+            const chatField = document.getElementById("ChatField");
+            const sendMessageButton = document.getElementById("SendMessageButton");
 
-        function appendMessage(message) {
-            if (messageDivider.children.length !== 0) {
-                messageDivider.appendChild(document.createElement("br"))
+            const apiURL = window.location.origin + "/chat/api/";
+
+            const closeButton = `<img class="AlertBoxButton" onclick="closeErrorBoxFunction()" src="./chat/assets/close_white_48dp.svg" alt="Close">`;
+            function closeErrorBoxFunction() {
+                errorBox.hidden = true;
             }
-            let tagText = ""
-            if (message.author.isAdmin) {
-                tagText = ' <span class="GoldText">[ADMIN]</span>'
-            }
-            const elementDivider = document.createElement("div")
-            elementDivider.classList.add("ChatMessageDivider")
-            elementDivider.innerHTML = `<p class="ChatMessageName"><img src="${message.author.profilePicture}" class="ChatMessageProfilePicture"> ${message.author.name}${tagText}</p><br><br><p class="ChatMessageMessage">${message.message}</p>`
-            messageDivider.appendChild(elementDivider)
-            elementDivider.scrollIntoView()
-        }
 
-        function displayErrorPage(message) {
-            mainDivider.innerHTML = `<div id="ErrorDivider"><h1>Oops!</h1><p>Looks like something went wrong...</p><br><p><b>${message}<b></p></div>`
-        }
-
-        function logout() {
-            const request = new XMLHttpRequest();
-            request.addEventListener("load", function () {
-                document.location.reload();
-            });
-            request.open("GET", window.location.origin + "/api/logout", true);
-            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-            request.send()
-        }
-
-        let firstMessageRequest = true
-
-        const loadingElement = document.createElement("p")
-        loadingElement.innerHTML = "Waiting for message(s)..."
-        loadingElement.classList.add("LoadingText")
-        messageDivider.appendChild(loadingElement)
-
-        const webSocket = new WebSocket("ws://" + window.location.hostname + ":" + "4001");
-        webSocket.onmessage = function (message) {
-            const data = JSON.parse(message.data)
-            if (data.Type == "Messages") {
-                if (firstMessageRequest === true) {
-                    firstMessageRequest = false
-                    data.Data.forEach(message => {
-                        appendMessage(message)
-                    });
-                    loadingElement.remove()
-                } else {
-                    appendMessage(data.Data[data.Data.length - 1])
-                }
-            } else {
-                console.log("Invalid Type: ", data.Type)
-            }
-        };
-
-        webSocket.onclose = function () {
-            displayErrorPage(`WebSocket Closed: Looks like the server is no longer communicating with you, waiting for server... <p id="PingCount">Attempt... 0</p>`)
-            const pingCount = document.getElementById("PingCount")
-            let count = 0
-            const intervel = setInterval(() => {
-                count++
-                pingCount.innerHTML = "Attempt... " + count
+            function sendMessage() {
+                errorBox.hidden = true;
                 const request = new XMLHttpRequest();
                 request.addEventListener("load", function () {
-                    window.location.reload()
+                    let response = JSON.parse(this.responseText);
+                    if (response.success) {
+                        chatField.value = "";
+                    } else {
+                        errorBox.innerHTML = closeButton + ` <b>${response.errorType}:</b> ${response.errorMessage}`;
+                        errorBox.hidden = false;
+                    }
                 });
-                request.open("GET", window.location.origin + "/ping", true);
+                request.addEventListener("error", function () {
+                    errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?";
+                    errorBox.hidden = false;
+                });
+                request.addEventListener("abort", function () {
+                    errorBox.innerHTML = closeButton + " <b>Error!</b> Looks like the request returned an error, maybe refresh the page?";
+                    errorBox.hidden = false;
+                });
+                request.open("POST", apiURL + "sendmessage", true);
                 request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-                request.send("ping");
-                if (count === 60) {
-                    pingCount.innerHTML = "Max attempts reached, please refresh manually."
-                    clearInterval(intervel)
+                request.send(
+                    JSON.stringify({
+                        message: chatField.value,
+                    })
+                );
+            }
+
+            sendMessageButton.addEventListener("click", function () {
+                sendMessage();
+            });
+
+            chatField.addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    sendMessage();
                 }
-            }, 1000);
-        }
+            });
 
-        webSocket.onerror = function (error) {
-            displayErrorPage("WebSocket Error: " + error)
-        }
+            function appendMessage(message) {
+                if (messageDivider.children.length !== 0) {
+                    messageDivider.appendChild(document.createElement("hr"));
+                } else {
+                    messageDivider.appendChild(document.createElement("br"));
+                }
+                let tagText = "";
+                if (message.author.isAdmin) {
+                    tagText = ' <span class="GoldText">ADMIN</span>';
+                }
+                const elementDivider = document.createElement("div");
+                elementDivider.classList.add("ChatMessageDivider");
+                elementDivider.innerHTML = `<p class="ChatMessageName"><img src="${message.author.profilePicture}" class="ChatMessageProfilePicture">&nbsp;${message.author.name}${tagText}</p><br><br><p class="ChatMessageTime"><i>${new Date(message.created).toLocaleString()}</i></p><br><br><p class="ChatMessageMessage">${message.message}</p>`;
+                messageDivider.appendChild(elementDivider);
+                elementDivider.scrollIntoView();
+            }
 
-        addEventListener("error", function (error) {
-            alert("Looks like something went wrong!\n>> " + error.message + "\n\nPlease refresh the page, or report the error to: \njhumston24@sciototech.org")
-        })
-    </script>
-</body>
+            function displayErrorPage(message) {
+                mainDivider.innerHTML = `<div id="ErrorDivider"><h1>Oops!</h1><p>Looks like something went wrong...</p><br><p><b>${message}<b></p></div>`;
+            }
 
+            function logout() {
+                const request = new XMLHttpRequest();
+                request.addEventListener("load", function () {
+                    document.location.reload();
+                });
+                request.open("GET", window.location.origin + "/api/logout", true);
+                request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                request.send();
+            }
+
+            let firstMessageRequest = true;
+
+            const loadingElement = document.createElement("p");
+            loadingElement.innerHTML = "Waiting for message(s)...";
+            loadingElement.classList.add("LoadingText");
+            messageDivider.appendChild(loadingElement);
+
+            const webSocket = new WebSocket("ws://" + window.location.hostname + ":" + "4001");
+            webSocket.onmessage = function (message) {
+                const data = JSON.parse(message.data);
+                if (data.Type == "Messages") {
+                    if (firstMessageRequest === true) {
+                        firstMessageRequest = false;
+                        loadingElement.remove();
+                        data.Data.forEach((message) => {
+                            appendMessage(message);
+                        });
+                    } else {
+                        appendMessage(data.Data[data.Data.length - 1]);
+                    }
+                } else {
+                    console.log("Invalid Type: ", data.Type);
+                }
+            };
+
+            webSocket.onclose = function () {
+                displayErrorPage(`WebSocket Closed: Looks like the server is no longer communicating with you, waiting for server... <p id="PingCount">Attempt... 0</p>`);
+                const pingCount = document.getElementById("PingCount");
+                let count = 0;
+                const intervel = setInterval(() => {
+                    count++;
+                    pingCount.innerHTML = "Attempt... " + count;
+                    const request = new XMLHttpRequest();
+                    request.addEventListener("load", function () {
+                        window.location.reload();
+                    });
+                    request.open("GET", window.location.origin + "/ping", true);
+                    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                    request.send("ping");
+                    if (count === 60) {
+                        pingCount.innerHTML = "Max attempts reached, please refresh manually.";
+                        clearInterval(intervel);
+                    }
+                }, 1000);
+            };
+
+            webSocket.onerror = function (error) {
+                displayErrorPage("WebSocket Error: " + error);
+            };
+
+            addEventListener("error", function (error) {
+                alert("Looks like something went wrong!\n>> " + error.message + "\n\nPlease refresh the page, or report the error to: \njhumston24@sciototech.org");
+            });
+        </script>
+    </body>
 </html>

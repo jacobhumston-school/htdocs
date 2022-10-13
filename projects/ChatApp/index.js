@@ -33,7 +33,7 @@ adminData.data.forEach(function (value) {
         userId: uuidv4(),
         admin: true,
         ipWhitelist: value.ip,
-        profilePicture: `https://ui-avatars.com/api/?name=${value.user}&format=svg&rounded=true`
+        profilePicture: `https://ui-avatars.com/api/?name=${value.user}&format=svg&rounded=true`,
     });
 });
 
@@ -102,10 +102,10 @@ function isValidSession(sessionId) {
 }
 
 function getAccountFromSession(sessionId) {
-    const index = data.sessions.findIndex((value) => value.sessionId === sessionId)
-    const userId = data.sessions[index].accountId
-    const userIndex = data.accounts.findIndex((value) => value.userId === userId)
-    return data.accounts[userIndex]
+    const index = data.sessions.findIndex((value) => value.sessionId === sessionId);
+    const userId = data.sessions[index].accountId;
+    const userIndex = data.accounts.findIndex((value) => value.userId === userId);
+    return data.accounts[userIndex];
 }
 
 // these are very important functions that are used to do very important things
@@ -121,11 +121,11 @@ function sendMessage(message, account) {
             isRobot: account.robot ?? false,
         },
         created: new Date(),
-        id: uuidv4()
-    })
+        id: uuidv4(),
+    });
     wsServer.clients.forEach(function (webSocket) {
-        webSocket.send(JSON.stringify({ Type: "Messages", Data: data.messages }))
-    })
+        webSocket.send(JSON.stringify({ Type: "Messages", Data: data.messages }));
+    });
 }
 
 function sendRobotMessage(message) {
@@ -135,7 +135,7 @@ function sendRobotMessage(message) {
         profilePicture: "https://ui-avatars.com/api/?name=Robot&format=svg&rounded=true",
         admin: true,
         robot: true,
-    })
+    });
 }
 
 // websocket for all the chat messenging needs
@@ -155,29 +155,29 @@ wsServer.on("connection", function (webSocket, request) {
         webSocket.send("You're IP is blacklisted, lol.");
         webSocket.close();
     } else {
-        const cookies = request.headers.cookie
-        const sessionId = cookies.split("sessionId=")[1]
-        let account = null
+        const cookies = request.headers.cookie ?? "";
+        const sessionId = cookies.split("sessionId=")[1];
+        let account = null;
 
         if (!isValidSession(sessionId) === true) {
             webSocket.close();
         } else {
-            account = getAccountFromSession(sessionId)
-            sendRobotMessage("👋 " + account.username + " has connected to the chat, welcome!")
+            account = getAccountFromSession(sessionId);
+            sendRobotMessage("👋 " + account.username + " has connected to the chat, welcome!");
         }
 
         const intervel = setInterval(function () {
             if (!isValidSession(sessionId) === true) {
                 webSocket.close();
             }
-        }, 1000)
+        }, 1000);
 
         webSocket.onclose = function () {
             if (account !== null) {
-                sendRobotMessage("👋 " + account.username + " has disconnected, goodbye!")
+                sendRobotMessage("👋 " + account.username + " has disconnected, goodbye!");
             }
-            clearInterval(intervel)
-        }
+            clearInterval(intervel);
+        };
 
         /** dont need this but keeping it for later incase
         
@@ -196,7 +196,7 @@ wsServer.on("connection", function (webSocket, request) {
 
 // starting message
 
-sendRobotMessage("A new chatting session has started! Make sure to be nice to each other.")
+sendRobotMessage("🎉 A new chatting session has started! Make sure to be nice to each other.");
 
 // this is the main api, used for login and such
 
@@ -205,37 +205,39 @@ app.get("/", function (request, response) {
 });
 
 app.get("/ping", function (request, response) {
-    response.send("ok")
-})
+    response.send("ok");
+});
 
 app.get("/api/logout", function (request, response) {
-    const sessionId = request.cookies.sessionId
+    const sessionId = request.cookies.sessionId;
     if (isValidSession(request.cookies.sessionId) === true) {
-        const index = data.sessions.findIndex(value => value.sessionId === sessionId)
+        const index = data.sessions.findIndex((value) => value.sessionId === sessionId);
         if (index !== -1) {
-            data.sessions.splice(index, 1)
+            data.sessions.splice(index, 1);
         }
     }
-    response.redirect("/")
-})
+    response.redirect("/");
+});
 
-app.post("/api/sendmessage", function (request, response) {
-    const sessionId = request.cookies.sessionId
+app.post("/chat/api/sendmessage", function (request, response) {
+    const sessionId = request.cookies.sessionId;
+    let responseObject = { success: false, errorType: "Couldn't Send", errorMessage: "Make sure your message is between 1-999 characters long." };
     if (isValidSession(request.cookies.sessionId) === true) {
-        const body = request.body
+        const body = request.body;
         if (body !== undefined && body !== null) {
-            let message = body.message
-            if (typeof (message) === "string") {
-                message = message.trim()
-                if (message.length < 1000 || message.length > 1) {
-                    const account = getAccountFromSession(sessionId)
-                    sendMessage(message, account)
+            let message = body.message;
+            if (typeof message === "string") {
+                message = message.trim();
+                if (message.length < 1000 && message.length > 0) {
+                    const account = getAccountFromSession(sessionId);
+                    sendMessage(message, account);
+                    responseObject = { success: true };
                 }
             }
         }
     }
-    response.send("ok")
-})
+    response.send(responseObject);
+});
 
 app.get("/chat", function (request, response) {
     if (isIpBanned(request.ip) === true) {
@@ -338,7 +340,7 @@ app.post("/chat/login/api/signup", function (request, response) {
                         userId: uuidv4(),
                         admin: false,
                         ipWhitelist: null,
-                        profilePicture: `https://ui-avatars.com/api/?name=${body.username}&format=svg&rounded=true`
+                        profilePicture: `https://ui-avatars.com/api/?name=${body.username}&format=svg&rounded=true`,
                     };
                     data.accounts.push(newAccount);
                     const session = { sessionId: `${uuidv4()}-${uuidv4()}-${uuidv4()}`, accountId: newAccount.userId };
@@ -376,9 +378,9 @@ for (const fileName of fs.readdirSync("./assets")) {
 
 // this is a dummy function for viewing data
 // it will get commented out when testing is done
-app.get("/data/get/lol", function (request, response) {
-    response.send(data);
-});
+//app.get("/data/get/lol", function (request, response) {
+//    response.send(data);
+//});
 
 // redirct to main page incase of 404
 app.use(function (request, response) {

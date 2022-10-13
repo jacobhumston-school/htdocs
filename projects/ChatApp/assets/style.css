@@ -36,6 +36,14 @@ code
     background-color: rgb(51, 51, 51);
 }
 
+hr
+{
+    color: rgb(42, 42, 42);
+    border-style: solid;
+    border-color: rgb(42, 42, 42);
+    background-color: rgb(42, 42, 42)
+}
+
 /*
     Classes
 */
@@ -223,6 +231,14 @@ code
     padding-bottom: 5px;
 }
 
+@media (max-height: 7.5in)
+{
+    #MessageDivider
+    {
+        height: 5in;
+    }
+}
+
 .ChatMessageDivider
 {
     color: rgb(255, 255, 255);
@@ -255,6 +271,14 @@ code
     word-wrap: break-word;
 }
 
+.ChatMessageTime
+{
+    font-size: medium;
+    display: inline;
+    word-wrap: break-word;
+    color: rgb(212, 212, 212);
+}
+
 .LoadingText
 {
     width: 100%;
@@ -265,7 +289,7 @@ code
 .GoldText
 {
     color: rgb(245, 255, 133);
-    font-size: large;
+    font-size: medium;
 }
 
 .ChatInput
@@ -282,6 +306,12 @@ code
     text-align: center;
     border-radius: .1in;
     display: inline;
+    outline: none;
+}
+
+.ChatInput:hover
+{
+    outline: none;
 }
 
 .SendMessageButton
@@ -298,4 +328,22 @@ code
     text-align: center;
     border-radius: .1in;
     display: inline;
+}
+
+.SendMessageButton:focus
+{
+    background-color: rgb(33, 156, 137)
+}
+
+@media (max-width: 4in)
+{
+    .SendMessageButton
+    {
+        font-size: medium;
+    }
+
+    .ChatInput
+    {
+        font-size: medium;
+    }
 }
