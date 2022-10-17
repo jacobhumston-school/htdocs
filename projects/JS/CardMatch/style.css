@@ -1,0 +1,22 @@
+/*
+    Author: Jacob Humston
+    Source: JS Card Matching Game for Juniors
+*/
+
+/* Main Tags */
+
+body
+{
+    background-color: black;
+    color: white;
+}
+
+#Container
+{
+    width: 100%;
+}
+
+#GameBoard
+{
+
+}
