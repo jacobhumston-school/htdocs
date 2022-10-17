@@ -100,11 +100,20 @@ function drawCardSpots() {
 
 
 function randomCards() {
-    let Temp = 0;
-    for (let Index = 0; Index < NumberOfCards; Index += 2) {
-        SetPool[Index] = Temp;
-        SetPool[(Index + 1)] = Temp;
-        Temp++;
+    /*
+        let Temp = 0
+        for (let Index = 0; Index < NumberOfCards; Index += 2) {
+            SetPool[Index] = Temp;
+            SetPool[(Index + 1)] = Temp;
+            Temp++;
+        }
+    */
+    let ThisImage = [];
+    let Count = ImagePool.length;
+    for (Index = 0; Index < Count; Index++) {
+        let RandomImage = Math.floor(ImagePool.length * Math.random())
+        ThisImage[Index] = ImagePool[RandomImage]
+        ImagePool.splice(RandomImage, 1)
     }
     for (Index = 0; Index < NumberOfCards; Index++) {
         let Pick = Math.floor(SetPool.length * Math.random());
