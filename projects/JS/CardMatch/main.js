@@ -16,6 +16,7 @@ let NumberOfCards = 4;
 let SetPool = [];
 let CardPool = [];
 let ImagePool = [];
+let Card = [];
 let BackgroundImage = new Image();
 BackgroundImage.src = "images/background.jpeg";
 let BackImage = new Image();
@@ -111,14 +112,15 @@ function randomCards() {
     let ThisImage = [];
     let Count = ImagePool.length;
     for (Index = 0; Index < Count; Index++) {
-        let RandomImage = Math.floor(ImagePool.length * Math.random())
-        ThisImage[Index] = ImagePool[RandomImage]
-        ImagePool.splice(RandomImage, 1)
+        let RandomImage = Math.floor(ImagePool.length * Math.random());
+        ThisImage[Index] = ImagePool[RandomImage];
+        ImagePool.splice(RandomImage, 1);
     }
     for (Index = 0; Index < NumberOfCards; Index++) {
         let Pick = Math.floor(SetPool.length * Math.random());
         let Drawn = SetPool.splice(Pick, 1);
-        CardPool[Index] = Drawn;
+        CardPool[Index] = parseInt(Drawn);
+        Card[Index] = new CardData(1, 0, CardLi)
     }
     console.log("[CardPool]: Result: " + CardPool);
 }
