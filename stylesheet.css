@@ -1,0 +1,102 @@
+@font-face
+{
+    font-family: Regular;
+    src: url("Fonts/SourceSansPro-Regular.ttf");
+}
+
+@font-face
+{
+    font-family: SemiBold;
+    src: url("Fonts/SourceSansPro-SemiBold.ttf");
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(40, 43, 48);
+    color: rgb(255, 255, 255);
+    font-family: Regular;
+}
+
+h1
+{
+    color: rgb(114, 137, 218);
+    font-family: SemiBold;
+}
+
+h2
+{
+    color: rgb(114, 137, 218);
+    font-family: SemiBold;
+}
+
+h3
+{
+    color: rgb(114, 137, 218);
+    font-family: SemiBold;
+}
+
+a
+{
+    color: rgb(114, 137, 218)
+}
+
+a:visited
+{
+    color: rgb(114, 137, 218)
+}
+
+a:hover
+{
+    color: rgb(79, 94, 150)
+}
+
+a:active
+{
+    color: rgb(114, 137, 218)
+}
+
+#TopDetailsDivider
+{
+    background-color: rgb(30, 33, 36);
+    padding: 10px;
+}
+
+.PlainTextButton
+{
+    color: rgb(114, 137, 218);
+    text-decoration: underline;
+}
+
+.PlainTextButton:hover
+{
+    color: rgb(79, 94, 150)
+}
+
+#TopBar
+{
+    background-color: rgb(30,33,36);
+    height: 50px;
+}
+
+#TopBarText
+{
+    float: left;
+    margin: 0;
+    margin-left: 5px;
+    height: 30px;
+    font-family: SemiBold;
+    font-size: x-large;
+    margin-top: calc((50px - 30px) / 2)
+}
+
+#TopBarIcon
+{
+    float: left;
+    margin: 0;
+    margin-left: 5px;
+    height: 30px;
+    width: 30px;
+    margin-top: calc((50px - 30px) / 2)
+}

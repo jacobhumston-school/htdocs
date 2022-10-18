@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 
 <head>
     <meta charset="utf-8">
-    <title>Links</title>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="heart.png">
+    <title>Portfolio</title>
 </head>
 
 <body>
-    <header>Jacob Humston's Links</header>
-    <main>
+    <div id="TopDetailsDivider">
+        <h2>Quick Links</h2>
         <p>
-            > ➡️ <a href="projects/">Projects</a> ⭐
+            ➡️ <a href="projects/">Projects</a> ⭐
             <br>
-            > ↗️ <a href="http://192.168.0.23:3000" target="blank">Node.Js API Web Server</a>
+            ↗️ <a href="http://192.168.0.23:3000" target="blank">Node.Js API Web Server</a>
             <br>
-            > ↗️ <a href="http://192.168.0.23:4000" target="blank">Chat App</a>
+            ↗️ <a href="http://192.168.0.23:4000" target="blank">Chat App</a>
             <br>
-            > ➡️ <a href="http://192.168.0.23/wp/wordpress" target="blank">Wordpress Site</a>
+            ➡️ <a href="http://192.168.0.23/wp/wordpress" target="blank">Wordpress Site</a>
             <br>
-            > ⤴️ <a href="https://github.com/jacobhumston-school/htdocs" target="blank">Github Repository</a>
+            ⤴️ <a href="https://github.com/jacobhumston-school/htdocs" target="blank">Github Repository</a>
         </p>
         <ul>
             <li>⭐ - You should check this out first.</li>
@@ -26,7 +28,25 @@
             <li>↗️ - These pages are handled by Node.js or something similar, may be offline.</li>
             <li>⤴️ - Offsite redirect, not created by me.</li>
         </ul>
-    </main>
+        <br>
+        <p class="PlainTextButton" onclick="closeTopDetails()">Click here to close...</p>
+    </div>
+
+    <div id="TopBar">
+        <img id="TopBarIcon" src="heart.png" alt="icon">
+        <p id="TopBarText">Jacob Humston's Portfolio</p>
+    </div>
+
+    <p>Coming soon.</p>
+
+    <script>
+        function closeTopDetails() {
+            const element = document.getElementById("TopDetailsDivider");
+            if (element) {
+                element.remove();
+            }
+        }
+    </script>
 </body>
 
 </html>
