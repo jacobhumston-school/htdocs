@@ -14,9 +14,19 @@ let ImagesLoaded = 0;
 let More = -1;
 let NumberOfCards = 4;
 let SetPool = [];
-let CardPool = [];
+let CardPool = []
 let ImagePool = [];
-let Card = [];
+function CardData(avail, flip, x, y, img, pair) {
+    this.avail = avail;
+    this.flip = flip;
+    this.x = x;
+    this.y = y;
+    this.img = img;
+    this.pair = pair;
+}
+let CardList = [];
+let LGCards = [135, 30, 135, 220, 375, 30, 375, 220, 255, 30, 255, 220];
+let SNCards = [220, 30, 305, 30, 135, 145, 305, 145, 390, 145, 220, 260, 305, 260, 390, 30, 135, 260, 135, 30, 390, 390, 260, 50, 145, 475, 145, 475, 30, 50, 260, 50, 30, 475, 260];
 let BackgroundImage = new Image();
 BackgroundImage.src = "images/background.jpeg";
 let BackImage = new Image();
@@ -29,7 +39,7 @@ loadPreGame();
 function loadPreGame() {
     let Next = 0;
     while (Next <= (PictureList.length - 1)) {
-        window[ImagePool[Next] + "Image"] = preLoadImage("images/" + PictureList[Next] + ".png");
+        window[PictureList[Next] + "Image"] = preLoadImage("images/" + PictureList[Next] + ".png");
         Next++;
     }
 }
@@ -37,7 +47,7 @@ function loadPreGame() {
 function preLoadImage(Url) {
     More++;
     ImagePool[More] = new Image();
-    ImagePool[More].addEventListener("onload", imageLoaded, false);
+    ImagePool[More].onload = imageLoaded();
     ImagePool[More].src = Url;
     return ImagePool[More];
 }
@@ -68,8 +78,9 @@ function setCanvas(Id) {
 function drawCardSpots() {
     Context.drawImage(BackgroundImage, 0, 0);
 
+    
     // Red Cards
-    Context.beginPath();
+    /*Context.beginPath();
     Context.lineWidth = 2;
     Context.strokeStyle = "red";
 
@@ -79,7 +90,7 @@ function drawCardSpots() {
     Context.rect(135, 220, 90, 150);
     Context.rect(375, 220, 90, 150);
 
-    Context.stroke();
+    Context.stroke();*/
 
     /*
         // Blue Cards
@@ -93,22 +104,34 @@ function drawCardSpots() {
         Context.stroke();
     */
 
-    Context.drawImage(BackImage, 135, 30);
-    Context.drawImage(BackImage, 375, 30);
-    Context.drawImage(BackImage, 135, 220);
-    Context.drawImage(BackImage, 375, 220);
+    console.log(CardPool);
+
+    for (let Index = 0; Index < NumberOfCards; Index++) {
+        Context.drawImage(BackImage, CardPool[Index].x, CardPool[Index].y);
+
+        Context.beginPath();
+        Context.rect(CardPool[Index].x, CardPool[Index].y, CardWidth, CardHeight);
+        Context.stroke();
+    }
 }
 
-
 function randomCards() {
-    /*
-        let Temp = 0
-        for (let Index = 0; Index < NumberOfCards; Index += 2) {
-            SetPool[Index] = Temp;
-            SetPool[(Index + 1)] = Temp;
-            Temp++;
-        }
-    */
+    let EValue = document.getElementById("NumberOfCards");
+    NumberOfCards = EValue.value;
+    CardPool = [];
+    if (NumberOfCards <= 6) {
+        CardWidth = 90;
+        CardHeight = 150;
+    } else {
+        CardWidth = 70;
+        CardHeight = 100;
+    }
+    let Temp = 0;
+    for (let Index = 0; Index < NumberOfCards; Index += 2) {
+        SetPool[Index] = Temp;
+        SetPool[(Index + 1)] = Temp;
+        Temp++;
+    }
     let ThisImage = [];
     let Count = ImagePool.length;
     for (Index = 0; Index < Count; Index++) {
@@ -120,9 +143,10 @@ function randomCards() {
         let Pick = Math.floor(SetPool.length * Math.random());
         let Drawn = SetPool.splice(Pick, 1);
         CardPool[Index] = parseInt(Drawn);
-        Card[Index] = new CardData(1, 0, CardLi)
+        CardPool[Index] = new CardData(1, 0, LGCards[(Index + 2)], LGCards[((Index + 2) + 1)], ThisImage[CardPool[Index]], CardPool[Index]);
     }
     console.log("[CardPool]: Result: " + CardPool);
+    drawCardSpots()
 }
 
 function doMouseDown(event) {
@@ -155,6 +179,7 @@ function doMouseDown(event) {
 function loadGame() {
     setCanvas("GameBoard");
     Canvas.addEventListener("mousedown", doMouseDown, false);
+    randomCards();
     drawCardSpots();
 }
 
