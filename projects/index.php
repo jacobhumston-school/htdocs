@@ -28,6 +28,7 @@
             if ($Ext == "txt" || $Ext == "md") $Image = '<img src="./ViewerAssets/FileTypes/text_fields_black_24dp.svg">';
             if ($Ext == "ttf" || $Ext == "otf") $Image = '<img src="./ViewerAssets/FileTypes/title_black_24dp.svg">';
             if ($Ext == "json") $Image = '<img src="./ViewerAssets/FileTypes/data_object_black_24dp.svg">';
+            if ($Ext == "zip") $Image = '<img src="./ViewerAssets/FileTypes/folder_zip_black_24dp.svg">';
             if ($Ext == "Unkown") $Image = '<img src="./ViewerAssets/FileTypes/question_mark_black_24dp.svg">';
             return $Image;
         };

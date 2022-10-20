@@ -1,0 +1,40 @@
+{
+    "Author": "Jacob Humston",
+    "Story": [
+        {
+            "Text": "Welcome to the story... Would you like to proceed?",
+            "Options": [
+                {
+                    "Text": "Yes! :D",
+                    "Value": 2
+                },
+                {
+                    "Text": "No... :(",
+                    "Value": 1
+                }
+            ]
+        },
+        {
+            "Text": "Okay, you can leave.",
+            "Options": [
+                {
+                    "Text": "I change my mind...",
+                    "Value": 2
+                }
+            ]
+        },
+        {
+            "Text": "It's a <i>spooky</i> afternoon in New York. You are walking down the street and you see somone who is begging for money. They might be homeless.",
+            "Options": [
+                {
+                    "Text": "I'm going to give them some change.",
+                    "Value": 3
+                },
+                {
+                    "Text": "I'm going to ignore them.",
+                    "Value": 4
+                }
+            ]
+        }
+    ]
+}
