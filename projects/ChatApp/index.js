@@ -176,6 +176,7 @@ wsServer.on("connection", function (webSocket, request) {
         } else {
             account = getAccountFromSession(sessionId);
             sendRobotMessage("👋 " + account.username + " has connected to the chat, welcome!");
+            console.log(`${account.username} connected to the chat. (${connected} Connected)`)
         }
 
         const intervel = setInterval(function () {
@@ -185,11 +186,12 @@ wsServer.on("connection", function (webSocket, request) {
         }, 1000);
 
         webSocket.onclose = function () {
+            connected--
             if (account !== null) {
                 sendRobotMessage("👋 " + account.username + " has disconnected, goodbye!");
+                console.log(`${account.username} disconnected from the chat. (${connected} Connected)`)
             }
             clearInterval(intervel);
-            connected--
             updateConnected(connected)
         };
 

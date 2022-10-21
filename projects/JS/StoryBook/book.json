@@ -24,7 +24,7 @@
             ]
         },
         {
-            "Text": "It's a <i>spooky</i> afternoon in New York. You are walking down the street and you see somone who is begging for money. They might be homeless.",
+            "Text": "It's a spooky afternoon in New York. You are walking down the street and you see someone who is begging for money. They might be homeless.",
             "Options": [
                 {
                     "Text": "I'm going to give them some change.",
@@ -33,6 +33,64 @@
                 {
                     "Text": "I'm going to ignore them.",
                     "Value": 4
+                }
+            ]
+        },
+        {
+            "Text": "The homeless man appreciates the money and thanks you.",
+            "Options": [
+                {
+                    "Text": "Continue walking...",
+                    "Value": 5
+                }
+            ]
+        },
+        {
+            "Text": "You walk past the homeless man with no issue. They are probably used to it.",
+            "Options": [
+                {
+                    "Text": "Continue walking...",
+                    "Value": 5
+                }
+            ]
+        },
+        {
+            "Text": "Your phone is ringing... It's from an unknown caller. Are you going to answer?",
+            "Options": [
+                {
+                    "Text": "Yes...",
+                    "Value": 6
+                },
+                {
+                    "Text": "No...",
+                    "Value": 7
+                }
+            ]
+        },
+        {
+            "Text": "They don't say anything for a few seconds... You say \"hello?\" with no response.*However, right before you tried to hang up an old sounding voice starts talking.*\"I don't understand who you think you are, but never call this number again!\"*You respond by saying \"You called me!?\".*\"Oh, okay.\" says the old sounding person on the phone.*They hang up, with no time for you to give a response.",
+            "Options": [
+                {
+                    "Text": "Okay, that was weird... Maybe the had the wrong number?",
+                    "Value": 8
+                }
+            ]
+        },
+        {
+            "Text": "You hung up. \"If it really matters they will call me again.\" you say in your mind.",
+            "Options": [
+                {
+                    "Text": "Continue...",
+                    "Value": 8
+                }
+            ]
+        },
+        {
+            "Text": "Today has been a weird day, how about you head home?",
+            "Options": [
+                {
+                    "Text": "...",
+                    "Value": 8
                 }
             ]
         }
