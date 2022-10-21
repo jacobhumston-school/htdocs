@@ -72,6 +72,9 @@ function StartUp() {
         PageNumber.innerHTML = `<b>Page ${Value + 1}</b>`;
         let StringIndex = -1;
         let Text = CurrentData.Text;
+        if (Value === Data.Story.length - 1) {
+            Text = Text + "**It seems the story ends here for now. Path you took:*Page " + PagesViewed.join(", Page ");
+        }
         console.log("CurrentTextInterval started!");
         CurrentTextInterval = setInterval(function () {
             StringIndex++;
@@ -83,9 +86,6 @@ function StartUp() {
                 }
             } else {
                 StoryText.innerHTML = Text.replaceAll("*", "<br>");
-                if (Value === Data.Story.length - 1) {
-                    StoryText.innerHTML = StoryText.innerHTML + "<br><br>It seems the story ends here. The following is the path you took in the story:<br><b>" + PagesViewed.join("</b> > <b>") + "</b>";
-                }
                 clearInterval(CurrentTextInterval);
                 console.log("CurrentTextInterval cleared!");
                 CurrentTextInterval = null;
