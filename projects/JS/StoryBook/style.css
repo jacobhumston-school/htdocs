@@ -47,6 +47,12 @@ body
     font-size: larger;
 }
 
+#StoryImage
+{
+    margin-bottom: 10px;
+    animation: FadeIn 1s;
+}
+
 .StoryButton
 {
     font-size: medium;
@@ -77,10 +83,15 @@ body
 .StoryButton3
 {
     animation: FadeIn 1.5s;
-    animation-delay: 2.5s;
+    animation-delay: 2s;
 }
 
 #PageNumber
 {
     text-align: left;
+}
+
+.GreyText
+{
+    color: rgb(130, 130, 130);
 }

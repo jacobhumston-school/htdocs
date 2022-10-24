@@ -11,6 +11,7 @@ function StartUp() {
     let PagesViewed = [];
     const StoryTitle = document.getElementById("StoryTitle");
     const StoryText = document.getElementById("StoryText");
+    const StoryImage = document.getElementById("StoryImage");
     const ButtonWrapper = document.getElementById("ButtonWrapper");
     const PageNumber = document.getElementById("PageNumber");
 
@@ -26,7 +27,7 @@ function StartUp() {
             console.log("Button was clicked!");
             Update(Value);
         };
-        NewElement.innerHTML = "<b>You:</b> " + Text;
+        NewElement.innerHTML = `<i><span class="GreyText">${ButtonCount} —</span></i> <b>You:</b> ` + Text;
         ButtonWrapper.appendChild(NewElement);
         ButtonWrapper.appendChild(document.createElement("br"));
         NewElement.addEventListener("animationend", function () {
@@ -47,6 +48,10 @@ function StartUp() {
 
     // Update Function
     function Update(Value) {
+        StoryImage.hidden = true;
+        StoryImage.width = null;
+        StoryImage.height = null;
+        console.log("Image was hidden, width and hight were reset!");
         if (CurrentTextInterval !== null) {
             clearInterval(CurrentTextInterval);
             CurrentTextInterval = null;
@@ -69,7 +74,7 @@ function StartUp() {
         console.table(CurrentData);
         ButtonWrapper.innerHTML = "";
         StoryText.innerHTML = "";
-        PageNumber.innerHTML = `<b>Page ${Value + 1}</b>`;
+        PageNumber.innerHTML = `<b>Page ${Value + 1}</b> — <a href="mailto:jhumston24@sciototech.org?subject=StoryBook Feedback (Page ${Value + 1})" onclick="alert('Email link opened!\\n\\nIs your email app not opening?\\nYou can manually send the email to this address: \\njhumston24@sciototech.org');">Send Feedback</a>`;
         let StringIndex = -1;
         let Text = CurrentData.Text;
         if (Value === Data.Story.length - 1) {
@@ -89,6 +94,14 @@ function StartUp() {
                 clearInterval(CurrentTextInterval);
                 console.log("CurrentTextInterval cleared!");
                 CurrentTextInterval = null;
+                const Image = CurrentData.Image;
+                if (Image !== undefined) {
+                    StoryImage.src = "./images/" + Image;
+                    StoryImage.hidden = false;
+                    StoryImage.width = CurrentData.ImageMeta.Width;
+                    StoryImage.height = CurrentData.ImageMeta.Height;
+                    console.log("Image was updated!");
+                }
                 for (Index in CurrentData.Options) {
                     const OptionData = CurrentData.Options[Index];
                     CreateStoryButton(OptionData.Text, OptionData.Value);

@@ -34,7 +34,12 @@
                     "Text": "I'm going to ignore them.",
                     "Value": 4
                 }
-            ]
+            ],
+            "Image": "moneyjar.jpg",
+            "ImageMeta": {
+                "Width": 150,
+                "Height": 150
+            }
         },
         {
             "Text": "The homeless man appreciates the money and thanks you.",
@@ -71,7 +76,7 @@
             "Text": "They don't say anything for a few seconds... You say \"hello?\" with no response.*However, right before you tried to hang up an old sounding voice starts talking.*\"I don't understand who you think you are, but never call this number again!\"*You respond by saying \"You called me!?\".*\"Oh, okay.\" says the old sounding person on the phone.*They hang up, with no time for you to give a response.",
             "Options": [
                 {
-                    "Text": "Okay, that was weird... Maybe the had the wrong number?",
+                    "Text": "Okay, that was weird... Maybe they had the wrong number?",
                     "Value": 8
                 }
             ]
