@@ -1,2 +1,2 @@
 #!/bin/bash
-cd "./projects/ChatApp/" && node . & cd "./projects/TestJsApp/" && node .
+echo "Starting..." && cd "./projects/ChatApp/" && node . & cd "./projects/TestJsApp/" && node .
