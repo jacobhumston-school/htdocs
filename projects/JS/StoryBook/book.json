@@ -70,7 +70,12 @@
                     "Text": "No...",
                     "Value": 7
                 }
-            ]
+            ],
+            "Image": "strangephonecall.jpg",
+            "ImageMeta": {
+                "Width": 350,
+                "Height": 200
+            }
         },
         {
             "Text": "They don't say anything for a few seconds... You say \"hello?\" with no response.*However, right before you tried to hang up an old sounding voice starts talking.*\"I don't understand who you think you are, but never call this number again!\"*You respond by saying \"You called me!?\".*\"Oh, okay.\" says the old sounding person on the phone.*They hang up, with no time for you to give a response.",
@@ -79,7 +84,12 @@
                     "Text": "Okay, that was weird... Maybe they had the wrong number?",
                     "Value": 8
                 }
-            ]
+            ],
+            "Image": "confusedcat.webp",
+            "ImageMeta": {
+                "Width": 255.125,
+                "Height": 210
+            }
         },
         {
             "Text": "You hung up. \"If it really matters they will call me again.\" you say in your mind.",
