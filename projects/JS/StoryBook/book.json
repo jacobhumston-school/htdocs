@@ -104,8 +104,21 @@
             "Text": "Today has been a weird day, how about you head home?",
             "Options": [
                 {
-                    "Text": "...",
+                    "Text": "Alright...",
                     "Value": 9
+                }
+            ]
+        },
+        {
+            "Text": "Something something.",
+            "Options": [
+                {
+                    "Text": "...",
+                    "Value": 10
+                },
+                {
+                    "Text": "...",
+                    "Value": 11
                 }
             ]
         }
