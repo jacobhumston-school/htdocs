@@ -50,7 +50,8 @@ body
 #StoryImage
 {
     margin-bottom: 10px;
-    animation: FadeIn 1s;
+    animation: FadeIn 4s;
+    outline: #000000 solid 3px;
 }
 
 .StoryButton

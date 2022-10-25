@@ -74,7 +74,7 @@ function StartUp() {
         console.table(CurrentData);
         ButtonWrapper.innerHTML = "";
         StoryText.innerHTML = "";
-        PageNumber.innerHTML = `<b>Page ${Value + 1}</b> — <a href="mailto:jhumston24@sciototech.org?subject=StoryBook Feedback (Page ${Value + 1})" onclick="alert('Email link opened!\\n\\nIs your email app not opening?\\nYou can manually send the email to this address: \\njhumston24@sciototech.org');">Send Feedback</a>`;
+        PageNumber.innerHTML = `<b>Page ${Value + 1}</b> — <i><a href="mailto:jhumston24@sciototech.org?subject=StoryBook Feedback (Page ${Value + 1})" target="blank">Send Feedback</a> (Email)</i>`;
         let StringIndex = -1;
         let Text = CurrentData.Text;
         if (Value === Data.Story.length - 1) {
