@@ -101,7 +101,7 @@
             ]
         },
         {
-            "Text": "Today has been a weird day, how about you head home?",
+            "Text": "Today has been interesting, how about you head home?",
             "Options": [
                 {
                     "Text": "Alright...",
@@ -110,15 +110,41 @@
             ]
         },
         {
-            "Text": "Something something.",
+            "Text": "You are now heading home. People have been wondering what happened to you.",
+            "Options": [
+                {
+                    "Text": "Huh?",
+                    "Value": 10
+                }
+            ]
+        },
+        {
+            "Text": "Stop.",
             "Options": [
                 {
                     "Text": "...",
-                    "Value": 10
-                },
-                {
-                    "Text": "...",
                     "Value": 11
+                }
+            ]
+        },
+        {
+            "Text": "STOP!",
+            "Options": [
+                {
+                    "Text": "What did I even do? 😭",
+                    "Value": 12
+                }
+            ],
+            "Meta": {
+                "BackgroundImage": "betterfire.gif"
+            }
+        },
+        {
+            "Text": "LOL! 🤣😊*I'm just messing with you! You should really get home now.",
+            "Options": [
+                {
+                    "Text": "Oh, okay.... Don't do that again, please.",
+                    "Value": 13
                 }
             ]
         }

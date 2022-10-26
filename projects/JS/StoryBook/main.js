@@ -9,6 +9,7 @@ function StartUp() {
     let ButtonCount = 0;
     let CurrentTextInterval = null;
     let PagesViewed = [];
+    const Body = document.getElementById("Body");
     const StoryTitle = document.getElementById("StoryTitle");
     const StoryText = document.getElementById("StoryText");
     const StoryImage = document.getElementById("StoryImage");
@@ -52,6 +53,8 @@ function StartUp() {
         StoryImage.width = null;
         StoryImage.height = null;
         console.log("Image was hidden, width and hight were reset!");
+        Body.style.backgroundImage = null;
+        console.log("Background image was cleared!");
         if (CurrentTextInterval !== null) {
             clearInterval(CurrentTextInterval);
             CurrentTextInterval = null;
@@ -80,14 +83,24 @@ function StartUp() {
         if (Value === Data.Story.length - 1) {
             Text = Text + "**It seems the story ends here for now. Path you took:*Page " + PagesViewed.join(", Page ");
         }
+        const Meta = CurrentData.Meta;
+        if (Meta !== undefined) {
+            if (Meta.BackgroundImage !== undefined) {
+                Body.style.backgroundImage = "url(./images/" + Meta.BackgroundImage + ")";
+                console.log("Background image has been loaded!");
+            }
+        }
         console.log("CurrentTextInterval started!");
         CurrentTextInterval = setInterval(function () {
             StringIndex++;
             if (StringIndex < Text.length) {
+                if (StoryText.innerHTML.charAt(StoryText.innerHTML.length - 1) === "█") {
+                    StoryText.innerHTML = StoryText.innerHTML.slice(0, -1);
+                }
                 if (Text.charAt(StringIndex) === "*") {
-                    StoryText.innerHTML = StoryText.innerHTML + "<br>";
+                    StoryText.innerHTML = StoryText.innerHTML + "<br>█";
                 } else {
-                    StoryText.innerHTML = StoryText.innerHTML + Text.charAt(StringIndex);
+                    StoryText.innerHTML = StoryText.innerHTML + Text.charAt(StringIndex) + "█";
                 }
             } else {
                 StoryText.innerHTML = Text.replaceAll("*", "<br>");
