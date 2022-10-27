@@ -1,7 +1,7 @@
 # htdocs
 Mirror of my htdocs folder.
 
-> CPP projects or any other types of files and/or programs that need built may not work an all systems. You'll probably need to modify the makefile, for example.
+> CPP projects or any other types of files and/or programs that need built may not work on all systems. You'll probably need to modify the makefile for them to build correctly. I might do that myself I needed personally.
 
 Uploaded to github pages for fun! :) (SOME URL STUFF MAY BE BROKEN)
 - https://jacobhumston-school.github.io/htdocs/
