@@ -147,6 +147,19 @@
                     "Value": 13
                 }
             ]
+        },
+        {
+            "Text": "You're actually heading home now. However, you hear a strange noise coming from behind you.*What are going to do?",
+            "Options": [
+                {
+                    "Text": "Look back and see what it is.",
+                    "Value": 14
+                },
+                {
+                    "Text": "Keep walking.",
+                    "Value": 15
+                }
+            ]
         }
     ]
 }
