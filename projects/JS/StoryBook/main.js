@@ -75,7 +75,7 @@ function StartUp() {
             if (DoRestart === true) {
                 Start();
             } else {
-                if (PageToGoIfCancelled !== null) {
+                if (PageToGoIfCancelled !== null && PageToGoIfCancelled !== undefined) {
                     Update(PageToGoIfCancelled);
                 }
             }
