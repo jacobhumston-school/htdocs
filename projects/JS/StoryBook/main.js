@@ -9,6 +9,8 @@ function StartUp() {
     let ButtonCount = 0;
     let CurrentTextInterval = null;
     let PagesViewed = [];
+    let LastPageVisited = 0;
+    let SkipTextAnimation = false;
     const Body = document.getElementById("Body");
     const StoryTitle = document.getElementById("StoryTitle");
     const StoryText = document.getElementById("StoryText");
@@ -48,7 +50,10 @@ function StartUp() {
     });
 
     // Update Function
-    function Update(Value) {
+    function Update(Value, PageToGoIfCancelled) {
+        SkipTextAnimation = false;
+        window.scrollTo(0, 0);
+        console.log("Reset scroll position!");
         StoryImage.hidden = true;
         StoryImage.width = null;
         StoryImage.height = null;
@@ -69,6 +74,10 @@ function StartUp() {
             console.log("Confirm prompt finished.\n>> Restart?: " + DoRestart);
             if (DoRestart === true) {
                 Start();
+            } else {
+                if (PageToGoIfCancelled !== null) {
+                    Update(PageToGoIfCancelled);
+                }
             }
             return;
         }
@@ -90,10 +99,12 @@ function StartUp() {
                 console.log("Background image has been loaded!");
             }
         }
-        console.log("CurrentTextInterval started!");
+        LastPageVisited = Value;
+        console.log("Last visited page variable updated!");
+        console.log("CurrentTextInterval starting...");
         CurrentTextInterval = setInterval(function () {
             StringIndex++;
-            if (StringIndex < Text.length) {
+            if (StringIndex < Text.length && SkipTextAnimation == false) {
                 if (StoryText.innerHTML.charAt(StoryText.innerHTML.length - 1) === "█") {
                     StoryText.innerHTML = StoryText.innerHTML.slice(0, -1);
                 }
@@ -103,6 +114,7 @@ function StartUp() {
                     StoryText.innerHTML = StoryText.innerHTML + Text.charAt(StringIndex) + "█";
                 }
             } else {
+                SkipTextAnimation = false;
                 StoryText.innerHTML = Text.replaceAll("*", "<br>");
                 clearInterval(CurrentTextInterval);
                 console.log("CurrentTextInterval cleared!");
@@ -133,4 +145,25 @@ function StartUp() {
         Update(0);
     }
 
+    // Events
+    addEventListener("keydown", function (Event) {
+        if (Event.key === "c" && Event.ctrlKey === true) {
+            console.log("Prompting go-to-prompt...");
+            const Page = prompt(`Please enter a page to go to... (1 - ${Data.Story.length})`, "1");
+            if (Page !== null && Page !== "") {
+                console.log("Going to page from go-to-prompt.");
+                let ProvidedNumber = parseInt(Page);
+                if (isNaN(ProvidedNumber) !== true) {
+                    Update(ProvidedNumber - 1, LastPageVisited);
+                } else {
+                    Update(0);
+                }
+            } else {
+                console.log("Go-to-prompt was cancelled or returned an empty string!");
+            }
+        } else if (Event.key === "s") {
+            SkipTextAnimation = true;
+            console.log("Skipping text animation!");
+        }
+    });
 }
