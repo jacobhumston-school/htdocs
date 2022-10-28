@@ -17,6 +17,7 @@ function StartUp() {
     const StoryImage = document.getElementById("StoryImage");
     const ButtonWrapper = document.getElementById("ButtonWrapper");
     const PageNumber = document.getElementById("PageNumber");
+    const PagesViewedText = document.getElementById("PagesViewedText");
 
     // Extra Functions
     function CreateStoryButton(Text, Value) {
@@ -89,9 +90,10 @@ function StartUp() {
         PageNumber.innerHTML = `<b>Page ${Value + 1}</b> — <i><a href="mailto:jhumston24@sciototech.org?subject=StoryBook Feedback (Page ${Value + 1})" target="blank">Send Feedback</a> (Email)</i>`;
         let StringIndex = -1;
         let Text = CurrentData.Text;
-        if (Value === Data.Story.length - 1) {
-            Text = Text + "**It seems the story ends here for now. Path you took:*Page " + PagesViewed.join(", Page ");
-        }
+        //if (Value === Data.Story.length - 1) {
+        //    Text = Text + "**It seems the story ends here for now. Path you took:*Page " + PagesViewed.join(", Page ");
+        //}
+        PagesViewedText.innerHTML = "<b>Pages Viewed:</b><br>" + PagesViewed.join(", ");
         const Meta = CurrentData.Meta;
         if (Meta !== undefined) {
             if (Meta.BackgroundImage !== undefined) {

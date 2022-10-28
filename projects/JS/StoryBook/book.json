@@ -146,7 +146,12 @@
                     "Text": "Oh, okay.... Don't do that again, please.",
                     "Value": 13
                 }
-            ]
+            ],
+            "Image": "laughing.png",
+            "ImageMeta": {
+                "Width": 460,
+                "Height": 310.5
+            }
         },
         {
             "Text": "You're actually heading home now. However, you hear a strange noise coming from behind you.*What are going to do?",
@@ -160,6 +165,68 @@
                     "Value": 15
                 }
             ]
+        },
+        {
+            "Text": "You look back to see its the old person that called you before...*They are holding a knife... You try to run but there is no hope.*They catch up to you easily... You are stabbed 24 times according to the police record.*Unfortunately, they leave no trace and get away free.**Your death is all over the news, short amount of fame but at least you got your own wikipedia article now.*However, I doubt you want this to be your ending. How about you try again?",
+            "Options": [
+                {
+                    "Text": "<span class=\"RestartText\"><b>RESTART</b></span>",
+                    "Value": 0
+                }
+            ],
+            "Meta": {
+                "BackgroundImage": "blackrain.gif"
+            }
+        },
+        {
+            "Text": "You hear the voice getting closer, so you start to run.*\"RUN! ... RUN! .. RUN WHILE YOU STILL CAN!\" the old sounding voice screams.**You run in fear, you're scared, and you have no idea where to go.",
+            "Options": [
+                {
+                    "Text": "Keep running...",
+                    "Value": 16
+                }
+            ]
+        },
+        {
+            "Text": "You see a unfamiliar coffee shop, you are not sure if you should run in to hide.*What will you do?",
+            "Options": [
+                {
+                    "Text": "Go inside.",
+                    "Value": 17
+                },
+                {
+                    "Text": "Keep running.",
+                    "Value": 18
+                }
+            ]
+        },
+        {
+            "Text": "You go inside to hide. Only to find it was a trap.*People inside were waiting for you...**You get murdered, how unfortunate.",
+            "Options": [
+                {
+                    "Text": "<span class=\"RestartText\"><b>RESTART</b></span>",
+                    "Value": 0
+                }
+            ],
+            "Meta": {
+                "BackgroundImage": "blackrain.gif"
+            }
+        },
+        {
+            "Text": "You keep running... And running... And running...**You finally escape, and you are now out of all places, actually home.",
+            "Options": [
+                {
+                    "Text": "Go inside...",
+                    "Value": 19
+                }
+            ]
+        },
+        {
+            "Text": "Once you finally close the door, it's over.**You wake up in exhaustion. It was all just a terrible dream.*You have no idea why you would have that dream. The old person chasing you is just a fuzzy memory, you don't even know if they were a man. You feel as if something is over, however nothing started. It was all just a dream after all. A very terrible dream however. One that can only remind you of your deepest sorrows. Things like this seem to happen to you a lot... Why does that happen? I know you would like to know, however I don't have an answer for you. Please, don't fall asleep, because it will just happen again... Sleeping is a lot of fun, and I know you like it a lot. But the more you dream, the more you remember.**Thanks for reading,*Jacob Humston",
+            "Options": [],
+            "Meta": {
+                "BackgroundImage": "pinkskys.jpeg"
+            }
         }
     ]
 }

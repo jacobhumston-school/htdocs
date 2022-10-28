@@ -116,6 +116,11 @@ html
     font-size: larger;
 }
 
+.RestartText
+{
+    color: rgb(248, 84, 66);
+}
+
 #KeyBinds
 {
     font-family: OpenSans;
