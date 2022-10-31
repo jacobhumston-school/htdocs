@@ -1,0 +1,1 @@
+# all projects in the important folder are for other people or something along those lines and not just a normal school project (this does not include not-graded projects which can still be found in the parent projects folder)
