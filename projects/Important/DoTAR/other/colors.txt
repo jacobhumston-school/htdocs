@@ -1,0 +1,13 @@
+////////////////////////////////////////////////////////////////////////
+    
+    Author: Jacob Humston 
+            - Github: https://github.com/jacobhumston-school    
+    Editors:
+
+////////////////////////////////////////////////////////////////////////
+
+Stickouts Elements (red)  : #ff5d52
+Background                : #474747
+Background (secondary)    : #262626
+Text (white)              : #dedddc
+Text (black)              : #0d0d0d
