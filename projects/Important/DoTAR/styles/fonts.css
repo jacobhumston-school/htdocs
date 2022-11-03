@@ -4,7 +4,25 @@
     Editors:
 */
 
-@font-face {
+@font-face
+{
     font-family: Roboto;
     src: url("../assets/fonts/roboto/Roboto-Regular.ttf");
+}
+
+@font-face
+{
+    font-family: RobotoBold;
+    src: url("../assets/fonts/roboto/Roboto-Bold.ttf");
+}
+
+html,
+body
+{
+    font-family: Roboto;
+}
+
+button
+{
+    font-family: RobotoBold;
 }

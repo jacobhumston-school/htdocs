@@ -6,7 +6,7 @@
 
 ////////////////////////////////////////////////////////////////////////
 
-Stickouts Elements (red)  : #ff5d52
+Stickouts Elements (red)  : #e86d65
 Background                : #474747
 Background (secondary)    : #262626
 Text (white)              : #dedddc

@@ -3,3 +3,17 @@
             - Github: https://github.com/jacobhumston-school    
     Editors:
 */
+
+#NotFoundHeader
+{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #e86d65;
+    font-size: xx-large;
+}
+
+#NotFoundParagraph
+{
+    margin-bottom: 15px;
+    font-size: large;
+}

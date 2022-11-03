@@ -3,3 +3,15 @@
             - Github: https://github.com/jacobhumston-school    
     Editors:
 */
+
+.Center
+{
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.LinkButton:hover
+{
+    text-decoration: underline;
+}

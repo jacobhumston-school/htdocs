@@ -11,5 +11,14 @@ body
     padding: 0px;
     margin: 0px;
     color: #dedddc;
-    font-family: Roboto;
+}
+
+button
+{
+    font-size: medium;
+    border: none;
+    color: #dedddc;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #e86d65;
 }
