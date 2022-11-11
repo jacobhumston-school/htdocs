@@ -4,6 +4,8 @@
     Editors:
 */
 
+/* 404 Page */
+
 #NotFoundHeader
 {
     margin-top: 25px;
@@ -16,4 +18,25 @@
 {
     margin-bottom: 15px;
     font-size: large;
+}
+
+/* Menu Bar */
+
+#MenuBarDivider
+{
+    background-color: #262626;
+    color: #dedddc;
+    padding: 10px;
+    font-size: large;
+}
+
+#MenuBarDropdown
+{
+    border: none;
+    background: none;
+    display: inline;
+    float: Right;
+    color: #dedddc;
+    text-align: right;
+    font-size: medium;
 }

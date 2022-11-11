@@ -15,14 +15,3 @@
     font-family: RobotoBold;
     src: url("../assets/fonts/roboto/Roboto-Bold.ttf");
 }
-
-html,
-body
-{
-    font-family: Roboto;
-}
-
-button
-{
-    font-family: RobotoBold;
-}

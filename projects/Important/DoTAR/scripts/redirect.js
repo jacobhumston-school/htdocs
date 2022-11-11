@@ -7,7 +7,7 @@
 // redirect.js
 // Code to redirect users to homepage, may include special cases
 
-// redirect function
+// Redirect function
 function Redirect(Path) {
     window.location.href = Path + "pages/home.html";
 }

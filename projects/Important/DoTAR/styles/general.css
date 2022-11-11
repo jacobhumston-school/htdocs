@@ -7,18 +7,31 @@
 html,
 body
 {
-    background-color: #474747;
+    background-color: #ffffff;
     padding: 0px;
     margin: 0px;
-    color: #dedddc;
+    color: #0d0d0d;
+    font-family: Roboto;
 }
 
 button
 {
     font-size: medium;
     border: none;
-    color: #dedddc;
+    color: #0d0d0d;
     padding: 10px;
     border-radius: 15px;
     background-color: #e86d65;
+    font-family: RobotoBold;
+}
+
+a
+{
+    color: #4a7dff;
+}
+
+p
+{
+    margin: 0px;
+    padding: 0px;
 }

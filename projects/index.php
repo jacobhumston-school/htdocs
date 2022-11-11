@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 
+<!-- Author: Jacob Humston -->
+
 <head>
     <meta charset="UTF8">
     <title>Project Files</title>
@@ -18,6 +20,8 @@
 
     function Main() {
 
+        $StartTime = (int)microtime();
+
         $ANumber = 0;  
         $NeedBreak = false;  
 
@@ -29,7 +33,7 @@
             if ($Ext == "ttf" || $Ext == "otf") $Image = '<img src="./ViewerAssets/FileTypes/title_black_24dp.svg">';
             if ($Ext == "json") $Image = '<img src="./ViewerAssets/FileTypes/data_object_black_24dp.svg">';
             if ($Ext == "zip") $Image = '<img src="./ViewerAssets/FileTypes/folder_zip_black_24dp.svg">';
-            if ($Ext == "Unkown") $Image = '<img src="./ViewerAssets/FileTypes/question_mark_black_24dp.svg">';
+            if ($Ext == "Unknown") $Image = '<img src="./ViewerAssets/FileTypes/question_mark_black_24dp.svg">';
             return $Image;
         };
 
@@ -70,7 +74,7 @@
                     if (isset($PathInfo["extension"]) == true) {
                        $PathExtension = $PathInfo["extension"];
                     } else {
-                        $PathExtension = "Unkown";
+                        $PathExtension = "Unknown";
                     };
                     $ImageFound = GetImageOfFileType($PathExtension);
                     if ($ImageFound != null) $Image = $ImageFound;
@@ -95,7 +99,7 @@
 
         global $ANumber;
 
-        echo '<img src="./ViewerAssets/info_black_48dp.svg" width="25px" height="25px"> Total Files: <b>' . $ANumber . '</b>';
+        echo '<img src="./ViewerAssets/info_black_48dp.svg" width="25px" height="25px"> Total Files: <b>' . $ANumber . '</b> (<b>' . ((int)microtime() - $StartTime) . '</b>ms)';
 
         echo "</div>";
 

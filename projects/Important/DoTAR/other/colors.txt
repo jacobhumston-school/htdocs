@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 Stickouts Elements (red)  : #e86d65
-Background                : #474747
+Background                : #ffffff
 Background (secondary)    : #262626
 Text (white)              : #dedddc
 Text (black)              : #0d0d0d
