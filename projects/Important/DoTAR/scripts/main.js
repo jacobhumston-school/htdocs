@@ -52,7 +52,7 @@ function PlaceMenuBar() {
                 // display loading gif it takes longer then 500 ms (half a second)
                 setTimeout(function () {
                     Button.innerHTML = "";
-                    Button.append(GetLoadingGIF);
+                    Button.append(GetLoadingGIF());
                 }, 500);
             };
         }
