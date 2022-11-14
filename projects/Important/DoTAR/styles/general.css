@@ -4,6 +4,8 @@
     Editors:
 */
 
+/* General Elements */
+
 html,
 body
 {
@@ -23,6 +25,7 @@ button
     border-radius: 15px;
     background-color: #e86d65;
     font-family: RobotoBold;
+    color: #ffffff;
 }
 
 a
@@ -34,4 +37,9 @@ p
 {
     margin: 0px;
     padding: 0px;
+}
+
+h1
+{
+    font-family: RobotoBold;
 }

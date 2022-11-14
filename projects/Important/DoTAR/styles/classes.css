@@ -4,6 +4,8 @@
     Editors:
 */
 
+/* General Classes */
+
 .Center
 {
     text-align: center;
@@ -29,4 +31,25 @@
 .SmallerFont
 {
     font-size: smaller !important;
+}
+
+.LoadingGIF
+{
+    height: 100%;
+    width: auto;
+}
+
+/* Menu Bar */
+
+.MenuBarButton
+{
+    background-color: #171717;
+    float: right;
+    display: inline;
+    height: 100%;
+    width: auto;
+    border-radius: 0px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
 }

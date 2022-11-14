@@ -10,7 +10,7 @@
 // Calender function, inserts the calender
 function PlaceCalender(ParentName) {
     const Parent = document.getElementById(ParentName);
-    const CalenderFrame = `<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;showTitle=1&amp;src=Y19kMzQ2ZTIxZDg1ZmVhNmUxOTg5NTRlOGMwYWYwYmE0ZjkxN2UxYmE2M2UwNjNlNjJlMzNjZDU3ZTliNzE4NDgxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%234285F4" style="border-width:0" scrolling="no" width="100%" height="600" frameborder="0"></iframe>`;
+    const CalenderFrame = `<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;showTitle=1&amp;src=Y19kMzQ2ZTIxZDg1ZmVhNmUxOTg5NTRlOGMwYWYwYmE0ZjkxN2UxYmE2M2UwNjNlNjJlMzNjZDU3ZTliNzE4NDgxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%234285F4" style="border-width:0; background-image: url('../assets/loading-black.gif'); background-repeat: no-repeat; background-position: center;" scrolling="no" width="100%" height="600" frameborder="0"></iframe>`;
     Parent.innerHTML = CalenderFrame;
 }
 
@@ -21,56 +21,59 @@ function PlaceMenuBar() {
     const Divider = document.createElement("div");
     Divider.id = "MenuBarDivider";
 
-    const FontSpan = document.createElement("span");
-    FontSpan.classList.add("SmallerFont");
-    FontSpan.innerText = "Daughters of the American Revolution";
+    const Title = document.createElement("p");
+    Title.innerText = document.title;
+    Title.id = "MenuBarParagraph";
 
-    const Title = document.createElement("span");
-    Title.innerHTML = document.title + " | " + FontSpan.outerHTML;
-
-    const Dropdown = document.createElement("select");
-    Dropdown.id = "MenuBarDropdown";
-
-    const DropdownOptions = [
+    const Pages = [
         {
-            Value: null,
-            Name: "Pages"
-        },
-        {
-            Value: "../pages/home.html",
-            Name: "Home"
+            Value: "../pages/calender.html",
+            Name: "Calender"
         },
         {
             Value: "../pages/contact-us.html",
             Name: "Contact Us"
         },
         {
-            Value: "../pages/calender.html",
-            Name: "Calender"
+            Value: "../pages/home.html",
+            Name: "Home"
         }
     ];
 
-    DropdownOptions.forEach(function (OptionObject) {
-        const Option = document.createElement("option");
-        Option.innerText = OptionObject.Name;
-        Dropdown.append(Option);
+    Pages.forEach(function (OptionObject) {
+        const Button = document.createElement("button");
+        Button.innerText = OptionObject.Name;
+        Button.classList.add("LinkButton");
+        Button.classList.add("MenuBarButton");
+        Divider.append(Button);
         if (OptionObject.Value !== null) {
-            Option.addEventListener("click", function () {
+            Button.onclick = function () {
                 window.location.href = OptionObject.Value;
-                Option.innerText = "Loading...";
-            });
+                // display loading gif it takes longer then 500 ms (half a second)
+                setTimeout(function () {
+                    Button.innerHTML = "";
+                    Button.append(GetLoadingGIF);
+                }, 500);
+            };
         }
     });
 
     Divider.append(Title);
-    Divider.append(Dropdown);
     Body.insertAdjacentElement("afterbegin", Divider);
     Body.insertAdjacentHTML("afterbegin", "<!-- Menu Bar -->");
 }
 
-// Util function, basically small automated edits
+// Util function, basically small automated edits, this function should be called last
 function Util() {
     document.title = document.title + " - Daughters of the American Revolution";
+}
+
+// Loading GIF function, returns a loading GIF element
+function GetLoadingGIF() {
+    const Element = document.createElement("img");
+    Element.src = "../assets/loading.gif";
+    Element.classList.add("LoadingGIF");
+    return Element;
 }
 
 // Load function, this is like a wrapper for other functions that should be called

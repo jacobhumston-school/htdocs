@@ -26,17 +26,13 @@
 {
     background-color: #262626;
     color: #dedddc;
-    padding: 10px;
+    height: 40px;
     font-size: large;
 }
 
-#MenuBarDropdown
+#MenuBarParagraph
 {
-    border: none;
-    background: none;
-    display: inline;
-    float: Right;
-    color: #dedddc;
-    text-align: right;
-    font-size: medium;
+    height: 20px;
+    padding: 10px;
+    font-family: RobotoBold;
 }
