@@ -31,6 +31,12 @@ button
 a
 {
     color: #4a7dff;
+    text-decoration: underline;
+}
+
+a:hover
+{
+    font-family: RobotoBold;
 }
 
 p

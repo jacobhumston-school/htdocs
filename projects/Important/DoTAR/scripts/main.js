@@ -7,6 +7,9 @@
 // main.js
 // Includes important functions for main pages, etc
 
+// Variables
+const StarterTitle = document.title;
+
 // Calender function, inserts the calender
 function PlaceCalender(ParentName) {
     const Parent = document.getElementById(ParentName);
@@ -16,56 +19,115 @@ function PlaceCalender(ParentName) {
 
 // Menu function, inserts the menu
 function PlaceMenuBar() {
+
     const Body = document.body;
 
-    const Divider = document.createElement("div");
-    Divider.id = "MenuBarDivider";
+    function Place(Version) {
+        const Divider = document.createElement("div");
+        Divider.id = "MenuBarDivider";
 
-    const Title = document.createElement("p");
-    Title.innerText = document.title;
-    Title.id = "MenuBarParagraph";
+        const Title = document.createElement("p");
+        Title.innerText = StarterTitle;
+        Title.id = "MenuBarParagraph";
 
-    const Pages = [
-        {
-            Value: "../pages/calender.html",
-            Name: "Calender"
-        },
-        {
-            Value: "../pages/contact-us.html",
-            Name: "Contact Us"
-        },
-        {
-            Value: "../pages/home.html",
-            Name: "Home"
-        }
-    ];
+        const Pages = [
+            {
+                Value: "../pages/calender.html",
+                Name: "Calender"
+            },
+            {
+                Value: "../pages/contact-us.html",
+                Name: "Contact Us"
+            },
+            {
+                Value: "../pages/home.html",
+                Name: "Home"
+            }
+        ];
 
-    Pages.forEach(function (OptionObject) {
-        const Button = document.createElement("button");
-        Button.innerText = OptionObject.Name;
-        Button.classList.add("LinkButton");
-        Button.classList.add("MenuBarButton");
-        Divider.append(Button);
-        if (OptionObject.Value !== null) {
-            Button.onclick = function () {
-                window.location.href = OptionObject.Value;
-                // display loading gif it takes longer then 500 ms (half a second)
-                setTimeout(function () {
-                    Button.innerHTML = "";
-                    Button.append(GetLoadingGIF());
-                }, 500);
+        if (Version === "Normal") {
+            Pages.forEach(function (OptionObject) {
+                const Button = document.createElement("button");
+                Button.innerText = OptionObject.Name;
+                Button.classList.add("LinkButton");
+                Button.classList.add("MenuBarButton");
+                Divider.append(Button);
+                if (OptionObject.Value !== null) {
+                    Button.onclick = function () {
+                        window.location.href = OptionObject.Value;
+                        // display loading gif it takes longer then 500 ms (half a second)
+                        setTimeout(function () {
+                            Button.innerHTML = "";
+                            Button.append(GetLoadingGIF());
+                        }, 500);
+                    };
+                }
+            });
+            Body.insertAdjacentElement("afterbegin", Divider);
+        } else if (Version === "Dropdown") {
+            const MenuButton = document.createElement("img");
+            MenuButton.src = "../assets/menu-icon.svg";
+            MenuButton.classList.add("MenuBarButton");
+            Divider.append(MenuButton);
+            const ButtonDivider = document.createElement("div");
+            ButtonDivider.id = "MenuBarButtonDivider";
+            ButtonDivider.hidden = true;
+            Pages.forEach(function (OptionObject) {
+                const Button = document.createElement("button");
+                Button.innerText = OptionObject.Name;
+                Button.classList.add("LinkButton");
+                Button.classList.add("MenuBarButton");
+                Button.classList.add("MenuBarButtonFull");
+                ButtonDivider.insertAdjacentElement("afterbegin", Button);
+                if (OptionObject.Value !== null) {
+                    Button.onclick = function () {
+                        window.location.href = OptionObject.Value;
+                        // display loading gif it takes longer then 500 ms (half a second)
+                        setTimeout(function () {
+                            Button.innerHTML = "";
+                            Button.append(GetLoadingGIF());
+                        }, 500);
+                    };
+                }
+            });
+            Body.insertAdjacentElement("afterbegin", ButtonDivider);
+            Body.insertAdjacentElement("afterbegin", Divider);
+            MenuButton.onclick = function () {
+                ButtonDivider.hidden = !ButtonDivider.hidden;
             };
         }
-    });
 
-    Divider.append(Title);
-    Body.insertAdjacentElement("afterbegin", Divider);
-    Body.insertAdjacentHTML("afterbegin", "<!-- Menu Bar -->");
+        Divider.append(Title);
+    }
+
+    function Clear() {
+        const Divider = document.getElementById("MenuBarDivider");
+        const ButtonDivider = document.getElementById("MenuBarButtonDivider");
+        if (Divider !== null) {
+            Divider.remove();
+        }
+        if (ButtonDivider !== null) {
+            ButtonDivider.remove();
+        }
+    }
+
+    function Main() {
+        Clear();
+        const Width = window.innerWidth;
+        if (Width > 500) {
+            Place("Normal");
+        } else {
+            Place("Dropdown");
+        }
+    }
+
+    Body.onresize = Main;
+    Main();
 }
 
 // Util function, basically small automated edits, this function should be called last
 function Util() {
-    document.title = document.title + " - Daughters of the American Revolution";
+    document.title = StarterTitle + " - Daughters of the American Revolution";
 }
 
 // Loading GIF function, returns a loading GIF element

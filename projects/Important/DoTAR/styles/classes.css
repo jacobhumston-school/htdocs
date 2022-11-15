@@ -35,7 +35,8 @@
 
 .LoadingGIF
 {
-    height: 100%;
+    height: 70%;
+    margin: auto;
     width: auto;
 }
 
@@ -52,4 +53,12 @@
     padding: 0px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.MenuBarButtonFull
+{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    float: none;
 }
