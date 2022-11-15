@@ -9,6 +9,8 @@
 
 // Variables
 const StarterTitle = document.title;
+let MenuBarStayOpenAlreadyChecked = false;
+let MenuBarCurrentlyOpen = false;
 
 // Calender function, inserts the calender
 function PlaceCalender(ParentName) {
@@ -52,10 +54,10 @@ function PlaceMenuBar() {
                 Button.classList.add("LinkButton");
                 Button.classList.add("MenuBarButton");
                 Divider.append(Button);
+
                 if (OptionObject.Value !== null) {
                     Button.onclick = function () {
                         window.location.href = OptionObject.Value;
-                        // display loading gif it takes longer then 500 ms (half a second)
                         setTimeout(function () {
                             Button.innerHTML = "";
                             Button.append(GetLoadingGIF());
@@ -63,15 +65,29 @@ function PlaceMenuBar() {
                     };
                 }
             });
+
             Body.insertAdjacentElement("afterbegin", Divider);
+
         } else if (Version === "Dropdown") {
             const MenuButton = document.createElement("img");
             MenuButton.src = "../assets/menu-icon.svg";
             MenuButton.classList.add("MenuBarButton");
             Divider.append(MenuButton);
+
             const ButtonDivider = document.createElement("div");
             ButtonDivider.id = "MenuBarButtonDivider";
-            ButtonDivider.hidden = true;
+            ButtonDivider.hidden = !MenuBarCurrentlyOpen;
+
+            if (MenuBarStayOpenAlreadyChecked === false) {
+                const URLPerms = new URLSearchParams(document.location.search);
+                const KeepOpen = URLPerms.get("MenuBarDropdownOpen") ?? false;
+                if (KeepOpen === "true") {
+                    ButtonDivider.hidden = false;
+                }
+                MenuBarStayOpenAlreadyChecked = true;
+                MenuBarCurrentlyOpen = true;
+            }
+
             Pages.forEach(function (OptionObject) {
                 const Button = document.createElement("button");
                 Button.innerText = OptionObject.Name;
@@ -79,20 +95,24 @@ function PlaceMenuBar() {
                 Button.classList.add("MenuBarButton");
                 Button.classList.add("MenuBarButtonFull");
                 ButtonDivider.insertAdjacentElement("afterbegin", Button);
+
                 if (OptionObject.Value !== null) {
                     Button.onclick = function () {
-                        window.location.href = OptionObject.Value;
-                        // display loading gif it takes longer then 500 ms (half a second)
+                        window.location.href = OptionObject.Value + "?MenuBarDropdownOpen=true";
                         setTimeout(function () {
                             Button.innerHTML = "";
                             Button.append(GetLoadingGIF());
                         }, 500);
                     };
                 }
+
             });
+
             Body.insertAdjacentElement("afterbegin", ButtonDivider);
             Body.insertAdjacentElement("afterbegin", Divider);
+
             MenuButton.onclick = function () {
+                MenuBarCurrentlyOpen = ButtonDivider.hidden;
                 ButtonDivider.hidden = !ButtonDivider.hidden;
             };
         }
@@ -114,7 +134,7 @@ function PlaceMenuBar() {
     function Main() {
         Clear();
         const Width = window.innerWidth;
-        if (Width > 500) {
+        if (Width >= 500) {
             Place("Normal");
         } else {
             Place("Dropdown");
