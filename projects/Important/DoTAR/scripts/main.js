@@ -83,9 +83,9 @@ function PlaceMenuBar() {
                 const KeepOpen = URLPerms.get("MenuBarDropdownOpen") ?? false;
                 if (KeepOpen === "true") {
                     ButtonDivider.hidden = false;
+                    MenuBarCurrentlyOpen = true;
                 }
                 MenuBarStayOpenAlreadyChecked = true;
-                MenuBarCurrentlyOpen = true;
             }
 
             let CurrentTimeout = 350;
