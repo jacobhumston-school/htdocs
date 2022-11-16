@@ -70,8 +70,8 @@ function PlaceMenuBar() {
 
         } else if (Version === "Dropdown") {
             const MenuButton = document.createElement("img");
-            MenuButton.src = "../assets/menu-icon.svg";
             MenuButton.classList.add("MenuBarButton");
+            MenuButton.id = "MenuBarButtonImage";
             Divider.append(MenuButton);
 
             const ButtonDivider = document.createElement("div");
@@ -88,13 +88,28 @@ function PlaceMenuBar() {
                 MenuBarCurrentlyOpen = true;
             }
 
+            let CurrentTimeout = 300;
+            const TimeoutDifference = -100;
             Pages.forEach(function (OptionObject) {
                 const Button = document.createElement("button");
                 Button.innerText = OptionObject.Name;
                 Button.classList.add("LinkButton");
                 Button.classList.add("MenuBarButton");
                 Button.classList.add("MenuBarButtonFull");
+                Button.style.opacity = "0";
                 ButtonDivider.insertAdjacentElement("afterbegin", Button);
+
+                CurrentTimeout = CurrentTimeout + TimeoutDifference;
+                Button.classList.add("FadeInAnimation");
+                Button.style.animationDelay = CurrentTimeout + "ms";
+
+                Button.onanimationend = function () {
+                    Button.style.opacity = null;
+                };
+
+                MenuButton.addEventListener("click", function () {
+                    Button.style.opacity = "0";
+                });
 
                 if (OptionObject.Value !== null) {
                     Button.onclick = function () {
@@ -114,7 +129,19 @@ function PlaceMenuBar() {
             MenuButton.onclick = function () {
                 MenuBarCurrentlyOpen = ButtonDivider.hidden;
                 ButtonDivider.hidden = !ButtonDivider.hidden;
+                if (MenuBarCurrentlyOpen === true) {
+                    MenuButton.src = "../assets/close-icon.svg";
+                } else {
+                    MenuButton.src = "../assets/menu-icon.svg";
+                }
             };
+
+            if (MenuBarCurrentlyOpen === true) {
+                MenuButton.src = "../assets/close-icon.svg";
+            } else {
+                MenuButton.src = "../assets/menu-icon.svg";
+            }
+
         }
 
         Divider.append(Title);
