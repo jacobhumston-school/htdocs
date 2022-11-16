@@ -88,8 +88,9 @@ function PlaceMenuBar() {
                 MenuBarCurrentlyOpen = true;
             }
 
-            let CurrentTimeout = 300;
+            let CurrentTimeout = 350;
             const TimeoutDifference = -100;
+            const CreatedButtons = [];
             Pages.forEach(function (OptionObject) {
                 const Button = document.createElement("button");
                 Button.innerText = OptionObject.Name;
@@ -107,10 +108,6 @@ function PlaceMenuBar() {
                     Button.style.opacity = null;
                 };
 
-                MenuButton.addEventListener("click", function () {
-                    Button.style.opacity = "0";
-                });
-
                 if (OptionObject.Value !== null) {
                     Button.onclick = function () {
                         window.location.href = OptionObject.Value + "?MenuBarDropdownOpen=true";
@@ -121,26 +118,31 @@ function PlaceMenuBar() {
                     };
                 }
 
+                CreatedButtons.push(Button);
+
             });
 
             Body.insertAdjacentElement("afterbegin", ButtonDivider);
             Body.insertAdjacentElement("afterbegin", Divider);
 
-            MenuButton.onclick = function () {
-                MenuBarCurrentlyOpen = ButtonDivider.hidden;
-                ButtonDivider.hidden = !ButtonDivider.hidden;
+            function ImageUpdate() {
                 if (MenuBarCurrentlyOpen === true) {
                     MenuButton.src = "../assets/close-icon.svg";
                 } else {
                     MenuButton.src = "../assets/menu-icon.svg";
                 }
+            }
+
+            MenuButton.onclick = function () {
+                MenuBarCurrentlyOpen = ButtonDivider.hidden;
+                ButtonDivider.hidden = !ButtonDivider.hidden;
+                CreatedButtons.forEach(function (Button) {
+                    Button.style.opacity = "0";
+                });
+                ImageUpdate();
             };
 
-            if (MenuBarCurrentlyOpen === true) {
-                MenuButton.src = "../assets/close-icon.svg";
-            } else {
-                MenuButton.src = "../assets/menu-icon.svg";
-            }
+            ImageUpdate();
 
         }
 
