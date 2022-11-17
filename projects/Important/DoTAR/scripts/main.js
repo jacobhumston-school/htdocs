@@ -5,7 +5,7 @@
 */
 
 // main.js
-// Includes important functions for main pages, etc
+// Includes important functions for pages, etc
 
 // Variables
 const StarterTitle = document.title;
@@ -38,6 +38,10 @@ function PlaceMenuBar() {
                 Name: "Calender"
             },
             {
+                Value: "../pages/join.html",
+                Name: "Join"
+            },
+            {
                 Value: "../pages/contact-us.html",
                 Name: "Contact Us"
             },
@@ -55,15 +59,18 @@ function PlaceMenuBar() {
                 Button.classList.add("MenuBarButton");
                 Divider.append(Button);
 
-                if (OptionObject.Value !== null) {
-                    Button.onclick = function () {
-                        window.location.href = OptionObject.Value;
-                        setTimeout(function () {
-                            Button.innerHTML = "";
-                            Button.append(GetLoadingGIF());
-                        }, 500);
-                    };
+                if (Button.innerText == StarterTitle) {
+                    Button.classList.add("StickoutColor");
                 }
+
+                Button.onclick = function () {
+                    window.location.href = OptionObject.Value;
+                    setTimeout(function () {
+                        Button.innerHTML = "";
+                        Button.append(GetLoadingGIF());
+                    }, 500);
+                };
+
             });
 
             Body.insertAdjacentElement("afterbegin", Divider);
@@ -88,7 +95,7 @@ function PlaceMenuBar() {
                 MenuBarStayOpenAlreadyChecked = true;
             }
 
-            let CurrentTimeout = 350;
+            let CurrentTimeout = 450;
             const TimeoutDifference = -100;
             const CreatedButtons = [];
             Pages.forEach(function (OptionObject) {
@@ -100,6 +107,10 @@ function PlaceMenuBar() {
                 Button.style.opacity = "0";
                 ButtonDivider.insertAdjacentElement("afterbegin", Button);
 
+                if (Button.innerText == StarterTitle) {
+                    Button.classList.add("StickoutColor");
+                }
+
                 CurrentTimeout = CurrentTimeout + TimeoutDifference;
                 Button.classList.add("FadeInAnimation");
                 Button.style.animationDelay = CurrentTimeout + "ms";
@@ -108,15 +119,13 @@ function PlaceMenuBar() {
                     Button.style.opacity = null;
                 };
 
-                if (OptionObject.Value !== null) {
-                    Button.onclick = function () {
-                        window.location.href = OptionObject.Value + "?MenuBarDropdownOpen=true";
-                        setTimeout(function () {
-                            Button.innerHTML = "";
-                            Button.append(GetLoadingGIF());
-                        }, 500);
-                    };
-                }
+                Button.onclick = function () {
+                    window.location.href = OptionObject.Value + "?MenuBarDropdownOpen=true";
+                    setTimeout(function () {
+                        Button.innerHTML = "";
+                        Button.append(GetLoadingGIF());
+                    }, 500);
+                };
 
                 CreatedButtons.push(Button);
 
@@ -174,9 +183,52 @@ function PlaceMenuBar() {
     Main();
 }
 
-// Util function, basically small automated edits, this function should be called last
+// Footer function, inserts the footer
+function PlaceFooter() {
+    const Body = document.body;
+
+    const FooterDivider = document.createElement("div");
+    FooterDivider.id = "FooterDivider";
+    FooterDivider.classList.add("TopMargin");
+
+    const Image = document.createElement("img");
+    Image.src = "../assets/banner-white.png";
+    Image.width = 359 / 1.5;
+    Image.height = 129 / 1.5;
+    FooterDivider.append(Image);
+
+    FooterDivider.insertAdjacentHTML("beforeend", "<br><br>Website authored by <b>Jacob Humston</b><br>");
+
+    const CopyrightText = document.createElement("span");
+    CopyrightText.innerText = "© 1890 - 2022, National Society Daughters of the American Revolution (NSDAR) | All Rights Reserved.";
+    CopyrightText.style.fontSize = "13px";
+    FooterDivider.append(CopyrightText);
+
+    Body.insertAdjacentElement("beforeend", FooterDivider);
+}
+
+// Util function, basically small automated edits
 function Util() {
     document.title = StarterTitle + " - Daughters of the American Revolution";
+
+    const Body = document.body;
+
+    const Wrapper = document.createElement("div");
+    Wrapper.id = "ContentWrapper";
+    Wrapper.innerHTML = Body.innerHTML;
+    Body.innerHTML = "";
+    Body.append(Wrapper);
+
+    // Spacing for footer
+    Wrapper.insertAdjacentHTML("beforeend", "<br><br>");
+
+    function Update() {
+        Wrapper.style.minHeight = ((window.innerHeight - Wrapper.offsetHeight) / 2) + "px";
+    }
+
+    window.addEventListener("resize", Update);
+
+    Update();
 }
 
 // Loading GIF function, returns a loading GIF element
@@ -190,6 +242,7 @@ function GetLoadingGIF() {
 // Load function, this is like a wrapper for other functions that should be called
 // -------------- it's important to note that load is called on ALL pages
 function Load() {
-    PlaceMenuBar();
     Util();
+    PlaceMenuBar();
+    PlaceFooter();
 }

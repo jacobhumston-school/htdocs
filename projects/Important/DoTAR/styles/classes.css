@@ -23,6 +23,11 @@
     padding-top: 15px;
 }
 
+.TopMargin
+{
+    margin-top: 15px;
+}
+
 .MediumFont
 {
     font-size: medium !important;
@@ -40,7 +45,13 @@
     width: auto;
 }
 
+.StickoutColor
+{
+    color: #e86d65;
+}
+
 /* Simple Animations */
+
 @keyframes FadeIn
 {
     from

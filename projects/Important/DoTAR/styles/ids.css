@@ -4,6 +4,15 @@
     Editors:
 */
 
+/* General IDs */
+
+#ContentWrapper
+{
+    margin: 0px;
+    padding: 0px;
+    background-color: #ffffff;
+}
+
 /* 404 Page */
 
 #NotFoundHeader
@@ -35,4 +44,18 @@
     height: 20px;
     padding: 10px;
     font-family: RobotoBold;
+}
+
+#MenuBarButtonDivider
+{
+    background-color: #ffffff;
+}
+
+/* Footer */
+
+#FooterDivider
+{
+    background-color: #262626;
+    color: #dedddc;
+    padding: 15px;
 }
