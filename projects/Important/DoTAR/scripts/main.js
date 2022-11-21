@@ -98,6 +98,7 @@ function PlaceMenuBar() {
             let CurrentTimeout = 450;
             const TimeoutDifference = -100;
             const CreatedButtons = [];
+
             Pages.forEach(function (OptionObject) {
                 const Button = document.createElement("button");
                 Button.innerText = OptionObject.Name;
@@ -191,11 +192,36 @@ function PlaceFooter() {
     FooterDivider.id = "FooterDivider";
     FooterDivider.classList.add("TopMargin");
 
+    const FacebookDivider = document.createElement("div");
+    FacebookDivider.id = "FacebookDivider";
+
+    const FacebookImage = document.createElement("img");
+    FacebookImage.src = "../assets/facebook-icon.png";
+    FacebookImage.id = "FooterFacebookImage";
+
+    const FacebookText = document.createElement("a");
+    FacebookText.innerText = "ExampleFacebook";
+    FacebookText.href = "https://www.facebook.com/ExampleFacebook/";
+    FacebookText.target = "blank";
+    FacebookText.classList.add("WhiteLink");
+    FacebookText.id = "FooterFacebookText";
+
+    FacebookDivider.append(FacebookImage);
+    FacebookDivider.append(FacebookText);
+
+    FooterDivider.append(FacebookDivider);
+
+    FooterDivider.insertAdjacentHTML("beforeend", "<br>");
+
     const Image = document.createElement("img");
     Image.src = "../assets/banner-white.png";
     Image.width = 359 / 1.5;
     Image.height = 129 / 1.5;
     FooterDivider.append(Image);
+
+    Image.onclick = function () {
+        window.open("https://www.dar.org/", "_blank");
+    };
 
     FooterDivider.insertAdjacentHTML("beforeend", "<br><br>Website authored by <b>Jacob Humston</b><br>");
 

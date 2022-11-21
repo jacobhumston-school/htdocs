@@ -59,3 +59,15 @@
     color: #dedddc;
     padding: 15px;
 }
+
+#FooterFacebookText
+{
+    font-size: 18px;
+    align-self: center;
+}
+
+#FacebookDivider
+{
+    display: flex;
+    height: 40px;
+}
