@@ -101,6 +101,10 @@
 
         echo '<img src="./ViewerAssets/info_black_48dp.svg" width="25px" height="25px"> Total Files: <b>' . $ANumber . '</b> (<b>' . ((int)microtime() - $StartTime) . '</b>ms)';
 
+        echo "<br><br>";
+
+        echo '<button type="button" id="ShowAll" class="btn btn-primary">Show All</button> <button type="button" id="HideAll" class="btn btn-primary">Hide All</button>';
+
         echo "</div>";
 
     };
@@ -108,6 +112,27 @@
     Main();
 
     ?>
+
+    <script>
+    function Main(Hide) {
+        const Elements = document.getElementsByClassName("collapse");
+        for (let I = 0; I < Elements.length; I++) {
+            const Element = Elements.item(I);
+            if (Hide === false) {
+                Element.classList.add("in");
+            } else {
+                Element.classList.remove("in");
+            }
+        }
+    }
+
+    document.getElementById("ShowAll").onclick = function() {
+        Main(false);
+    }
+    document.getElementById("HideAll").onclick = function() {
+        Main(true);
+    }
+    </script>
 </body>
 
 </html>
