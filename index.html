@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="heart.png">
-    <title>Portfolio</title>
+    <title>Hello! - Landing Page</title>
 </head>
 
 <body>
@@ -14,11 +15,11 @@
         <p>
             ➡️ <a href="projects/">Projects</a> ⭐
             <br>
-            ↗️ <a href="http://192.168.0.23:3000" target="blank">Node.Js API Web Server</a>
+            ↗️ <a data-port="3000" target="blank" class="PortLink">Node.Js API Web Server</a>
             <br>
-            ↗️ <a href="http://192.168.0.23:4000" target="blank">Chat App</a>
+            ↗️ <a data-port="4000" target="blank" class="PortLink">Chat App</a>
             <br>
-            ➡️ <a href="http://192.168.0.23/wp/wordpress" target="blank">Wordpress Site</a>
+            ➡️ <a href="./wp/wordpress" target="blank">Wordpress Site</a>
             <br>
             ⤴️ <a href="https://github.com/jacobhumston-school/htdocs" target="blank">Github Repository</a>
         </p>
@@ -34,16 +35,24 @@
 
     <div id="TopBar">
         <img id="TopBarIcon" src="heart.png" alt="icon">
-        <p id="TopBarText">Jacob Humston's Portfolio</p>
+        <p id="TopBarText">Jacob Humston</p>
     </div>
 
-    <p>Coming soon.</p>
+    <p id="PortfolioLink">You may find my portfolio <a href="./portfolio/">here</a>.</p>
 
     <script>
         function closeTopDetails() {
             const element = document.getElementById("TopDetailsDivider");
             if (element) {
                 element.remove();
+            }
+        }
+
+        document.body.onload = function () {
+            const PortLinks = document.getElementsByClassName("PortLink");
+            for (let I = 0; I < PortLinks.length; I++) {
+                const Element = PortLinks.item(I);
+                Element.href = document.location.origin + ":" + Element.dataset.port;
             }
         }
     </script>

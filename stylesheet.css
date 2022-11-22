@@ -100,3 +100,8 @@ a:active
     width: 30px;
     margin-top: calc((50px - 30px) / 2)
 }
+
+#PortfolioLink
+{
+    margin-left: 10px;
+}
