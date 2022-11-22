@@ -37,6 +37,7 @@
     color: #dedddc;
     height: 40px;
     font-size: large;
+    width: 100%;
 }
 
 #MenuBarParagraph
@@ -49,6 +50,7 @@
 #MenuBarButtonDivider
 {
     background-color: #ffffff;
+    width: 100%;
 }
 
 /* Footer */

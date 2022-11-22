@@ -51,6 +51,9 @@ function PlaceMenuBar() {
             }
         ];
 
+        const Dividers = [];
+        Dividers.push(Divider);
+
         if (Version === "Normal") {
             Pages.forEach(function (OptionObject) {
                 const Button = document.createElement("button");
@@ -84,6 +87,8 @@ function PlaceMenuBar() {
             const ButtonDivider = document.createElement("div");
             ButtonDivider.id = "MenuBarButtonDivider";
             ButtonDivider.hidden = !MenuBarCurrentlyOpen;
+
+            Dividers.push(ButtonDivider);
 
             if (MenuBarStayOpenAlreadyChecked === false) {
                 const URLPerms = new URLSearchParams(document.location.search);
@@ -157,6 +162,26 @@ function PlaceMenuBar() {
         }
 
         Divider.append(Title);
+
+        /*
+        window.onscroll = function () {
+            let SetSticky = false;
+
+            if (window.scrollY > parseInt(getComputedStyle(Divider).height) + 1) {
+                SetSticky = true;
+            }
+
+            // console.log(SetSticky, parseInt(getComputedStyle(Divider).height) + 1, window.scrollY);
+
+            Dividers.forEach(function (Divider) {
+                if (SetSticky === true) {
+                    Divider.style.position = "fixed";
+                } else {
+                    Divider.style.position = null;
+                }
+            });
+        };
+        */
     }
 
     function Clear() {
