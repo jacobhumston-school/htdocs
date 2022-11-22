@@ -1,13 +1,13 @@
 @font-face
 {
     font-family: Regular;
-    src: url("Fonts/SourceSansPro-Regular.ttf");
+    src: url("fonts/SourceSansPro-Regular.ttf");
 }
 
 @font-face
 {
     font-family: SemiBold;
-    src: url("Fonts/SourceSansPro-SemiBold.ttf");
+    src: url("fonts/SourceSansPro-SemiBold.ttf");
 }
 
 body
