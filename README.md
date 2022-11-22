@@ -11,4 +11,4 @@ Uploaded to github pages for fun! :) (SOME URL STUFF MAY BE BROKEN)
 - https://jacobhumston-school.github.io/htdocs/projects/ReactionTimeGame
 - https://jacobhumston-school.github.io/htdocs/projects/JS/Slideshow/
 - https://jacobhumston-school.github.io/htdocs/projects/JS/StoryBook/
-- https://jacobhumston-school.github.io/htdocs/projects/Important/DoTAR/pages/home.html
+- https://jacobhumston-school.github.io/htdocs/projects/Important/DoTAR/
