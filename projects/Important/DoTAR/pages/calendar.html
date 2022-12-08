@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<!--
+    Author: Jacob Humston 
+            - Github: https://github.com/jacobhumston-school
+    Editors:
+-->
+
+<html lang="en-us">
+
+<head>
+    <!-- title & meta -->
+    <title>Calendar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <!-- icon -->
+    <link type="icon/png" rel="icon" href="../assets/icon-v2.png">
+
+    <!-- stylesheets -->
+    <link type="text/css" rel="stylesheet" href="../styles/general.css">
+    <link type="text/css" rel="stylesheet" href="../styles/classes.css">
+    <link type="text/css" rel="stylesheet" href="../styles/ids.css">
+    <link type="text/css" rel="stylesheet" href="../styles/fonts.css">
+
+    <!-- scripts -->
+    <script src="../scripts/main.js"></script>
+</head>
+
+<body onload="Load(); PlaceCalender('MiddleDivider');">
+    <!-- Top Text -->
+    <p class="Center TopPadding">
+        You can find our calendar bellow.
+        <br>
+        Have any questions? <a href="./contact-us.html">Contact Us</a>
+        <br>
+        <a onclick="PlaceCalender('MiddleDivider')">Click/tap to refresh the calendar.</a>
+    </p>
+
+    <!-- Google Calender -->
+    <div id="MiddleDivider" class="Center TopPadding">
+        <p>Loading...</p>
+    </div>
+</body>
+
+</html>

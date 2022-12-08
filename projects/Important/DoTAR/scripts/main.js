@@ -34,8 +34,16 @@ function PlaceMenuBar() {
 
         const Pages = [
             {
-                Value: "../pages/calender.html",
-                Name: "Calender"
+                Value: "../pages/officers.html",
+                Name: "Officers"
+            },
+            {
+                Value: "../pages/patriots.html",
+                Name: "Patriots"
+            },
+            {
+                Value: "../pages/calendar.html",
+                Name: "Calendar"
             },
             {
                 Value: "../pages/join.html",
@@ -51,16 +59,34 @@ function PlaceMenuBar() {
             }
         ];
 
-        const Dividers = [];
-        Dividers.push(Divider);
+        // const Dividers = [];
+        // Dividers.push(Divider);
 
         if (Version === "Normal") {
-            Pages.forEach(function (OptionObject) {
+
+            const MenuButton = document.createElement("img");
+            MenuButton.classList.add("MenuBarButton");
+            MenuButton.id = "MenuBarButtonImage";
+            Divider.append(MenuButton);
+
+            const ButtonDivider = document.createElement("div");
+            ButtonDivider.id = "MenuBarButtonDivider";
+            ButtonDivider.classList.add("MenuBarButtonDividerNotFull");
+            ButtonDivider.hidden = !MenuBarCurrentlyOpen;
+
+            Pages.forEach(function (OptionObject, Index) {
                 const Button = document.createElement("button");
                 Button.innerText = OptionObject.Name;
                 Button.classList.add("LinkButton");
                 Button.classList.add("MenuBarButton");
-                Divider.append(Button);
+
+                if (Index < 3) {
+                    Button.classList.add("MenuBarButtonFull");
+                    Button.classList.add("MenuBarButtonNotFull");
+                    ButtonDivider.append(Button);
+                } else {
+                    Divider.append(Button);
+                }
 
                 if (Button.innerText == StarterTitle) {
                     Button.classList.add("StickoutColor");
@@ -73,11 +99,36 @@ function PlaceMenuBar() {
                         Button.append(GetLoadingGIF());
                     }, 500);
                 };
-
             });
 
-            Body.insertAdjacentElement("afterbegin", Divider);
+            function ImageUpdate() {
+                if (MenuBarCurrentlyOpen === true) {
+                    MenuButton.src = "../assets/close-icon.svg";
+                    // MenuButton.style.backgroundColor = "#e86d65";
+                } else {
+                    MenuButton.src = "../assets/menu-icon.svg";
+                    // MenuButton.style.backgroundColor = null; 
+                }
+            }
 
+            ImageUpdate();
+
+            MenuButton.onclick = function () {
+                MenuBarCurrentlyOpen = ButtonDivider.hidden;
+                ButtonDivider.hidden = !ButtonDivider.hidden;
+                ImageUpdate();
+            };
+
+            window.onscroll = function () {
+                if (MenuBarCurrentlyOpen == true) {
+                    MenuBarCurrentlyOpen = ButtonDivider.hidden;
+                    ButtonDivider.hidden = !ButtonDivider.hidden;
+                    ImageUpdate();
+                }
+            };
+
+            Body.insertAdjacentElement("afterbegin", ButtonDivider);
+            Body.insertAdjacentElement("afterbegin", Divider);
         } else if (Version === "Dropdown") {
             const MenuButton = document.createElement("img");
             MenuButton.classList.add("MenuBarButton");
@@ -88,19 +139,20 @@ function PlaceMenuBar() {
             ButtonDivider.id = "MenuBarButtonDivider";
             ButtonDivider.hidden = !MenuBarCurrentlyOpen;
 
-            Dividers.push(ButtonDivider);
+            // Dividers.push(ButtonDivider);
 
+            // This is disabled for now may enable again later
             if (MenuBarStayOpenAlreadyChecked === false) {
                 const URLPerms = new URLSearchParams(document.location.search);
                 const KeepOpen = URLPerms.get("MenuBarDropdownOpen") ?? false;
                 if (KeepOpen === "true") {
-                    ButtonDivider.hidden = false;
-                    MenuBarCurrentlyOpen = true;
+                    // ButtonDivider.hidden = false;
+                    // MenuBarCurrentlyOpen = true;
                 }
                 MenuBarStayOpenAlreadyChecked = true;
             }
 
-            let CurrentTimeout = 450;
+            let CurrentTimeout = 650;
             const TimeoutDifference = -100;
             const CreatedButtons = [];
 
@@ -119,6 +171,7 @@ function PlaceMenuBar() {
 
                 CurrentTimeout = CurrentTimeout + TimeoutDifference;
                 Button.classList.add("FadeInAnimation");
+
                 Button.style.animationDelay = CurrentTimeout + "ms";
 
                 Button.onanimationend = function () {
@@ -143,8 +196,10 @@ function PlaceMenuBar() {
             function ImageUpdate() {
                 if (MenuBarCurrentlyOpen === true) {
                     MenuButton.src = "../assets/close-icon.svg";
+                    // MenuButton.style.backgroundColor = "#e86d65";
                 } else {
                     MenuButton.src = "../assets/menu-icon.svg";
+                    // MenuButton.style.backgroundColor = null;
                 }
             }
 
@@ -158,6 +213,17 @@ function PlaceMenuBar() {
             };
 
             ImageUpdate();
+
+            window.onscroll = function () {
+                if (MenuBarCurrentlyOpen == true) {
+                    MenuBarCurrentlyOpen = ButtonDivider.hidden;
+                    ButtonDivider.hidden = !ButtonDivider.hidden;
+                    CreatedButtons.forEach(function (Button) {
+                        Button.style.opacity = "0";
+                    });
+                    ImageUpdate();
+                }
+            };
 
         }
 
@@ -270,8 +336,8 @@ function Util() {
     Body.innerHTML = "";
     Body.append(Wrapper);
 
-    // Spacing for footer
-    Wrapper.insertAdjacentHTML("beforeend", "<br><br>");
+    // Spacing for footer (not needed for now)
+    // Wrapper.insertAdjacentHTML("beforeend", "<br><br>");
 
     function Update() {
         Wrapper.style.minHeight = ((window.innerHeight - Wrapper.offsetHeight) / 2) + "px";

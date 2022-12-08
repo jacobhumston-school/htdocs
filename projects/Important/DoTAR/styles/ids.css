@@ -29,6 +29,14 @@
     font-size: large;
 }
 
+/* Home Page */
+
+#HomeTopBackgroundImage
+{
+    width: 100%;
+    height: auto;
+}
+
 /* Menu Bar */
 
 #MenuBarDivider
@@ -49,8 +57,9 @@
 
 #MenuBarButtonDivider
 {
-    background-color: #ffffff;
+    background-color: transparent;
     width: 100%;
+    position: fixed;
 }
 
 /* Footer */

@@ -98,3 +98,18 @@
     float: none;
     margin: 0;
 }
+
+.MenuBarButtonDividerNotFull
+{
+    width: 150px !important;
+    right: 0;
+    background-color: #171717 !important;
+    padding: 5px;
+    border-bottom-left-radius: 15px;
+    /* border-bottom-right-radius: 10px; */
+}
+
+.MenuBarButtonNotFull
+{
+    background-color: transparent !important;
+}

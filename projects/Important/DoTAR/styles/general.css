@@ -42,10 +42,11 @@ a:hover
 p
 {
     margin: 0px;
-    padding: 0px;
+    padding: 5px;
 }
 
 h1
 {
     font-family: RobotoBold;
+    padding: 5px;
 }

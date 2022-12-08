@@ -25,8 +25,8 @@
     <div id="Wrapper">
         <h1>Project Files</h1>
         <p>By Jacob Humston</p>
-        <p>
-            <span class="material-icons-round">folder</span>Folder
+        <p style="font-size: 24px;">
+            <span class="material-icons-round" style="font-size: 24px;">folder</span>Folder
         </p>
     </div>
 </body>
