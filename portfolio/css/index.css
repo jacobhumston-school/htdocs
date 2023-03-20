@@ -1,0 +1,65 @@
+#menu-bar {
+    background-color: var(--colors-background-secondary);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#menu-bar a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#menu-bar a:hover {
+    text-decoration: underline;
+}
+
+body {
+    text-align: center;
+}
+
+#main-headers {
+    padding: 20px;
+    background-image: url('../assets/images/code-background.jpg');
+    background-size: cover;
+}
+
+#main-details {
+    font-size: large;
+    text-align: center;
+}
+
+ul {
+    text-align: left;
+}
+
+c-comment {
+    color: rgb(100, 100, 100);
+}
+
+c-function {
+    color: rgb(255, 101, 101);
+}
+
+c-string {
+    color: rgb(158, 227, 115);
+}
+
+code {
+    background-color: var(--colors-background-secondary);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#code-example {
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding: 20px;
+}
+
+roblox-visits {
+    font-weight: bold;
+    font-size: larger;
+}

@@ -1,61 +1,75 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="stylesheet.css">
-    <link rel="icon" href="heart.png">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="stylesheet.css" />
+    <link rel="icon" href="heart.png" />
     <title>Hello! - Landing Page</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="TopDetailsDivider">
-        <h2>Quick Links</h2>
-        <p>
-            ➡️ <a href="projects/">Projects</a> ⭐
-            <br>
-            ↗️ <a data-port="3000" target="blank" class="PortLink">Node.Js API Web Server</a>
-            <br>
-            ↗️ <a data-port="4000" target="blank" class="PortLink">Chat App</a>
-            <br>
-            ➡️ <a href="./wp/wordpress" target="blank">Wordpress Site</a>
-            <br>
-            ⤴️ <a href="https://github.com/jacobhumston-school/htdocs" target="blank">Github Repository</a>
-        </p>
-        <ul>
-            <li>⭐ - You should check this out first.</li>
-            <li>➡️ - These pages are handled by the server and will be viewable.</li>
-            <li>↗️ - These pages are handled by Node.js or something similar, may be offline.</li>
-            <li>⤴️ - Offsite redirect, not created by me.</li>
-        </ul>
-        <br>
-        <p class="PlainTextButton" onclick="closeTopDetails()">Click here to close...</p>
+      <h2>Quick Links</h2>
+      <p>
+        ➡️ <a href="projects/">Projects</a> ⭐
+        <br />
+        ↗️
+        <a data-port="3000" target="blank" class="PortLink"
+          >Node.Js API Web Server</a
+        >
+        <br />
+        ↗️ <a data-port="4000" target="blank" class="PortLink">Chat App</a>
+        <br />
+        ➡️ <a href="./wp/wordpress" target="blank">Wordpress Site</a>
+        <br />
+        ⤴️
+        <a href="https://github.com/jacobhumston-school/htdocs" target="blank"
+          >Github Repository</a
+        >
+      </p>
+      <ul>
+        <li>⭐ - You should check this out first.</li>
+        <li>
+          ➡️ - These pages are handled by the server and will be viewable.
+        </li>
+        <li>
+          ↗️ - These pages are handled by Node.js or something similar, may be
+          offline.
+        </li>
+        <li>⤴️ - Offsite redirect, not created by me.</li>
+      </ul>
+      <br />
+      <p class="PlainTextButton" onclick="closeTopDetails()">
+        Click here to close...
+      </p>
     </div>
 
     <div id="TopBar">
-        <img id="TopBarIcon" src="heart.png" alt="icon">
-        <p id="TopBarText">Jacob Humston</p>
+      <img id="TopBarIcon" src="heart.png" alt="icon" />
+      <p id="TopBarText">Jacob Humston</p>
     </div>
 
-    <p id="PortfolioLink">You may find my portfolio <a href="./portfolio/">here</a>.</p>
+    <p id="PortfolioLink">
+      You may find my portfolio <a href="./portfolio/">here</a>.
+    </p>
 
     <script>
-        function closeTopDetails() {
-            const element = document.getElementById("TopDetailsDivider");
-            if (element) {
-                element.remove();
-            }
+      function closeTopDetails() {
+        const element = document.getElementById("TopDetailsDivider");
+        if (element) {
+          element.remove();
         }
+      }
 
-        document.body.onload = function () {
-            const PortLinks = document.getElementsByClassName("PortLink");
-            for (let I = 0; I < PortLinks.length; I++) {
-                const Element = PortLinks.item(I);
-                Element.href = document.location.origin + ":" + Element.dataset.port;
-            }
+      document.body.onload = function () {
+        const PortLinks = document.getElementsByClassName("PortLink");
+        for (let I = 0; I < PortLinks.length; I++) {
+          const Element = PortLinks.item(I);
+          Element.href = document.location.origin + ":" + Element.dataset.port;
         }
+        document.location.href = "/portfolio";
+      };
     </script>
-</body>
-
+  </body>
 </html>
