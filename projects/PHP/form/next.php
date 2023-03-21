@@ -9,6 +9,8 @@
   	<body>
       <?php
 
+            echo "<p>";
+
             $firstName = $_POST['firstName'];
             echo $firstName . "<br>";
 
@@ -33,6 +35,7 @@
             $class = $_POST['class'];
             echo $class . "<br>";
 
+            echo "</p>";
         ?>
 	</body>
 </html>
