@@ -1,0 +1,98 @@
+@font-face {
+    font-family: IBM;
+    src: url('font/IBMPlexSans-Regular.ttf');
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url('background-image.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    color: white;
+}
+
+body,
+input,
+textarea,
+button {
+    font-family: IBM, arial, sans-serif;
+}
+
+h1,
+h2,
+input,
+label {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+#content-wrapper {
+    margin: 0;
+    width: 70vw;
+    height: 70vh;
+    margin-top: 15vh;
+    margin-left: 15vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    border-radius: 15px;
+    padding: 10px;
+    overflow-y: scroll;
+    text-align: center;
+    max-width: 580px;
+}
+
+.section-wrapper {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 96%;
+    margin: 0;
+    margin-left: 2%;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.radio-input-wrapper {
+    text-align: left;
+    width: 40%;
+    margin-left: 30%;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.text-field {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 15px;
+    width: 90%;
+    padding-left: 5%;
+    color: white;
+    border: none;
+}
+
+.text-field:focus {
+    outline: none;
+}
+
+input[type='submit'],
+input[type='reset'] {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: large;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+input[type='submit']:hover,
+input[type='reset']:hover {
+    cursor: pointer;
+}

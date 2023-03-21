@@ -4,22 +4,34 @@
     	<meta charset="UTF-8" />
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    	<title>Forum Result</title>
+    	<title>Form Result</title>
   	</head>
   	<body>
       <?php
 
-            $fName = $_POST['fname'];
-            echo $fName . "<br>";
+            $firstName = $_POST['firstName'];
+            echo $firstName . "<br>";
 
-            $lName = $_POST['lname'];
-            echo $lName . "<br>";
+            $lastName = $_POST['lastName'];
+            echo $lastName . "<br>";
 
-            $rName = $_POST['fav_race'];
-            echo $rName . "<br>";
+            $userEmail = $_POST['userEmail'];
+            echo $userEmail . "<br>";
 
-            $cName = $_POST['fav_class'];
-            echo $cName . "<br>";
+            $userEmailAgain = $_POST['userEmailAgain'];
+            echo $userEmailAgain . "<br>";
+
+            $userPassword = $_POST['userPassword'];
+            echo $userPassword . "<br>";
+
+            $userPasswordAgain = $_POST['userPasswordAgain'];
+            echo $userPasswordAgain . "<br>";
+
+            $race = $_POST['race'];
+            echo $race . "<br>";
+
+            $class = $_POST['class'];
+            echo $class . "<br>";
 
         ?>
 	</body>

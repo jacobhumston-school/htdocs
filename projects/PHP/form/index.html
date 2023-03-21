@@ -4,11 +4,114 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Forum</title>
+        <title>Form</title>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-		<forum action="post">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper">
+            <form action="next.php" method="post">
+                <!-- Account Details -->
+                <div class="section-wrapper">
+                    <!-- Header -->
+                    <h1>Accounts Details</h1>
 
-		</forum>
-	</body>
+                    <!-- First Name Field -->
+                    <label>First Name</label>
+                    <br />
+                    <input class="text-field" type="text" name="firstName" required placeholder="First Name" />
+                    <br />
+
+                    <!-- Last Name Field -->
+                    <label>Last Name</label>
+                    <br />
+                    <input class="text-field" type="text" name="lastName" required placeholder="Last Name" />
+                    <br />
+
+                    <!-- Username Field -->
+                    <label>Username</label>
+                    <br />
+                    <input class="text-field" type="text" name="userName" required placeholder="Username" />
+                    <br />
+
+                    <!-- Email Field -->
+                    <label>Email</label>
+                    <br />
+                    <input class="text-field" type="email" name="userEmail" required placeholder="Email" />
+                    <input
+                        class="text-field"
+                        type="email"
+                        name="userEmailAgain"
+                        required
+                        placeholder="Re-Enter Email"
+                    />
+                    <br />
+
+                    <!-- Password Field -->
+                    <label>Password</label>
+                    <br />
+                    <input
+                        class="text-field"
+                        type="password"
+                        name="userPassword"
+                        required
+                        placeholder="Password"
+                        minlength="5"
+                        maxlength="12"
+                    />
+                    <input
+                        class="text-field"
+                        type="password"
+                        name="userPasswordAgain"
+                        required
+                        placeholder="Re-Enter Password"
+                        minlength="5"
+                        maxlength="12"
+                    />
+                </div>
+
+                <!-- Customization -->
+                <div class="section-wrapper">
+                    <!-- Header -->
+                    <h1>Customization</h1>
+
+                    <!-- Race Fields -->
+                    <h2>Race</h2>
+
+                    <!-- Radio Input Wrapper -->
+                    <div class="radio-input-wrapper">
+                        <input type="radio" name="race" value="Human" required /> <label>Human</label>
+                        <br />
+                        <input type="radio" name="race" value="Dwarf" required /> <label>Dwarf</label>
+                        <br />
+                        <input type="radio" name="race" value="Elf" required /> <label>Elf</label>
+                        <br />
+                    </div>
+                    <br />
+
+                    <!-- Class Fields -->
+                    <h2>Class</h2>
+
+                    <!-- Radio Input Wrapper -->
+                    <div class="radio-input-wrapper">
+                        <input type="radio" name="class" value="Warrior" required /> <label>Warrior</label>
+                        <br />
+                        <input type="radio" name="class" value="Cleric" required /> <label>Cleric</label>
+                        <br />
+                        <input type="radio" name="class" value="Mage" required /> <label>Mage</label>
+                        <br />
+                    </div>
+                </div>
+
+                <!-- Finalize -->
+                <div class="section-wrapper">
+                    <!-- Header -->
+                    <h1>Finalize</h1>
+
+                    <!-- Submit and Reset Button -->
+                    <input type="submit" value="Submit" /> <input type="reset" />
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
