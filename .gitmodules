@@ -1,2 +1,3 @@
 [submodule "my-website"]
+	path = my-website
 	url = https://github.com/jacobhumston/my-website.git
