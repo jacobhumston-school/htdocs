@@ -1,0 +1,70 @@
+/*
+
+    Directory Viewer
+    https://github.com/Lovely-Experiences/Directory-Viewer
+
+    Licensed under the Apache License 2.0
+
+*/
+
+body
+{
+    font-family: 'Roboto', Arial, sans-serif;
+    padding: 10px;
+}
+
+table
+{
+    margin-top: 50px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table .material-icons-round
+{
+    font-size: x-large;
+    vertical-align: middle;
+}
+
+td,
+th
+{
+    text-align: left;
+    padding: 3px;
+    border: solid #505050 1px;
+}
+
+th
+{
+    background-color: #c9eaff;
+}
+
+tr
+{
+    background-color: #e2e2e2;
+}
+
+td
+{
+    vertical-align: middle;
+}
+
+tr:nth-child(even)
+{
+    background-color: #ffffff;
+}
+
+th
+{
+    font-size: large;
+}
+
+a
+{
+    color: #2594df;
+}
+
+a:hover 
+{
+    color: #2282c2;
+}

@@ -1,138 +1,199 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<!-- Author: Jacob Humston -->
+<!-- 
+
+    Directory Viewer
+    https://github.com/Lovely-Experiences/Directory-Viewer
+
+    Licensed under the Apache License 2.0
+
+-->
+
+<?php
+
+/* --- SETTINGS/CONFIGURATION --- */
+
+$path = './'; // Path to be viewed. It's important that you include the '/' at the end.
+$recursive = true; // If true, child directories will be viewable as well.
+$ignoredFiles = ['.', '..']; // File extensions or the names of files/folders that should be excluded.
+$cssPath = 'index.css'; // Path to the css file.
+
+$displayLink = true; // If true, the file/folder name will also be a link to the file/folder.
+$displayLink_NewTab = false; // If true, file/folder links will open in a new tab.
+$displaySize = true; // If true, the size of files will be displayed.
+$displayDownloadLink = true; // If true, the download link to each file is provided.
+$displayModifiedTime = true; // If true, the date of which each file was last modified will be displayed.
+$displayModifiedTime_Format = 'D, d M Y H:i:s'; // Format of which 'displayModifiedTime' is to be displayed in.
+$mobileMode = true; // If true, small mobile devices will only include the files/folders and download (if enabled) sections.
+
+// Please remove the following 4 lines if you are using this in production.
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+clearstatcache();
+
+?>
 
 <head>
-    <meta charset="UTF8">
-    <title>Project Files</title>
-    <link rel="icon" href="./ViewerAssets/folder_black_24dp.svg">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directory Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo $cssPath ?>">
+
+    <?php
+    if ($mobileMode) {
+        echo '<style>';
+        echo '@media screen and (max-width: 650px) { .file-size-content, .file-last-modified-content { display: none; } }';
+        echo '</style>';
+    }
+    ?>
+
 </head>
 
 <body>
 
     <?php
-
-    ini_set('display_errors', 1);
-
-    function Main() {
-
-        $StartTime = (int)microtime();
-
-        $ANumber = 0;  
-        $NeedBreak = false;  
-
-        function GetImageOfFileType($Ext) {
-            $Image = null;
-            if ($Ext == "svg" || $Ext == "png" || $Ext == "jpg" || $Ext == "jpeg" || $Ext == "webp") $Image = '<img src="./ViewerAssets/FileTypes/image_black_24dp.svg">';
-            if ($Ext == "php" || $Ext == "js" || $Ext == "html" || $Ext == "css") $Image = '<img src="./ViewerAssets/FileTypes/code_black_24dp.svg">';
-            if ($Ext == "txt" || $Ext == "md") $Image = '<img src="./ViewerAssets/FileTypes/text_fields_black_24dp.svg">';
-            if ($Ext == "ttf" || $Ext == "otf") $Image = '<img src="./ViewerAssets/FileTypes/title_black_24dp.svg">';
-            if ($Ext == "json") $Image = '<img src="./ViewerAssets/FileTypes/data_object_black_24dp.svg">';
-            if ($Ext == "zip") $Image = '<img src="./ViewerAssets/FileTypes/folder_zip_black_24dp.svg">';
-            if ($Ext == "Unknown") $Image = '<img src="./ViewerAssets/FileTypes/question_mark_black_24dp.svg">';
-            return $Image;
-        };
-
-        function MainLoop($Directory, $IsStart) {
-
-            global $ANumber;
-            global $NeedBreak;
-        
-            $Files = scandir($Directory);
-            $FileCount = sizeof($Files);
-
-            for ($Index = 0; $Index < $FileCount; $Index++) 
-            {
-
-                ++$ANumber;
-
-                $CurrentFile = $Files[$Index];
-                $PathInfo = pathinfo($Directory . "/" . $CurrentFile);
-                $IsDirectory = is_dir($Directory . "/" . $CurrentFile);
-
-                if ($CurrentFile == "." || $CurrentFile == "..") continue;
-                       
-                if ($IsDirectory == true) {
-                    if ($NeedBreak == true) echo "<br>";
-                    echo '<a target="blank" type="button" class="btn btn-success btn-xs" href="' . $Directory . "/" . $CurrentFile . '">Open</a> <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#P' . $ANumber . '"><img src="./ViewerAssets/folder_black_24dp.svg"> <b>' . $CurrentFile . '</b></button>';
-                    echo '<div id="P' . $ANumber . '" class="collapse">';
-                    echo '<div class="well well-sm">';
-                    MainLoop($Directory . "/" . $CurrentFile, false);
-                    echo "</div></div>";
-                    if ($Index + 1 != $FileCount) echo "<br>";
-                    $NeedBreak = false;
-                }
-                
-                else 
-                {
-                    $Image = '<img src="./ViewerAssets/description_black_24dp.svg">';
-                    $PathExtension = null;
-                    if (isset($PathInfo["extension"]) == true) {
-                       $PathExtension = $PathInfo["extension"];
-                    } else {
-                        $PathExtension = "Unknown";
-                    };
-                    $ImageFound = GetImageOfFileType($PathExtension);
-                    if ($ImageFound != null) $Image = $ImageFound;
-                    echo '<a target="blank" type="button" class="btn btn-success btn-xs" href="' . $Directory . "/" . $CurrentFile . '">Open</a> ' . $Image . ' <b>' . $CurrentFile . '</b>';
-                    $NeedBreak = true;
-                };
-
-                echo "<br>";
-            };
-
-        };
-
-        echo "<div class=\"well\">";
-
-        echo '<h1 style="margin-top:5px;">Projects File Directory<br></h1><h3>Made by Jacob Humston<br></h3><h5>Some links will lead to a download instead of viewing in the browser depending on the file type. You can go to <b>Example > ProjectDirectoryViewer.zip</b> if you would like to use this yourself.</h5>';
-
-        echo '<p><img src="./ViewerAssets/iconmonstr-github-1.svg" height="30px"> <b>GitHub Repository:</b> <a href="https://github.com/jacobhumston-school/htdocs" target="blank">https://github.com/jacobhumston-school/htdocs</a></p>';
-        
-        MainLoop(".", true);
-
-        echo "<br>";
-
-        global $ANumber;
-
-        echo '<img src="./ViewerAssets/info_black_48dp.svg" width="25px" height="25px"> Total Files: <b>' . $ANumber . '</b> (<b>' . ((int)microtime() - $StartTime) . '</b>ms)';
-
-        echo "<br><br>";
-
-        echo '<button type="button" id="ShowAll" class="btn btn-primary">Show All</button> <button type="button" id="HideAll" class="btn btn-primary">Hide All</button>';
-
-        echo "</div>";
-
-    };
-
-    Main();
-
-    ?>
-
-    <script>
-    function Main(Hide) {
-        const Elements = document.getElementsByClassName("collapse");
-        for (let I = 0; I < Elements.length; I++) {
-            const Element = Elements.item(I);
-            if (Hide === false) {
-                Element.classList.add("in");
-            } else {
-                Element.classList.remove("in");
-            }
+    $currentlyNotOnMain = false;
+    $currentPreviewFolder = null;
+    if ($recursive and isset($_GET['f'])) {
+        $childFolder = htmlspecialchars($_GET['f']);
+        $currentPreviewFolder = $childFolder;
+        /*
+        if (str_contains($childFolder, '..')) {
+        echo '<h1>Path not allowed.</h1>';
+        echo '</body>';
+        exit();
+        }
+        */
+        if ($childFolder) {
+            $path = $path . str_replace('..', '', $childFolder) . '/';
+            $currentlyNotOnMain = true;
+        }
+        if (!is_dir($path)) {
+            echo '<h1>Invalid directory.</h1>';
+            echo '</body>';
+            exit();
         }
     }
+    ?>
 
-    document.getElementById("ShowAll").onclick = function() {
-        Main(false);
-    }
-    document.getElementById("HideAll").onclick = function() {
-        Main(true);
-    }
-    </script>
+    <h1>Directory Files</h1>
+
+    <p>
+        Viewing the contents of
+        <b>
+            <a href="<?php echo $path ?>"><?php echo $path ?></a>
+        </b>
+    </p>
+
+    <table>
+        <tr>
+            <th>Folders</th>
+        </tr>
+
+        <?php
+
+        if ($currentlyNotOnMain) {
+            echo '<tr><td><a href="javascript:history.back()"><span class="material-icons-round">arrow_back_ios</span>Previous</a></td></tr>';
+        }
+
+        $files_Folders = [];
+        $files_Normal = [];
+
+        foreach (scandir($path) as $file) {
+            $filePath = $path . $file;
+            if (is_dir($filePath)) {
+                $files_Folders[] = $file;
+            } else {
+                $files_Normal[] = $file;
+            }
+        }
+
+        $alreadyCreatedFileHeaders = false;
+        $noVisibleFolders = true;
+        $files = array_merge($files_Folders, $files_Normal);
+        foreach ($files as $file) {
+            $filePath = $path . $file;
+            if (is_dir($filePath)) {
+                if (!in_array($file, $ignoredFiles)) {
+                    $noVisibleFolders = false;
+                    echo '<tr><td><span class="material-icons-round">folder</span> ';
+                    if ($displayLink) {
+                        echo '<a href="' . $path . $file . '" ';
+                        if ($displayLink_NewTab) {
+                            echo 'target="_blank"';
+                        }
+                        echo ">" . $file . "</a>";
+                    } else {
+                        echo $file;
+                    }
+                    if ($recursive) {
+                        if ($currentPreviewFolder) {
+                            echo ' | <a href="./?f=' . $currentPreviewFolder . '/' . $file . '">View Files</a>';
+                        } else {
+                            echo ' | <a href="./?f=' . $file . '">View Files</a>';
+                        }
+                    }
+                    echo '</td></tr>';
+                }
+            } else {
+                if (!$alreadyCreatedFileHeaders) {
+                    if ($noVisibleFolders) {
+                        echo '<tr><td><span class="material-icons-round">close</span> No Folders</td></tr>';
+                    }
+                    echo '<tr>';
+                    echo '<th>Files</th>';
+                    if ($displaySize)
+                        echo '<th class="file-size-content">Size</th>';
+                    if ($displayDownloadLink)
+                        echo '<th>Download</th>';
+                    if ($displayModifiedTime)
+                        echo '<th class="file-last-modified-content">Modified</th>';
+                    echo '</tr>';
+                    $alreadyCreatedFileHeaders = true;
+                }
+                $fileExpanded = explode('.', $file);
+                $fileExtension = end($fileExpanded);
+                $fileName = reset($fileExpanded);
+                if (!in_array($fileExtension, $ignoredFiles) and !in_array($fileName, $ignoredFiles)) {
+                    echo '<tr>';
+                    echo '<td><span class="material-icons-round">description</span> ';
+                    if ($displayLink) {
+                        echo '<a href="' . $path . $file . '" ';
+                        if ($displayLink_NewTab) {
+                            echo 'target="_blank"';
+                        }
+                        echo ">" . $file . "</a>";
+                    } else {
+                        echo $file;
+                    }
+                    echo '</td>';
+                    if ($displaySize)
+                        try {
+                            echo '<td class="file-size-content">' . filesize($filePath) . ' bytes</td>';
+                        } catch (Exception $error) {
+                            echo '<td class="file-size-content">' . 'Failed to fetch.' . '</td>';
+                        }
+                    if ($displayDownloadLink)
+                        echo '<td><a href="' . $filePath . '" download>Download</a></td>';
+                    if ($displayModifiedTime)
+                        try {
+                            echo '<td class="file-last-modified-content">' . date($displayModifiedTime_Format, filemtime($filePath)) . '</td>';
+                        } catch (Exception $error) {
+                            echo '<td class="file-last-modified-content">' . 'Failed to fetch.' . '</td>';
+                        }
+                    echo '</tr>';
+                }
+            }
+        }
+        ?>
+
+    </table>
 </body>
 
 </html>
