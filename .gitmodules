@@ -1,3 +1,7 @@
 [submodule "my-website"]
 	path = my-website
 	url = https://github.com/jacobhumston/my-website.git
+
+[submodule "Directory-Viewer"]
+	path = projects/Directory-Viewer
+	url = https://github.com/Lovely-Experiences/Directory-Viewer.git
