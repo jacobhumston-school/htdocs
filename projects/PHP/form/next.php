@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-    	<meta charset="UTF-8" />
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    	<title>Form Result</title>
-  	</head>
-  	<body>
-      <?php
 
-            echo "<p>";
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Result</title>
+</head>
 
-            $firstName = $_POST['firstName'];
-            echo $firstName . "<br>";
+<body>
+    <?php
 
-            $lastName = $_POST['lastName'];
-            echo $lastName . "<br>";
+    // Variables
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $userName = $_POST['userName'];
+    $userEmail = $_POST['userEmail'];
+    $userEmailAgain = $_POST['userEmailAgain'];
+    $userPassword = $_POST['userPassword'];
+    $userPasswordAgain = $_POST['userPasswordAgain'];
+    $characterName = $_POST['characterName'];
+    $race = $_POST['race'];
+    $class = $_POST['class'];
 
-            $userEmail = $_POST['userEmail'];
-            echo $userEmail . "<br>";
+    // Error handling.
+    $error = null;
 
-            $userEmailAgain = $_POST['userEmailAgain'];
-            echo $userEmailAgain . "<br>";
+    if ($userEmailAgain !== $userEmailAgain)
+        $error = 'Email fields do not match.';
 
-            $userPassword = $_POST['userPassword'];
-            echo $userPassword . "<br>";
+    if ($userPassword !== $userPasswordAgain)
+        $error = 'Password field do not match.';
 
-            $userPasswordAgain = $_POST['userPasswordAgain'];
-            echo $userPasswordAgain . "<br>";
+    if ($characterName == $userName)
+        $error = 'Character name cannot be the same as your username.';
 
-            $race = $_POST['race'];
-            echo $race . "<br>";
+    if ($error) {
+        header('Location: index.php?err=' . '<b>Error!</b> ' . $error);
+    }
 
-            $class = $_POST['class'];
-            echo $class . "<br>";
+    // If everything is good, we echo all the user details.
+    echo "<p>";
+    echo $firstName . "<br>";
+    echo $lastName . "<br>";
+    echo $userName . "<br>";
+    echo $userEmail . "<br>";
+    echo $userEmailAgain . "<br>";
+    echo $userPassword . "<br>";
+    echo $userPasswordAgain . "<br>";
+    echo $characterName . "<br>";
+    echo $race . "<br>";
+    echo $class . "<br>";
+    echo "</p>";
+    ?>
+</body>
 
-            echo "</p>";
-        ?>
-	</body>
 </html>

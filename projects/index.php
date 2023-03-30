@@ -20,12 +20,15 @@ $ignoredFiles = ['.', '..']; // File extensions or the names of files/folders th
 $cssPath = 'index.css'; // Path to the css file.
 
 $displayLink = true; // If true, the file/folder name will also be a link to the file/folder.
-$displayLink_NewTab = false; // If true, file/folder links will open in a new tab.
+$displayLink_NewTab = true; // If true, file/folder links will open in a new tab.
 $displaySize = true; // If true, the size of files will be displayed.
 $displayDownloadLink = true; // If true, the download link to each file is provided.
 $displayModifiedTime = true; // If true, the date of which each file was last modified will be displayed.
 $displayModifiedTime_Format = 'D, d M Y H:i:s'; // Format of which 'displayModifiedTime' is to be displayed in.
+$displayDifferentFileIcons = true; // If true, different file types will have different icons.
+
 $mobileMode = true; // If true, small mobile devices will only include the files/folders and download (if enabled) sections.
+$oldPHPSupport = true; // If true, some features may be removed or limited to support older versions of PHP.
 
 // Please remove the following 4 lines if you are using this in production.
 ini_set('display_errors', 1);
@@ -63,13 +66,13 @@ clearstatcache();
     if ($recursive and isset($_GET['f'])) {
         $childFolder = htmlspecialchars($_GET['f']);
         $currentPreviewFolder = $childFolder;
-        /*
-        if (str_contains($childFolder, '..')) {
-        echo '<h1>Path not allowed.</h1>';
-        echo '</body>';
-        exit();
+        if (!$oldPHPSupport) {
+            if (str_contains($childFolder, '..')) {
+                echo '<h1>Path not allowed.</h1>';
+                echo '</body>';
+                exit();
+            }
         }
-        */
         if ($childFolder) {
             $path = $path . str_replace('..', '', $childFolder) . '/';
             $currentlyNotOnMain = true;
@@ -97,7 +100,6 @@ clearstatcache();
         </tr>
 
         <?php
-
         if ($currentlyNotOnMain) {
             echo '<tr><td><a href="javascript:history.back()"><span class="material-icons-round">arrow_back_ios</span>Previous</a></td></tr>';
         }
@@ -145,6 +147,7 @@ clearstatcache();
                 if (!$alreadyCreatedFileHeaders) {
                     if ($noVisibleFolders) {
                         echo '<tr><td><span class="material-icons-round">close</span> No Folders</td></tr>';
+                        $noVisibleFolders = false;
                     }
                     echo '<tr>';
                     echo '<th>Files</th>';
@@ -161,8 +164,22 @@ clearstatcache();
                 $fileExtension = end($fileExpanded);
                 $fileName = reset($fileExpanded);
                 if (!in_array($fileExtension, $ignoredFiles) and !in_array($fileName, $ignoredFiles)) {
+                    $fileIcon = 'description';
+                    if ($displayDifferentFileIcons) {
+                        $e = $fileExtension;
+                        if ($e == 'txt' or $e == 'md')
+                            $fileIcon = 'article';
+                        if ($e == 'html' or $e == 'php' or $e == 'css' or $e == 'js')
+                            $fileIcon = 'code';
+                        if ($e == 'zip')
+                            $fileIcon = 'folder_zip';
+                        if ($e == 'png' or $e == 'jpg' or $e == 'jpeg' or $e == 'svg' or $e == 'webp')
+                            $fileIcon = 'image';
+                        if ($e == 'ttf' or $e == 'otf')
+                            $fileIcon = 'text_fields';
+                    }
                     echo '<tr>';
-                    echo '<td><span class="material-icons-round">description</span> ';
+                    echo '<td><span class="material-icons-round">' . $fileIcon . '</span> ';
                     if ($displayLink) {
                         echo '<a href="' . $path . $file . '" ';
                         if ($displayLink_NewTab) {
@@ -190,6 +207,9 @@ clearstatcache();
                     echo '</tr>';
                 }
             }
+        }
+        if ($noVisibleFolders) {
+            echo '<tr><td><span class="material-icons-round">close</span> No Folders or Files</td></tr>';
         }
         ?>
 

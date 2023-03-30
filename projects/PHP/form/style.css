@@ -97,3 +97,10 @@ input[type='submit']:hover,
 input[type='reset']:hover {
     cursor: pointer;
 }
+
+#error-bar 
+{
+    background-color: #9b3f3f;
+    border-radius: 15px;
+    font-size: large;
+}
