@@ -1,13 +1,13 @@
+// INCLUDES
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <json.hpp>
 #include <fstream>
+#include </srv/www/htdocs/projects/TriviaCommandLine/packages/nlohmann/json.hpp>
 
 using namespace std;
 
-int main() {
+void main() {
     system("clear");
-    char Data = system("curl https://opentdb.com/api.php?amount=1&type=multiple");
     
 };
