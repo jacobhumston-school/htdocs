@@ -27,4 +27,11 @@ local function FormatNumber(Number)
     return FormattedString
 end
 
-print(FormatNumber(-10000000000000000))
+---@param Number string Number to be unformatted.
+---@return integer UnformattedNumber Unformatted number.
+local function UnFormatNumber(Number)
+    return tonumber(Number:gsub(",", ""))
+end
+
+local n = FormatNumber(-10000000000)
+print(n, UnFormatNumber(n));
